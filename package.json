@@ -1,0 +1,12 @@
+{
+  "name": "minecraft-motd-parser",
+  "version": "1.0.0",
+  "main": "motdStyleParser.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "test": "ts-node --target es6 ./src/app.ts"
+  }
+}
