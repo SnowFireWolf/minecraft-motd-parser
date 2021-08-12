@@ -1,5 +1,5 @@
 {
-  "name": "minecraft-motd-parser",
+  "name": "mc-motd-parser",
   "version": "1.0.0",
   "main": "motdParser.ts",
   "license": "MIT",
@@ -10,5 +10,13 @@
     "test": "ts-node ./src/test.ts"
   },
   "repository": "https://github.com/SnowFireWolf/minecraft-motd-parser.git",
-  "author": "Kevin Zheng"
+  "author": "Kevin Zheng",
+  "keywords": [
+    "motd",
+    "color",
+    "parser",
+    "minecraft",
+    "html",
+    "formatting"
+  ]
 }
