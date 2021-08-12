@@ -322,7 +322,7 @@ function textEnterRender(text: string) {
 
 
 // 自動類型檢查 並轉換
-async function autoToHtml(motd: motdJsonType | string) {
+function autoToHtml(motd: motdJsonType | string) {
     try {
         // 類型檢查
         if(isMotdJSONType(motd)) {
