@@ -1,13 +1,13 @@
 # Minecraft Server MOTD Parser
-can convert minecraft server motd data to text, json, html, and clean tags.
+Can convert minecraft server motd data to text, json, html, and clean tags.
 
-support 1.16 custom color parser.
+Support 1.16 custom color parser.
 
-support text, json to html.
+Support text, json to html.
 
-support auto check motd data type.
+Support auto check motd data type.
 
-
+Don't have other dependencies.
 
 
 
