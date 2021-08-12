@@ -153,7 +153,7 @@ function textToHTML(motdString: string) {
 
 
 // text to json
-function textToJSON(text: string) {
+function parseTextToJSON(text: string) {
     let motdText = text
 
     // color code regex: /([§][0-9a-fklmnor])/g
@@ -338,7 +338,7 @@ function autoToHtml(motd: motdJsonType | string) {
         } else if (typeof motd === 'string') {
             //logger.warn('處理模式： String mode')
 
-            return jsonEnterRender(textToJSON(motd));
+            return jsonEnterRender(parseTextToJSON(motd));
         } else {
             return 'unknow type source data';
         }
@@ -351,12 +351,12 @@ function autoToHtml(motd: motdJsonType | string) {
 //var text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
 //var json = '{"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]}';
 
-const _ = {
+const motdParserFuncs = {
     cleanTags,
     // 文字轉成 HTML
     textToHTML,
     // 文字轉乘 JSON
-    textToJSON,
+    textToJSON: parseTextToJSON,
     // JSON 轉成 HTML
     JSONToHtml: parseJSONToHTML,
     // JSON 完整轉換 包含 換行等
@@ -367,6 +367,15 @@ const _ = {
     autoToHtml
 }
 
+export let motdParser = motdParserFuncs;
 
-
-export default _
+/*
+export default {
+    cleanTags,
+    textToHTML,
+    textToJSON,
+    JSONToHtml: parseJSONToHTML,
+    jsonEnterRender,
+    textEnterRender,
+    autoToHtml
+}*/

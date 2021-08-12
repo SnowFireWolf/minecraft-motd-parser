@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const motdParser_1 = __importDefault(require("./motdParser"));
+const index_1 = require("./index");
 const text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE"; //
 const json = '{"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]}';
 let mcfalloutJson = {
@@ -55,26 +52,26 @@ let start = 0;
 // clean tags
 console.log('清除 MOTD Tags HTML');
 start = new Date().getTime();
-let cleanedtring = motdParser_1.default.cleanTags(text);
+let cleanedtring = index_1.motdParser.cleanTags(text);
 console.log(cleanedtring);
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`);
 // text to html
 console.log('文字轉成 HTML');
 start = new Date().getTime();
-let motdHtml = motdParser_1.default.textToHTML(text);
+let motdHtml = index_1.motdParser.textToHTML(text);
 console.log(motdHtml);
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`);
 // text to html
 console.log('文字轉成 JSON');
 start = new Date().getTime();
-let textToHtml = motdParser_1.default.textToJSON(text);
+let textToHtml = index_1.motdParser.textToJSON(text);
 console.log(textToHtml);
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`);
 // json to html
 console.log('JSON 轉成 HTML');
 start = new Date().getTime();
-let jsonToHtml = motdParser_1.default.JSONToHtml(JSON.parse(json));
-let jsonToHtml2 = motdParser_1.default.JSONToHtml(mcfalloutJson);
+let jsonToHtml = index_1.motdParser.JSONToHtml(JSON.parse(json));
+let jsonToHtml2 = index_1.motdParser.JSONToHtml(mcfalloutJson);
 console.log(jsonToHtml);
 console.log('-------------------------');
 console.log(jsonToHtml2);
@@ -137,11 +134,10 @@ let jsonExample = {
     "text": ""
 };
 let textExample = "§5§m                  §6>§7§l§6§l>§6§l[§5§l§oPurple §8§l§oPrison§6§l]§6§l<§6<§5§m                     §R §7   §5§k§l;;;§r  §d§lNEW BLACK-MARKET §5§l» §6§L/BLACKMARKET  §5§k§l;;;";
-let autoToHtml = motdParser_1.default.autoToHtml(jsonExample);
-let TextAutoToHtml = motdParser_1.default.autoToHtml(textExample);
+let autoToHtml = index_1.motdParser.autoToHtml(jsonExample);
+let TextAutoToHtml = index_1.motdParser.autoToHtml(textExample);
 console.log('-------------------------');
 console.log(autoToHtml);
 console.log('-------------------------');
 console.log(TextAutoToHtml);
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`);
-//# sourceMappingURL=test.js.map

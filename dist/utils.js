@@ -11,4 +11,3 @@ function isMotdJSONType(object) {
     return object;
 }
 exports.isMotdJSONType = isMotdJSONType;
-//# sourceMappingURL=utils.js.map

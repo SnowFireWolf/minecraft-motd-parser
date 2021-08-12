@@ -3,14 +3,15 @@
     "strict": true,
     "module": "commonjs",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "allowJs": true,
     "target": "ES6",
     "lib": [
       "es6",
-      "dom"
+      "ESNext"
     ],
-    "rootDir": "./",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "moduleResolution": "node"
   }
 }

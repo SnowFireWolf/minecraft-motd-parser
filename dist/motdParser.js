@@ -5,6 +5,7 @@
  * Released under the MIT license
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.motdParser = void 0;
 const utils_1 = require("./utils");
 const extras = {
     '§k': 'obfuscated;',
@@ -127,7 +128,7 @@ function textToHTML(motdString) {
     return resultHTML;
 }
 // text to json
-function textToJSON(text) {
+function parseTextToJSON(text) {
     let motdText = text;
     // color code regex: /([§][0-9a-fklmnor])/g
     // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
@@ -283,7 +284,7 @@ function autoToHtml(motd) {
         }
         else if (typeof motd === 'string') {
             //logger.warn('處理模式： String mode')
-            return jsonEnterRender(textToJSON(motd));
+            return jsonEnterRender(parseTextToJSON(motd));
         }
         else {
             return 'unknow type source data';
@@ -295,12 +296,12 @@ function autoToHtml(motd) {
 }
 //var text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
 //var json = '{"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]}';
-const _ = {
+const motdParserFuncs = {
     cleanTags,
     // 文字轉成 HTML
     textToHTML,
     // 文字轉乘 JSON
-    textToJSON,
+    textToJSON: parseTextToJSON,
     // JSON 轉成 HTML
     JSONToHtml: parseJSONToHTML,
     // JSON 完整轉換 包含 換行等
@@ -310,5 +311,14 @@ const _ = {
     // 自動類型檢查並轉換
     autoToHtml
 };
-exports.default = _;
-//# sourceMappingURL=motdParser.js.map
+exports.motdParser = motdParserFuncs;
+/*
+export default {
+    cleanTags,
+    textToHTML,
+    textToJSON,
+    JSONToHtml: parseJSONToHTML,
+    jsonEnterRender,
+    textEnterRender,
+    autoToHtml
+}*/ 
