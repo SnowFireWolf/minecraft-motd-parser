@@ -61,6 +61,8 @@ result:
 ```html
 <span style="color: #55FF55;">Hypixel Network <span style="color: #AAAAAA;"><span style="color: #FF5555;">1.8/1.9/1.10/1.11/1.12 <span style="color: #FFFF55;"><span style="font-weight: bold;">NEW PTL GAME:<span style="color: acqua;"><span style="font-weight: bold;"> THE BRIDGE</span></span></span></span></span></span></span>
 ```
+![Image_2021_08_2021d-2021h_23___001](https://user-images.githubusercontent.com/14024836/129277576-e94914f3-35f7-45a6-8ba3-58163f71d5a1.png)
+
 
 
 ## `textToJSON(string)`
@@ -143,6 +145,8 @@ result:
 ```html
 <span style="color: #AAAAAA;">  </span><span style="color: #FFAA00;">廢土伺服器  </span><span style="color: #FFFFFF;">mcFallout.net</span><span style="color: #555555;"> - </span><span style="color: #AAAAAA;">版本 1.17.1 </span><span style="color: #FFAA00;">洞穴</span><span style="color: #FF55FF;">與</span><span style="color: #55FFFF;">山崖<br/></span><span style="color: #AAAAAA;">  </span><span style="color: #555555;">享受工廠、農場、建築與紅石</span>
 ```
+![Image_2021_08_2021d-2021h_24___001](https://user-images.githubusercontent.com/14024836/129277638-fe8c5735-54fe-4ff1-afc5-4b5493706be9.png)
+
 
 
 
