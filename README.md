@@ -11,18 +11,24 @@ Don't have other dependencies.
 
 
 
+# Installation
+## NPM
+```bash
+$ npm install @sfirew/mc-motd-parser
+```
+
+## yarn
+```bash
+$ yarn add @sfirew/mc-motd-parser
+```
+
 
 # Usuage
 support deno and node.js
 
 ## ES6 Modules
 ```typescript
-import motdParser from './motdParser';
-```
-
-## Deno
-```typescript
-import motdParser from './motdParser.ts';
+import { motdParser } from '@sfirew/mc-motd-parser'
 ```
 
 
