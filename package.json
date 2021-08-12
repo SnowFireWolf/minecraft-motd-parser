@@ -1,5 +1,6 @@
 {
-  "name": "mc-motd-parser",
+  "name": "@snowfirewolf/mc-motd-parser",
+  "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
   "version": "1.0.0",
   "main": "motdParser.ts",
   "license": "MIT",
