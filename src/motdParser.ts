@@ -1,12 +1,16 @@
-// motd parser
-// version v1
-// 2021 snowfirewolf
+/*
+ * minecraft motd parser v1.0.0
+ * (c) 2021 Kevin Zheng
+ * Released under the MIT license
+ */
 
 import {
     extraLibraryType,
-    motdJsonType,
-    isMotdJSONType
+    motdJsonType
 } from './types';
+import { isMotdJSONType } from './utils';
+
+
 
 const extras: extraLibraryType = {
     '§k': 'obfuscated;',
@@ -80,6 +84,7 @@ const extraColorsToHex: extraLibraryType = {
 };
 
 
+
 // clean tags
 function cleanTags(text: string) {
     let REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
@@ -89,6 +94,7 @@ function cleanTags(text: string) {
 
     return textResult
 }
+
 
 
 function textToHTML(motdString: string) {
@@ -143,7 +149,6 @@ function textToHTML(motdString: string) {
 
     return resultHTML
 }
-
 
 
 
@@ -202,7 +207,6 @@ function textToJSON(text: string) {
 
     return resultObject;
 }
-
 
 
 
@@ -325,7 +329,7 @@ function textEnterRender(text: string) {
 function autoToHtml(motd: motdJsonType | string) {
     try {
         // 類型檢查
-        if(isMotdJSONType(motd)) {
+        if(typeof motd === 'object') {
             // 如果類型是物件
             // 將 json 轉換成 html
             //logger.warn('處理模式： Object mode')
@@ -362,7 +366,6 @@ const _ = {
     // 自動類型檢查並轉換
     autoToHtml
 }
-
 
 
 

@@ -99,13 +99,67 @@ console.log(`執行時間: ${(new Date().getTime() - start)} ms`)
 // 自動類型
 console.log('自動檢查類型並轉成 HTML')
 start = new Date().getTime();
-let autoToHtml = motdParser.autoToHtml(JSON.parse(json))
-let autoToHtml2 = motdParser.autoToHtml(mcfalloutJson)
-let TextAutoToHtml = motdParser.autoToHtml(text)
+let jsonExample = {
+  "extra": [
+    {
+      "bold": true,
+      "color": "gold",
+      "text": "Viper "
+    },
+    {
+      "color": "gray",
+      "text": "┃ "
+    },
+    {
+      "color": "yellow",
+      "text": "Summer Sale"
+    },
+    {
+      "color": "white",
+      "text": " at "
+    },
+    {
+      "color": "gold",
+      "text": "store.vipermc.net\n"
+    },
+    {
+      "color": "gray",
+      "text": "► "
+    },
+    {
+      "color": "yellow",
+      "text": "EOTW "
+    },
+    {
+      "color": "white",
+      "text": "on "
+    },
+    {
+      "color": "gold",
+      "text": "Infernal"
+    },
+    {
+      "color": "white",
+      "text": " is this Thursday at "
+    },
+    {
+      "color": "yellow",
+      "text": "5PM ET"
+    },
+    {
+      "color": "white",
+      "text": "."
+    }
+  ],
+  "text": ""
+};
 
-console.log(autoToHtml)
+let textExample = "§5§m                  §6>§7§l§6§l>§6§l[§5§l§oPurple §8§l§oPrison§6§l]§6§l<§6<§5§m                     §R §7   §5§k§l;;;§r  §d§lNEW BLACK-MARKET §5§l» §6§L/BLACKMARKET  §5§k§l;;;";
+let autoToHtml = motdParser.autoToHtml(jsonExample)
+let TextAutoToHtml = motdParser.autoToHtml(textExample)
+
 console.log('-------------------------')
-console.log(autoToHtml2)
+console.log(autoToHtml)
 console.log('-------------------------')
 console.log(TextAutoToHtml)
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`)

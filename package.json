@@ -1,12 +1,14 @@
 {
   "name": "minecraft-motd-parser",
   "version": "1.0.0",
-  "main": "motdStyleParser.ts",
+  "main": "motdParser.ts",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^4.3.5"
   },
   "scripts": {
     "test": "ts-node ./src/test.ts"
-  }
+  },
+  "repository": "https://github.com/SnowFireWolf/minecraft-motd-parser.git",
+  "author": "Kevin Zheng"
 }
