@@ -141,7 +141,7 @@ result:
 
 
 ## `autoToHtml(string | object)`
-convert text to motd json.
+auto check data type then return same html result.
 
 ```typescript
 let jsonExample = {
@@ -198,7 +198,6 @@ let jsonExample = {
   ],
   "text": ""
 };
-
 motdParser.autoToHtml(jsonExample);
 
 
