@@ -3,7 +3,9 @@
 // 2021 snowfirewolf
 
 import {
-    extraLibraryType
+    extraLibraryType,
+    motdJsonType,
+    isMotdJSONType
 } from './types';
 
 const extras: extraLibraryType = {
@@ -97,7 +99,6 @@ function textToHTML(motdString: string) {
 
     let fontStyle = ''
     let colorHex = ''
-
     let resultHTML = ''
 
     codeSplit.forEach((item, index) => {
@@ -146,18 +147,76 @@ function textToHTML(motdString: string) {
 
 
 
-interface sourceJsonType {
-    [key: string]: string
-};
+// text to json
+function textToJSON(text: string) {
+    let motdText = text
+
+    // color code regex: /([§][0-9a-fklmnor])/g
+    // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
+    const colorCodeReg = /([§][0-9a-f0-9a-fA-FklmnorFKLMNOR])/g
+    let codeREGEX = new RegExp(colorCodeReg.source)
+    let textSplit = motdText.split(codeREGEX);
+    let fontStyle = ''
+    let colorHex = ''
+
+    let resultObject: motdJsonType = {
+        text: "",
+        extra: []
+    }
+
+    textSplit.forEach((item) => {
+
+        let stringToLowerCase = item.toLowerCase()
+
+        // color code 轉換成 hex
+        if(colorCodeToHex.hasOwnProperty(stringToLowerCase)) {
+
+            //console.log(`偵測出 ${ colorCodeToHex[item] }`)
+            colorHex = colorCodeToHex[stringToLowerCase]
+        } else if(textToJsonExtras.hasOwnProperty(stringToLowerCase)) {
+
+            // font style code 轉換
+            //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
+            fontStyle = textToJsonExtras[stringToLowerCase]
+        } else {
+            let innerObject: motdJsonType = {
+                text: "",
+                extra: []
+            }
+
+            // 其餘字串
+            if(fontStyle !== ''){
+                innerObject[fontStyle] = true
+            }
+            innerObject.text = item
+
+            if(colorHex !== ''){
+                innerObject.color = colorHex
+            }
+
+            if(typeof resultObject.extra === 'object') {
+                resultObject.extra.push(innerObject)
+            }
+        }
+    })
+
+    return resultObject;
+}
+
+
+
 
 // json 轉換 html
-function parseJsonToHTML(sourceJson: sourceJsonType) {
+function parseJSONToHTML(sourceJson: motdJsonType) {
     let htmlElement = ""
     let colorHex = ""
     let fontStyle= ""
 
     //console.log(sourceJson)
     for(let key of Object.keys(sourceJson)) {
+        //console.log(key)
+        key = key.toLowerCase()
+
         // 文字樣式
         if(extraFontStyles.hasOwnProperty(key)) {
             if(sourceJson[key]) {
@@ -181,29 +240,8 @@ function parseJsonToHTML(sourceJson: sourceJsonType) {
             continue;
         }
 
-        // color 處理
-        if(key == "color") {
-            let colorKey = sourceJson[key]
-
-            // Hex color
-            if(extraColorsToHex.hasOwnProperty(colorKey)) {
-                colorHex = `color: ${ extraColorsToHex[colorKey] };`;
-                continue;
-            // color code
-            } else if(colorCodeToHex.hasOwnProperty(colorKey)) {
-                colorHex = `color: ${ colorCodeToHex[colorKey] };`;
-                continue;
-            // custom color
-            } else {
-                // custom hex color code mode
-                colorHex = `color: ${ colorKey };`;
-                continue;
-            }
-        }
-
-        //console.log(key)
         // 文字
-        if(key == "text") {
+        if(key === "text" && typeof sourceJson.text === 'string') {
             //console.log(textToHtml(sourceJson.text))
 
             // replace space to &nbsp; code
@@ -211,14 +249,38 @@ function parseJsonToHTML(sourceJson: sourceJsonType) {
             continue;
         }
         
-        /*
-        // exrta 處理
-        if(key == "extra") {
-            for(let sourceJsonExtra of sourceJson.extra) {
-                //console.log(sourceJsonExtra)
-                htmlElement += parseJsonToHTML(sourceJsonExtra);
+        // color 處理
+        if(key === "color") {
+            let colorKey = sourceJson[key]
+
+            if(typeof colorKey === 'string') {
+                // Hex color
+                if(extraColorsToHex.hasOwnProperty(colorKey)) {
+                    colorHex = `color: ${ extraColorsToHex[colorKey] };`;
+                    continue;
+                // color code
+                } else if(colorCodeToHex.hasOwnProperty(colorKey)) {
+                    colorHex = `color: ${ colorCodeToHex[colorKey] };`;
+                    continue;
+                // custom color
+                } else {
+                    // custom hex color code mode
+                    colorHex = `color: ${ colorKey };`;
+                    continue;
+                }
             }
-        }*/
+        }
+
+        // exrta 處理
+        if(key === "extra" && typeof sourceJson.extra === 'object') {
+            //console.log(typeof sourceJson.extra);
+            for(let sourceJsonExtra of sourceJson.extra) {
+                //console.log(sourceJson.extra)
+                if(isMotdJSONType(sourceJsonExtra)) {
+                    htmlElement += parseJSONToHTML(sourceJsonExtra);
+                }
+            }
+        }
 
         //console.log('element: ' + htmlElement)
         //console.log('font: ' + fontStyle)
@@ -237,72 +299,49 @@ function parseJsonToHTML(sourceJson: sourceJsonType) {
 
 
 
-// text to json
-function textToJson(text: string) {
-    let motdText = text
+// JSON 完整轉換 包含 換行等
+function jsonEnterRender(json: motdJsonType) {
+    // 轉換換行
+    let replaceReturn = JSON.parse(JSON.stringify(json).split('\\n').join("<br/>"));
+    let resultMotdHtml = parseJSONToHTML(replaceReturn);
 
-    // color code regex: /([§][0-9a-fklmnor])/g
-    // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
-    let colorCodeReg = /([§][0-9a-f0-9a-fA-FklmnorFKLMNOR])/g
-    let codeREGEX = new RegExp(colorCodeReg.source)
-    let codeSplit = motdText.split(codeREGEX);
-
-    let fontStyle = ''
-    let colorHex = ''
-
-    /*
-    interface innerStyleType {
-        [key: string]: Array<object> | string | boolean
-    };*/
-
-    interface innerStyleType {
-        [key: string]: Array<object> | string | boolean
-        text: string
-        extra: object[]
-    };
-
-    let resultObject:　innerStyleType = {
-        text: "",
-        extra: []
-    }
-    
-    codeSplit.forEach((item) => {
-
-        let stringToLowerCase = item.toLowerCase()
-
-        // color code 轉換成 hex
-        if(colorCodeToHex.hasOwnProperty(stringToLowerCase)) {
-
-            //console.log(`偵測出 ${ colorCodeToHex[item] }`)
-            colorHex = colorCodeToHex[stringToLowerCase]
-        } else if(textToJsonExtras.hasOwnProperty(stringToLowerCase)) {
-
-            // font style code 轉換
-            //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
-            fontStyle = textToJsonExtras[stringToLowerCase]
-        } else {
-            let innerObject: innerStyleType = {
-                text: "",
-                extra: []
-            }
-
-            // 其餘字串
-            if(fontStyle !== ''){
-                innerObject[fontStyle] = true
-            }
-            innerObject.text = item
-
-            if(colorHex !== ''){
-                innerObject.color = colorHex
-            }
-            
-            resultObject.extra.push(innerObject)
-        }
-    })
-
-    return resultObject;
+    //console.log('motd: ' + resultMotd)
+    return resultMotdHtml;
 }
 
+
+
+// TEXT 完整轉換 包含 換行等
+function textEnterRender(text: string) {
+    let replaceReturn = text.split('\\n').join("<br/>");
+    let resultMotdHtml = textToHTML(replaceReturn);
+
+    return resultMotdHtml;
+}
+
+
+
+// 自動類型檢查 並轉換
+async function autoToHtml(motd: motdJsonType | string) {
+    try {
+        // 類型檢查
+        if(isMotdJSONType(motd)) {
+            // 如果類型是物件
+            // 將 json 轉換成 html
+            //logger.warn('處理模式： Object mode')
+
+            return jsonEnterRender(motd);
+        } else if (typeof motd === 'string') {
+            //logger.warn('處理模式： String mode')
+
+            return jsonEnterRender(textToJSON(motd));
+        } else {
+            return 'unknow type source data';
+        }
+    } catch(err) {
+        return err;
+    }
+}
 
 
 //var text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
@@ -310,9 +349,21 @@ function textToJson(text: string) {
 
 const _ = {
     cleanTags,
+    // 文字轉成 HTML
     textToHTML,
-    jsonToHtml: parseJsonToHTML,
-    textToJson
+    // 文字轉乘 JSON
+    textToJSON,
+    // JSON 轉成 HTML
+    JSONToHtml: parseJSONToHTML,
+    // JSON 完整轉換 包含 換行等
+    jsonEnterRender,
+    // TEXT 完整轉換 包含 換行等
+    textEnterRender,
+    // 自動類型檢查並轉換
+    autoToHtml
 }
+
+
+
 
 export default _
