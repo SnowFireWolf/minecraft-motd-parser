@@ -24,7 +24,7 @@ $ yarn add @sfirew/mc-motd-parser
 
 ## Deno
 ```typescript
-import { motdParser } from "https://deno.land/x/minecraft_motd_parser/mod.ts";
+import { motdParser } from "https://deno.land/x/minecraft_motd_parser@v1.0.4-deno-main/mod.ts";
 ```
 
 
