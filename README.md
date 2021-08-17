@@ -22,9 +22,15 @@ $ npm install @sfirew/mc-motd-parser
 $ yarn add @sfirew/mc-motd-parser
 ```
 
+## Deno
+```typescript
+import { motdParser } from "https://deno.land/x/minecraft_motd_parser/mod.ts";
+```
+
+
 
 # Usuage
-support **[deno](https://github.com/SnowFireWolf/minecraft-motd-parser-deno)** and **node.js**
+support **deno** and **node.js**
 
 ## ES6 Modules
 ```typescript
