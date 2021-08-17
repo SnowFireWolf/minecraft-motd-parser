@@ -24,7 +24,7 @@ $ yarn add @sfirew/mc-motd-parser
 
 
 # Usuage
-support deno and node.js
+support **[deno](https://github.com/SnowFireWolf/minecraft-motd-parser-deno)** and **node.js**
 
 ## ES6 Modules
 ```typescript
