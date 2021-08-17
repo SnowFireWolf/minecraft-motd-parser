@@ -7,8 +7,8 @@
 import {
     extraLibraryType,
     motdJsonType
-} from './types';
-import { isMotdJSONType } from './utils';
+} from './types.ts';
+import { isMotdJSONType } from './utils.ts';
 
 
 

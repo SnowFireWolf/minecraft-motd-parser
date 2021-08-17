@@ -4,7 +4,7 @@
  * Released under the MIT license
  */
 
-import { motdJsonType } from './types';
+import { motdJsonType } from './types.ts';
 
 
 
