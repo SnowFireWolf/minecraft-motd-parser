@@ -1,7 +1,7 @@
 {
   "name": "@sfirew/mc-motd-parser",
   "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
-  "version": "1.0.4",
+  "version": "1.0.4-1",
   "main": "./dist/index.js",
   "license": "MIT",
   "devDependencies": {
@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "ts-node ./src/test.ts",
-    "build": "tsc --project ./"
+    "build": "tsc --project ./",
+    "declaration": "tsc --project ./ --declaration"
   },
   "repository": "https://github.com/SnowFireWolf/minecraft-motd-parser.git",
   "author": "SnowFireWolf",
