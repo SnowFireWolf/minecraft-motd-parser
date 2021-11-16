@@ -3,6 +3,7 @@
   "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
   "version": "1.0.4-1",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.6.0",
