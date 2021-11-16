@@ -12,6 +12,11 @@ Support auto check motd data type.
 
 Don't have other dependencies.
 
+Some good custom motd hex color server:
+
+[![Image_2021_11_16__18_18_54__001](https://user-images.githubusercontent.com/14024836/141967174-569a9e0e-817a-4a72-b124-204817c925ab.png)](https://www.tw-mc.top/server/tudoo.cloudns.cl)
+[![Image_2021_11_16__18_09_07__001](https://user-images.githubusercontent.com/14024836/141966554-453410a6-5b6c-44fc-a1f5-aa634eb48892.png)](https://www.tw-mc.top/server/fantasyrealms.net)
+
 
 
 ## Installation
