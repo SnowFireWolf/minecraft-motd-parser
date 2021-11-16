@@ -43,11 +43,11 @@ import { motdParser } from "https://deno.land/x/minecraft_motd_parser@v1.0.4-den
 
 
 ## Example
-Some examples here, you can use TypeScript or JavaScript.
+Some examples here, you can use **TypeScript** or **JavaScript**.
 
 
 ### `cleanTags(string)`
-clean text color tags
+clean text color tags.
 ```typescript
 let motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
 let result = motdParser.cleanTags(motdText);
