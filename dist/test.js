@@ -52,8 +52,8 @@ let start = 0;
 // clean tags
 console.log('清除 MOTD Tags HTML');
 start = new Date().getTime();
-let cleanedtring = index_1.motdParser.cleanTags(text);
-console.log(cleanedtring);
+let cleanedString = index_1.motdParser.cleanTags(text);
+console.log(cleanedString);
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`);
 // text to html
 console.log('文字轉成 HTML');

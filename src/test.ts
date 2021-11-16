@@ -55,9 +55,9 @@ let start = 0;
 // clean tags
 console.log('清除 MOTD Tags HTML')
 start = new Date().getTime();
-let cleanedtring = motdParser.cleanTags(text)
+let cleanedString = motdParser.cleanTags(text)
 
-console.log(cleanedtring)
+console.log(cleanedString)
 console.log(`執行時間: ${(new Date().getTime() - start)} ms`)
 
 

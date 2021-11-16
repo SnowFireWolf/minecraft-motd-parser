@@ -86,6 +86,10 @@ const extraColorsToHex: extraLibraryType = {
 
 
 // clean tags
+/** 
+ * ### `cleanTags(string)`
+ * Clean all tags from motd source string.
+ */
 function cleanTags(text: string) {
     let REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
     let textResult = ''
@@ -97,6 +101,12 @@ function cleanTags(text: string) {
 
 
 
+
+// text to html
+/** 
+ * ### `textToHTML(string)`
+ * Convert motd text to html.
+ */
 function textToHTML(motdString: string) {
     let motdText = motdString
     let colorCodeReg = /([§][0-9a-fA-FklmnorFKLMNOR])/g
@@ -153,6 +163,10 @@ function textToHTML(motdString: string) {
 
 
 // text to json
+/** 
+ * ### `textToJSON(string)`
+ * Convert motd text to JSON.
+ */
 function parseTextToJSON(text: string) {
     let motdText = text
 
@@ -210,7 +224,11 @@ function parseTextToJSON(text: string) {
 
 
 
-// json 轉換 html
+// json convert to html
+/** 
+ * ### `JSONToString(string)`
+ * Convert JSON to HTML.
+ */
 function parseJSONToHTML(sourceJson: motdJsonType) {
     let htmlElement = ""
     let colorHex = ""
@@ -326,7 +344,11 @@ function textEnterRender(text: string) {
 
 
 // 自動類型檢查 並轉換
-function autoToHtml(motd: motdJsonType | string) {
+/** 
+ * ### `autoToHtml(object | string)`
+ * auto check data type then convert to html.
+ */
+function autoToHtml(motd: motdJsonType | string): string {
     try {
         // 類型檢查
         if(typeof motd === 'object') {
@@ -348,10 +370,9 @@ function autoToHtml(motd: motdJsonType | string) {
 }
 
 
-//var text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-//var json = '{"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]}';
 
 const motdParserFuncs = {
+    // 刪除所有 tags
     cleanTags,
     // 文字轉成 HTML
     textToHTML,
@@ -366,6 +387,18 @@ const motdParserFuncs = {
     // 自動類型檢查並轉換
     autoToHtml
 }
+
+/**
+ *
+ * ## Minecraft Motd Parser v1.0.5
+ * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
+ * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
+ * 
+ * (c) 2021 Kevin Zheng
+ * 
+ * Released under the MIT license
+ * 
+ */
 
 export let motdParser = motdParserFuncs;
 

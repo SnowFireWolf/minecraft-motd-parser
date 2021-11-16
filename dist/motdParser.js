@@ -74,12 +74,21 @@ const extraColorsToHex = {
     'white': '#FFFFFF',
 };
 // clean tags
+/**
+ * ### `cleanTags(string)`
+ * Clean all tags from motd source string.
+ */
 function cleanTags(text) {
     let REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
     let textResult = '';
     textResult = text.replace(REGEX, '');
     return textResult;
 }
+// text to html
+/**
+ * ### `textToHTML(string)`
+ * Convert motd text to html.
+ */
 function textToHTML(motdString) {
     let motdText = motdString;
     let colorCodeReg = /([§][0-9a-fA-FklmnorFKLMNOR])/g;
@@ -128,6 +137,10 @@ function textToHTML(motdString) {
     return resultHTML;
 }
 // text to json
+/**
+ * ### `textToJSON(string)`
+ * Convert motd text to JSON.
+ */
 function parseTextToJSON(text) {
     let motdText = text;
     // color code regex: /([§][0-9a-fklmnor])/g
@@ -173,7 +186,11 @@ function parseTextToJSON(text) {
     });
     return resultObject;
 }
-// json 轉換 html
+// json convert to html
+/**
+ * ### `JSONToString(string)`
+ * Convert JSON to HTML.
+ */
 function parseJSONToHTML(sourceJson) {
     let htmlElement = "";
     let colorHex = "";
@@ -273,6 +290,10 @@ function textEnterRender(text) {
     return resultMotdHtml;
 }
 // 自動類型檢查 並轉換
+/**
+ * ### `autoToHtml(object | string)`
+ * auto check data type then convert to html.
+ */
 function autoToHtml(motd) {
     try {
         // 類型檢查
@@ -294,9 +315,8 @@ function autoToHtml(motd) {
         return err;
     }
 }
-//var text = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-//var json = '{"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]}';
 const motdParserFuncs = {
+    // 刪除所有 tags
     cleanTags,
     // 文字轉成 HTML
     textToHTML,
@@ -311,6 +331,17 @@ const motdParserFuncs = {
     // 自動類型檢查並轉換
     autoToHtml
 };
+/**
+ *
+ * ## Minecraft Motd Parser v1.0.5
+ * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
+ * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
+ *
+ * (c) 2021 Kevin Zheng
+ *
+ * Released under the MIT license
+ *
+ */
 exports.motdParser = motdParserFuncs;
 /*
 export default {
