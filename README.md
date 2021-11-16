@@ -27,7 +27,7 @@ $ yarn add @sfirew/mc-motd-parser
 
 
 
-# Usuage
+# Usage
 support **deno** and **node.js**
 
 ## ES6 Modules
@@ -50,7 +50,7 @@ Some examples here, use typescript.
 clean text color tags
 ```typescript
 let motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-motdParser.cleanTags(motdText);
+let result = motdParser.cleanTags(motdText);
 ```
 
 result:
@@ -63,7 +63,7 @@ Hypixel Network 1.8/1.9/1.10/1.11/1.12 NEW PTL GAME: THE BRIDGE
 convert motd text to html.
 ```typescript
 let motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-motdParser.textToHTML(motdText);
+let result = motdParser.textToHTML(motdText);
 ```
 
 result:
@@ -78,7 +78,7 @@ result:
 convert motd json to html.
 ```typescript
 let motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-motdParser.textToJSON(motdText);
+let result = motdParser.textToJSON(motdText);
 ```
 
 result:
@@ -147,7 +147,7 @@ let mcfalloutJson = {
   ],
   "text": ""
 }
-motdParser.JSONToHtml(mcfalloutJson);
+let result = motdParser.JSONToHtml(mcfalloutJson);
 ```
 
 result:
@@ -217,11 +217,11 @@ let jsonExample = {
   ],
   "text": ""
 };
-motdParser.autoToHtml(jsonExample);
+let result = motdParser.autoToHtml(jsonExample);
 
 
 let textExample = {"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]};
-motdParser.autoToHtml(textExample);
+let result = motdParser.autoToHtml(textExample);
 ```
 
 result:
