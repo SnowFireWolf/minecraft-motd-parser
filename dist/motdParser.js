@@ -295,24 +295,19 @@ function textEnterRender(text) {
  * auto check data type then convert to html.
  */
 function autoToHtml(motd) {
-    try {
-        // 類型檢查
-        if (typeof motd === 'object') {
-            // 如果類型是物件
-            // 將 json 轉換成 html
-            //logger.warn('處理模式： Object mode')
-            return jsonEnterRender(motd);
-        }
-        else if (typeof motd === 'string') {
-            //logger.warn('處理模式： String mode')
-            return jsonEnterRender(parseTextToJSON(motd));
-        }
-        else {
-            return 'unknow type source data';
-        }
+    // 類型檢查
+    if (typeof motd === 'object') {
+        // 如果類型是物件
+        // 將 json 轉換成 html
+        //logger.warn('處理模式： Object mode')
+        return jsonEnterRender(motd);
     }
-    catch (err) {
-        return err;
+    else if (typeof motd === 'string') {
+        //logger.warn('處理模式： String mode')
+        return jsonEnterRender(parseTextToJSON(motd));
+    }
+    else {
+        return 'unknown type source data';
     }
 }
 const motdParserFuncs = {

@@ -65,22 +65,22 @@ const colorCodeToHex: extraLibraryType = {
 };
 
 const extraColorsToHex: extraLibraryType = {
-    'black':        '#000000',
-    'dark_blue':    '#0000AA',
-    'dark_green':   '#00AA00',
-    'dark_aqua':    '#00AAAA',
-    'dark_red':     '#AA0000',
-    'dark_purple':  '#AA00AA',
-    'gold':         '#FFAA00',
-    'gray':         '#AAAAAA',
-    'dark_gray':    '#555555',
-    'blue':         '#5555FF',
-    'green':        '#55FF55',
-    'aqua':         '#55FFFF',
-    'red':          '#FF5555',
+    'black': '#000000',
+    'dark_blue': '#0000AA',
+    'dark_green': '#00AA00',
+    'dark_aqua': '#00AAAA',
+    'dark_red': '#AA0000',
+    'dark_purple': '#AA00AA',
+    'gold': '#FFAA00',
+    'gray': '#AAAAAA',
+    'dark_gray': '#555555',
+    'blue': '#5555FF',
+    'green': '#55FF55',
+    'aqua': '#55FFFF',
+    'red': '#FF5555',
     'light_purple': '#FF55FF',
-    'yellow':       '#FFFF55',
-    'white':        '#FFFFFF',
+    'yellow': '#FFFF55',
+    'white': '#FFFFFF',
 };
 
 
@@ -120,13 +120,13 @@ function textToHTML(motdString: string) {
     codeSplit.forEach((item, index) => {
         let motdStringToLowerCase = item.toLowerCase()
         // 過濾 hex
-        if(colorCodeToHex.hasOwnProperty(motdStringToLowerCase)) {
+        if (colorCodeToHex.hasOwnProperty(motdStringToLowerCase)) {
 
             //console.log(`偵測出 ${ colorCodeToHex[item] }`)
             colorHex = colorCodeToHex[motdStringToLowerCase]
 
-        // 過濾文字 style
-        } else if(extras.hasOwnProperty(motdStringToLowerCase)) {
+            // 過濾文字 style
+        } else if (extras.hasOwnProperty(motdStringToLowerCase)) {
             // font style code 轉換
             //console.log(`偵測出 style ${ extras[item] }`)
             fontStyle = extras[motdStringToLowerCase]
@@ -138,17 +138,17 @@ function textToHTML(motdString: string) {
             //console.log(fontStyle)
 
             // 檢查 Hex color
-            if(colorHex !== ''){
+            if (colorHex !== '') {
                 resultColor = `color:${colorHex};`
             }
 
-            if(textContent !== '') {
+            if (textContent !== '') {
                 //console.log('font: ' + fontStyle)
                 //console.log('color: ' + colorHex)
                 //console.log('text: ' + item)
                 //console.log('---------------------------------')
 
-                if(resultColor.length !== 0 || fontStyle.length !== 0) {
+                if (resultColor.length !== 0 || fontStyle.length !== 0) {
                     resultHTML += `<span style="${resultColor}${fontStyle}">${textContent}</span>`
                 } else {
                     resultHTML += textContent
@@ -188,11 +188,11 @@ function parseTextToJSON(text: string) {
         let stringToLowerCase = item.toLowerCase()
 
         // color code 轉換成 hex
-        if(colorCodeToHex.hasOwnProperty(stringToLowerCase)) {
+        if (colorCodeToHex.hasOwnProperty(stringToLowerCase)) {
 
             //console.log(`偵測出 ${ colorCodeToHex[item] }`)
             colorHex = colorCodeToHex[stringToLowerCase]
-        } else if(textToJsonExtras.hasOwnProperty(stringToLowerCase)) {
+        } else if (textToJsonExtras.hasOwnProperty(stringToLowerCase)) {
 
             // font style code 轉換
             //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
@@ -204,16 +204,16 @@ function parseTextToJSON(text: string) {
             }
 
             // 其餘字串
-            if(fontStyle !== ''){
+            if (fontStyle !== '') {
                 innerObject[fontStyle] = true
             }
             innerObject.text = item
 
-            if(colorHex !== ''){
+            if (colorHex !== '') {
                 innerObject.color = colorHex
             }
 
-            if(typeof resultObject.extra === 'object') {
+            if (typeof resultObject.extra === 'object') {
                 resultObject.extra.push(innerObject)
             }
         }
@@ -232,22 +232,22 @@ function parseTextToJSON(text: string) {
 function parseJSONToHTML(sourceJson: motdJsonType) {
     let htmlElement = ""
     let colorHex = ""
-    let fontStyle= ""
+    let fontStyle = ""
 
     //console.log(sourceJson)
-    for(let key of Object.keys(sourceJson)) {
+    for (let key of Object.keys(sourceJson)) {
         //console.log(key)
         key = key.toLowerCase()
 
         // 文字樣式
-        if(extraFontStyles.hasOwnProperty(key)) {
-            if(sourceJson[key]) {
+        if (extraFontStyles.hasOwnProperty(key)) {
+            if (sourceJson[key]) {
                 fontStyle = `${extraFontStyles[key]}`
             } else {
-                if(key === 'bold') {
+                if (key === 'bold') {
                     fontStyle += `font-weight:normal !important;`
 
-                } else if(key === 'italic') {
+                } else if (key === 'italic') {
                     fontStyle += `font-style: normal !important;`
 
                 } else if (key === 'underlined' || key === 'strikethrough') {
@@ -263,42 +263,42 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         }
 
         // 文字
-        if(key === "text" && typeof sourceJson.text === 'string') {
+        if (key === "text" && typeof sourceJson.text === 'string') {
             //console.log(textToHtml(sourceJson.text))
 
             // replace space to &nbsp; code
             htmlElement += textToHTML(sourceJson.text.replace(/ /g, '\u00a0'));
             continue;
         }
-        
+
         // color 處理
-        if(key === "color") {
+        if (key === "color") {
             let colorKey = sourceJson[key]
 
-            if(typeof colorKey === 'string') {
+            if (typeof colorKey === 'string') {
                 // Hex color
-                if(extraColorsToHex.hasOwnProperty(colorKey)) {
-                    colorHex = `color: ${ extraColorsToHex[colorKey] };`;
+                if (extraColorsToHex.hasOwnProperty(colorKey)) {
+                    colorHex = `color: ${extraColorsToHex[colorKey]};`;
                     continue;
-                // color code
-                } else if(colorCodeToHex.hasOwnProperty(colorKey)) {
-                    colorHex = `color: ${ colorCodeToHex[colorKey] };`;
+                    // color code
+                } else if (colorCodeToHex.hasOwnProperty(colorKey)) {
+                    colorHex = `color: ${colorCodeToHex[colorKey]};`;
                     continue;
-                // custom color
+                    // custom color
                 } else {
                     // custom hex color code mode
-                    colorHex = `color: ${ colorKey };`;
+                    colorHex = `color: ${colorKey};`;
                     continue;
                 }
             }
         }
 
         // exrta 處理
-        if(key === "extra" && typeof sourceJson.extra === 'object') {
+        if (key === "extra" && typeof sourceJson.extra === 'object') {
             //console.log(typeof sourceJson.extra);
-            for(let sourceJsonExtra of sourceJson.extra) {
+            for (let sourceJsonExtra of sourceJson.extra) {
                 //console.log(sourceJson.extra)
-                if(isMotdJSONType(sourceJsonExtra)) {
+                if (isMotdJSONType(sourceJsonExtra)) {
                     htmlElement += parseJSONToHTML(sourceJsonExtra);
                 }
             }
@@ -310,8 +310,8 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
     }
 
     let retunHTML = ''
-    if(fontStyle.length !== 0 || colorHex.length !== 0) {
-        retunHTML = `<span style="${colorHex + fontStyle}">${ htmlElement }</span>`
+    if (fontStyle.length !== 0 || colorHex.length !== 0) {
+        retunHTML = `<span style="${colorHex + fontStyle}">${htmlElement}</span>`
     } else {
         retunHTML = htmlElement
     }
@@ -349,23 +349,17 @@ function textEnterRender(text: string) {
  * auto check data type then convert to html.
  */
 function autoToHtml(motd: motdJsonType | string): string {
-    try {
-        // 類型檢查
-        if(typeof motd === 'object') {
-            // 如果類型是物件
-            // 將 json 轉換成 html
-            //logger.warn('處理模式： Object mode')
-
-            return jsonEnterRender(motd);
-        } else if (typeof motd === 'string') {
-            //logger.warn('處理模式： String mode')
-
-            return jsonEnterRender(parseTextToJSON(motd));
-        } else {
-            return 'unknow type source data';
-        }
-    } catch(err) {
-        return err;
+    // 類型檢查
+    if (typeof motd === 'object') {
+        // 如果類型是物件
+        // 將 json 轉換成 html
+        //logger.warn('處理模式： Object mode')
+        return jsonEnterRender(motd);
+    } else if (typeof motd === 'string') {
+        //logger.warn('處理模式： String mode')
+        return jsonEnterRender(parseTextToJSON(motd));
+    } else {
+        return 'unknown type source data';
     }
 }
 
