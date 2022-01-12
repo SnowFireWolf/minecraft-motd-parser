@@ -1,7 +1,7 @@
 {
   "name": "@sfirew/mc-motd-parser",
   "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
-  "version": "1.0.7-dev-hotfix-1",
+  "version": "1.0.7-hotfix",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "license": "MIT",
