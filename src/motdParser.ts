@@ -322,7 +322,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
 
 
 // JSON 完整轉換 包含 換行等
-function jsonEnterRender(json: motdJsonType) {
+function jsonEnterRender(json: motdJsonType | object) {
     // 轉換換行
     let replaceReturn = JSON.parse(JSON.stringify(json).split('\\n').join("<br/>"));
     let resultMotdHtml = parseJSONToHTML(replaceReturn);
@@ -348,7 +348,7 @@ function textEnterRender(text: string) {
  * ### `autoToHtml(object | string)`
  * auto check data type then convert to html.
  */
-function autoToHtml(motd: motdJsonType | string): string {
+function autoToHtml(motd: motdJsonType | string | object): string {
     // 類型檢查
     if (typeof motd === 'object') {
         // 如果類型是物件
