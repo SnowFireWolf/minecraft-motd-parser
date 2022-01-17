@@ -1,21 +1,31 @@
 # Minecraft Server MOTD Parser
+![Version](https://img.shields.io/github/languages/top/SnowFireWolf/minecraft-motd-parser?style=for-the-badge)
+[![npm version](https://img.shields.io/npm/v/@sfirew/mc-motd-parser?label=version&style=for-the-badge)](https://www.npmjs.com/package/@sfirew/mc-motd-parser?style=for-the-badge)
+[![License](https://img.shields.io/npm/l/minecraft-server-util?style=for-the-badge)](https://github.com/SnowFireWolf/minecraft-motd-parser/blob/master/LICENSE)
+![npm weekly downloads](https://img.shields.io/npm/dw/@sfirew/mc-motd-parser?style=for-the-badge)
+
 
 
 ## Introduction
 Can convert minecraft server motd data to text, json, html, and clean tags.
 
-Support **1.16** custom **hex color** parser.
-
-Support text, json to html.
-
-Support auto check motd data type.
+Support **1.16** custom **hex color** parser, Support auto check motd data type.
 
 Don't have other dependencies.
 
-Some good custom motd hex color server:
 
-[![Image_2021_11_16__18_18_54__001](https://user-images.githubusercontent.com/14024836/141967174-569a9e0e-817a-4a72-b124-204817c925ab.png)](https://www.tw-mc.top/server/tudoo.cloudns.cl)
-[![Image_2021_11_16__18_09_07__001](https://user-images.githubusercontent.com/14024836/141966554-453410a6-5b6c-44fc-a1f5-aa634eb48892.png)](https://www.tw-mc.top/server/fantasyrealms.net)
+### Some good custom motd hex color servers:
+The parser does not have the Minecraft font by default.
+
+#### Minecraft font example: 
+![Image_2022_01_2022d-2022h_58___002](https://user-images.githubusercontent.com/14024836/149810729-71909ca5-5705-43cf-ab3c-bdd66db00b78.png)
+
+![Image_2022_01_2022d-2022h_00___004](https://user-images.githubusercontent.com/14024836/149811040-5ddc35a0-38cf-4434-856a-968c94a4d6b4.png)
+
+#### No Minecraft font:
+![Image_2022_01_2022d-2022h_04___003](https://user-images.githubusercontent.com/14024836/149811501-d1376d90-d9ad-4092-912a-de1f78fa42eb.png)
+
+![Image_2022_01_2022d-2022h_01___002](https://user-images.githubusercontent.com/14024836/149811151-d9270d63-aead-46f9-b496-c88eb3b00c72.png)
 
 
 
@@ -34,6 +44,11 @@ $ yarn add @sfirew/mc-motd-parser
 
 ## Usage
 support **deno** and **node.js**
+
+### CommonJS
+```typescript
+const { motdParser } = require('@sfirew/mc-motd-parser');
+```
 
 ### ES6 Modules
 ```typescript
@@ -62,6 +77,82 @@ console.log(result);
  * Hypixel Network 1.8/1.9/1.10/1.11/1.12 NEW PTL GAME: THE BRIDGE
  */
 ```
+
+
+### `autoToHtml(string | object)`
+auto check data type then return same html result.
+
+```typescript
+let jsonExample = {
+  "extra": [
+    {
+      "bold": true,
+      "color": "gold",
+      "text": "Viper "
+    },
+    {
+      "color": "gray",
+      "text": "┃ "
+    },
+    {
+      "color": "yellow",
+      "text": "Summer Sale"
+    },
+    {
+      "color": "white",
+      "text": " at "
+    },
+    {
+      "color": "gold",
+      "text": "store.vipermc.net\n"
+    },
+    {
+      "color": "gray",
+      "text": "► "
+    },
+    {
+      "color": "yellow",
+      "text": "EOTW "
+    },
+    {
+      "color": "white",
+      "text": "on "
+    },
+    {
+      "color": "gold",
+      "text": "Infernal"
+    },
+    {
+      "color": "white",
+      "text": " is this Thursday at "
+    },
+    {
+      "color": "yellow",
+      "text": "5PM ET"
+    },
+    {
+      "color": "white",
+      "text": "."
+    }
+  ],
+  "text": ""
+};
+let autoJsonResult = motdParser.autoToHtml(jsonExample);
+console.log(autoJsonResult);
+
+/* auto JSON Result, callback HTML:
+<span style="color: #FFAA00;font-weight: bold;">Viper </span><span style="color: #AAAAAA;">┃ </span><span style="color: #FFFF55;">Summer Sale</span><span style="color: #FFFFFF;"> at </span><span style="color: #FFAA00;">store.vipermc.net<br/></span><span style="color: #AAAAAA;">► </span><span style="color: #FFFF55;">EOTW </span><span style="color: #FFFFFF;">on </span><span style="color: #FFAA00;">Infernal</span><span style="color: #FFFFFF;"> is this Thursday at </span><span style="color: #FFFF55;">5PM ET</span><span style="color: #FFFFFF;">.</span>
+*/
+
+let textExample = {"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]};
+let autoTextResult = motdParser.autoToHtml(textExample);
+console.log(autoTextResult);
+
+/* auto Text Result, callback HTML:
+<span style="color: #AA00AA;"></span><span style="color: #AA00AA;text-decoration: line-through;">                  </span><span style="color: #FFAA00;text-decoration: line-through;">></span><span style="color: #AAAAAA;text-decoration: line-through;"></span><span style="color: #AAAAAA;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">></span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">[</span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-style: italic;">Purple </span><span style="color: #555555;font-style: italic;"></span><span style="color: #555555;font-weight: bold;"></span><span style="color: #555555;font-style: italic;">Prison</span><span style="color: #FFAA00;font-style: italic;"></span><span style="color: #FFAA00;font-weight: bold;">]</span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;"><</span><span style="color: #FFAA00;font-weight: bold;"><</span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;text-decoration: line-through;">                     </span><span style="color: #AA00AA;"> </span><span style="color: #AAAAAA;">   </span><span style="color: #AA00AA;"></span><span style="color: #AA00AA;mc_obfuscated;"></span><span style="color: #AA00AA;font-weight: bold;">;;;</span><span style="color: #AA00AA;">  </span><span style="color: #FF55FF;"></span><span style="color: #FF55FF;font-weight: bold;">NEW BLACK-MARKET </span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-weight: bold;">» </span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">/BLACKMARKET  </span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;mc_obfuscated;"></span><span style="color: #AA00AA;font-weight: bold;">;;;</span>
+*/
+```
+
 
 
 ### `textToHTML(string)`
@@ -165,78 +256,3 @@ console.log(result)
 ![Image_2021_08_2021d-2021h_24___001](https://user-images.githubusercontent.com/14024836/129277638-fe8c5735-54fe-4ff1-afc5-4b5493706be9.png)
 
 
-
-
-### `autoToHtml(string | object)`
-auto check data type then return same html result.
-
-```typescript
-let jsonExample = {
-  "extra": [
-    {
-      "bold": true,
-      "color": "gold",
-      "text": "Viper "
-    },
-    {
-      "color": "gray",
-      "text": "┃ "
-    },
-    {
-      "color": "yellow",
-      "text": "Summer Sale"
-    },
-    {
-      "color": "white",
-      "text": " at "
-    },
-    {
-      "color": "gold",
-      "text": "store.vipermc.net\n"
-    },
-    {
-      "color": "gray",
-      "text": "► "
-    },
-    {
-      "color": "yellow",
-      "text": "EOTW "
-    },
-    {
-      "color": "white",
-      "text": "on "
-    },
-    {
-      "color": "gold",
-      "text": "Infernal"
-    },
-    {
-      "color": "white",
-      "text": " is this Thursday at "
-    },
-    {
-      "color": "yellow",
-      "text": "5PM ET"
-    },
-    {
-      "color": "white",
-      "text": "."
-    }
-  ],
-  "text": ""
-};
-let autoJsonResult = motdParser.autoToHtml(jsonExample);
-console.log(autoJsonResult);
-
-/* auto JSON Result, callback HTML:
-<span style="color: #FFAA00;font-weight: bold;">Viper </span><span style="color: #AAAAAA;">┃ </span><span style="color: #FFFF55;">Summer Sale</span><span style="color: #FFFFFF;"> at </span><span style="color: #FFAA00;">store.vipermc.net<br/></span><span style="color: #AAAAAA;">► </span><span style="color: #FFFF55;">EOTW </span><span style="color: #FFFFFF;">on </span><span style="color: #FFAA00;">Infernal</span><span style="color: #FFFFFF;"> is this Thursday at </span><span style="color: #FFFF55;">5PM ET</span><span style="color: #FFFFFF;">.</span>
-*/
-
-let textExample = {"text":"","extra":[{"text":"Hypixel Network ","extra":[{"text":"","extra":[{"text":"1.8/1.9/1.10/1.11/1.12 ","extra":[{"text":"","extra":[{"text":"NEW PTL GAME:","extra":[{"text":"","extra":[{"text":" THE BRIDGE","extra":[],"bold":true}],"color":"acqua"}],"bold":true}],"color":"yellow"}],"color":"red"}],"color":"gray"}],"color":"green"}]};
-let autoTextResult = motdParser.autoToHtml(textExample);
-console.log(autoTextResult);
-
-/* auto Text Result, callback HTML:
-<span style="color: #AA00AA;"></span><span style="color: #AA00AA;text-decoration: line-through;">                  </span><span style="color: #FFAA00;text-decoration: line-through;">></span><span style="color: #AAAAAA;text-decoration: line-through;"></span><span style="color: #AAAAAA;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">></span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">[</span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-style: italic;">Purple </span><span style="color: #555555;font-style: italic;"></span><span style="color: #555555;font-weight: bold;"></span><span style="color: #555555;font-style: italic;">Prison</span><span style="color: #FFAA00;font-style: italic;"></span><span style="color: #FFAA00;font-weight: bold;">]</span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;"><</span><span style="color: #FFAA00;font-weight: bold;"><</span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;text-decoration: line-through;">                     </span><span style="color: #AA00AA;"> </span><span style="color: #AAAAAA;">   </span><span style="color: #AA00AA;"></span><span style="color: #AA00AA;mc_obfuscated;"></span><span style="color: #AA00AA;font-weight: bold;">;;;</span><span style="color: #AA00AA;">  </span><span style="color: #FF55FF;"></span><span style="color: #FF55FF;font-weight: bold;">NEW BLACK-MARKET </span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;font-weight: bold;">» </span><span style="color: #FFAA00;font-weight: bold;"></span><span style="color: #FFAA00;font-weight: bold;">/BLACKMARKET  </span><span style="color: #AA00AA;font-weight: bold;"></span><span style="color: #AA00AA;mc_obfuscated;"></span><span style="color: #AA00AA;font-weight: bold;">;;;</span>
-*/
-```
