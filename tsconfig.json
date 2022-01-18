@@ -6,12 +6,10 @@
     "sourceMap": false,
     "allowJs": true,
     "target": "ES6",
-    "lib": [
-      "es6",
-      "ESNext"
-    ],
+    "lib": ["es6", "ESNext"],
     "rootDir": "./src",
     "outDir": "./dist",
     "moduleResolution": "node"
-  }
+  },
+  "exclude": ["node_modules", "test", "dist"]
 }

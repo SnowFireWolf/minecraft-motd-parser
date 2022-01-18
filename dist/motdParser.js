@@ -125,6 +125,7 @@ function textToHTML(motdString) {
                 //console.log('color: ' + colorHex)
                 //console.log('text: ' + item)
                 //console.log('---------------------------------')
+                textContent = utils_1.htmlStringFormatting(textContent);
                 if (resultColor.length !== 0 || fontStyle.length !== 0) {
                     resultHTML += `<span style="${resultColor}${fontStyle}">${textContent}</span>`;
                 }
@@ -227,7 +228,7 @@ function parseJSONToHTML(sourceJson) {
         if (key === "text" && typeof sourceJson.text === 'string') {
             //console.log(textToHtml(sourceJson.text))
             // replace space to &nbsp; code
-            htmlElement += textToHTML(sourceJson.text.replace(/ /g, '\u00a0'));
+            htmlElement += textToHTML(sourceJson.text);
             continue;
         }
         // color 處理
@@ -266,27 +267,25 @@ function parseJSONToHTML(sourceJson) {
         //console.log('font: ' + fontStyle)
         //console.log('color: ' + colorHex)
     }
-    let retunHTML = '';
+    let returnHTML = '';
     if (fontStyle.length !== 0 || colorHex.length !== 0) {
-        retunHTML = `<span style="${colorHex + fontStyle}">${htmlElement}</span>`;
+        returnHTML = `<span style="${colorHex + fontStyle}">${htmlElement}</span>`;
     }
     else {
-        retunHTML = htmlElement;
+        returnHTML = htmlElement;
     }
-    return retunHTML;
+    return returnHTML;
 }
 // JSON 完整轉換 包含 換行等
 function jsonEnterRender(json) {
-    // 轉換換行
-    let replaceReturn = JSON.parse(JSON.stringify(json).split('\\n').join("<br/>"));
-    let resultMotdHtml = parseJSONToHTML(replaceReturn);
+    // JSON.stringify(json).split('\\n').join("<br/>")
+    const resultMotdHtml = parseJSONToHTML(JSON.parse(JSON.stringify(json)));
     //console.log('motd: ' + resultMotd)
     return resultMotdHtml;
 }
 // TEXT 完整轉換 包含 換行等
 function textEnterRender(text) {
-    let replaceReturn = text.split('\\n').join("<br/>");
-    let resultMotdHtml = textToHTML(replaceReturn);
+    const resultMotdHtml = textToHTML(text);
     return resultMotdHtml;
 }
 // 自動類型檢查 並轉換
@@ -307,7 +306,7 @@ function autoToHtml(motd) {
         return jsonEnterRender(parseTextToJSON(motd));
     }
     else {
-        return 'unknown type source data';
+        return 'unknown motd data type';
     }
 }
 const motdParserFuncs = {
@@ -338,13 +337,3 @@ const motdParserFuncs = {
  *
  */
 exports.motdParser = motdParserFuncs;
-/*
-export default {
-    cleanTags,
-    textToHTML,
-    textToJSON,
-    JSONToHtml: parseJSONToHTML,
-    jsonEnterRender,
-    textEnterRender,
-    autoToHtml
-}*/ 

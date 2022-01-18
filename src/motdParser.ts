@@ -1,5 +1,5 @@
 /*
- * minecraft motd parser v1.0.5
+ * minecraft motd parser v1.0.7
  * (c) 2021 Kevin Zheng
  * Released under the MIT license
  */
@@ -8,7 +8,7 @@ import {
     extraLibraryType,
     motdJsonType
 } from './types';
-import { isMotdJSONType } from './utils';
+import { isMotdJSONType, htmlStringFormatting } from './utils';
 
 
 
@@ -147,6 +147,7 @@ function textToHTML(motdString: string) {
                 //console.log('color: ' + colorHex)
                 //console.log('text: ' + item)
                 //console.log('---------------------------------')
+                textContent = htmlStringFormatting(textContent)
 
                 if (resultColor.length !== 0 || fontStyle.length !== 0) {
                     resultHTML += `<span style="${resultColor}${fontStyle}">${textContent}</span>`
@@ -267,7 +268,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
             //console.log(textToHtml(sourceJson.text))
 
             // replace space to &nbsp; code
-            htmlElement += textToHTML(sourceJson.text.replace(/ /g, '\u00a0'));
+            htmlElement += textToHTML(sourceJson.text);
             continue;
         }
 
@@ -309,23 +310,22 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         //console.log('color: ' + colorHex)
     }
 
-    let retunHTML = ''
+    let returnHTML = ''
     if (fontStyle.length !== 0 || colorHex.length !== 0) {
-        retunHTML = `<span style="${colorHex + fontStyle}">${htmlElement}</span>`
+        returnHTML = `<span style="${colorHex + fontStyle}">${htmlElement}</span>`
     } else {
-        retunHTML = htmlElement
+        returnHTML = htmlElement
     }
 
-    return retunHTML;
+    return returnHTML;
 }
 
 
 
 // JSON 完整轉換 包含 換行等
 function jsonEnterRender(json: motdJsonType | object) {
-    // 轉換換行
-    let replaceReturn = JSON.parse(JSON.stringify(json).split('\\n').join("<br/>"));
-    let resultMotdHtml = parseJSONToHTML(replaceReturn);
+    // JSON.stringify(json).split('\\n').join("<br/>")
+    const resultMotdHtml = parseJSONToHTML(JSON.parse(JSON.stringify(json)));
 
     //console.log('motd: ' + resultMotd)
     return resultMotdHtml;
@@ -335,8 +335,7 @@ function jsonEnterRender(json: motdJsonType | object) {
 
 // TEXT 完整轉換 包含 換行等
 function textEnterRender(text: string) {
-    let replaceReturn = text.split('\\n').join("<br/>");
-    let resultMotdHtml = textToHTML(replaceReturn);
+    const resultMotdHtml = textToHTML(text);
 
     return resultMotdHtml;
 }
@@ -359,7 +358,7 @@ function autoToHtml(motd: motdJsonType | string | object): string {
         //logger.warn('處理模式： String mode')
         return jsonEnterRender(parseTextToJSON(motd));
     } else {
-        return 'unknown type source data';
+        return 'unknown motd data type';
     }
 }
 
@@ -394,15 +393,4 @@ const motdParserFuncs = {
  * 
  */
 
-export let motdParser = motdParserFuncs;
-
-/*
-export default {
-    cleanTags,
-    textToHTML,
-    textToJSON,
-    JSONToHtml: parseJSONToHTML,
-    jsonEnterRender,
-    textEnterRender,
-    autoToHtml
-}*/
+export const motdParser = motdParserFuncs;

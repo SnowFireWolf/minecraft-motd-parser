@@ -6,7 +6,7 @@ declare function parseJSONToHTML(sourceJson: motdJsonType): string;
 declare function jsonEnterRender(json: motdJsonType): string;
 declare function textEnterRender(text: string): string;
 declare function autoToHtml(motd: motdJsonType | string | object): string;
-export declare let motdParser: {
+export declare const motdParser: {
     cleanTags: typeof cleanTags;
     textToHTML: typeof textToHTML;
     textToJSON: typeof parseTextToJSON;
