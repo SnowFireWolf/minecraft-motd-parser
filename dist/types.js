@@ -1,6 +1,6 @@
 "use strict";
 /*
- * minecraft motd parser v1.0.5
+ * minecraft motd parser v1.0.8
  * (c) 2021 Kevin Zheng
  * Released under the MIT license
  */
