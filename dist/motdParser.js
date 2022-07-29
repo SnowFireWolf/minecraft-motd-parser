@@ -1,7 +1,7 @@
 "use strict";
 /*
- * minecraft motd parser v1.0.5
- * (c) 2021 Kevin Zheng
+ * minecraft motd parser v1.0.9
+ * (c) 2022 Kevin Zheng
  * Released under the MIT license
  */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -13,14 +13,15 @@ const extras = {
     '§m': 'text-decoration: line-through;',
     '§n': 'text-decoration:underline;',
     '§o': 'font-style: italic;',
-    '§r': 'text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
+    '§r': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
 };
 const extraFontStyles = {
-    "bold": "font-weight: bold;",
-    "italic": "font-style: italic;",
-    "underlined": "text-decoration:underline;",
-    "strikethrough": "text-decoration: line-through;",
-    "obfuscated": "mc_obfuscated;"
+    'bold': 'font-weight: bold;',
+    'italic': 'font-style: italic;',
+    'underlined': 'text-decoration:underline;',
+    'strikethrough': 'text-decoration: line-through;',
+    'obfuscated': 'mc_obfuscated;',
+    'reset': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
 };
 const textToJsonExtras = {
     '§k': 'obfuscated',
@@ -125,7 +126,7 @@ function textToHTML(motdString) {
                 //console.log('color: ' + colorHex)
                 //console.log('text: ' + item)
                 //console.log('---------------------------------')
-                textContent = utils_1.htmlStringFormatting(textContent);
+                textContent = (0, utils_1.htmlStringFormatting)(textContent);
                 if (resultColor.length !== 0 || fontStyle.length !== 0) {
                     resultHTML += `<span style="${resultColor}${fontStyle}">${textContent}</span>`;
                 }
@@ -155,6 +156,9 @@ function parseTextToJSON(text) {
         text: "",
         extra: []
     };
+    // console.log('textSplit', textSplit);
+    // const filterBlank = textSplit.filter(item => (item !== ''));
+    // console.log('filterBlank', filterBlank);
     textSplit.forEach((item) => {
         let stringToLowerCase = item.toLowerCase();
         // color code 轉換成 hex
@@ -185,7 +189,22 @@ function parseTextToJSON(text) {
             }
         }
     });
-    return resultObject;
+    // console.log('resultObject', resultObject);
+    let mergedObject = resultObject;
+    let newExtra = [];
+    // if text is '', remote it and merge to next array
+    mergedObject.extra && mergedObject.extra.forEach((item, index) => {
+        // console.log('item', item);
+        if (item.text === '') {
+            if (mergedObject.extra && typeof mergedObject.extra[index + 1] === 'object') {
+                newExtra.push(Object.assign(Object.assign({}, item), mergedObject.extra[index + 1]));
+            }
+        }
+    });
+    newExtra = newExtra.filter(item => item.text !== '');
+    console.log('newExtra', newExtra);
+    console.log('mergedObject', mergedObject);
+    return mergedObject;
 }
 // json convert to html
 /**
@@ -212,8 +231,11 @@ function parseJSONToHTML(sourceJson) {
                 else if (key === 'italic') {
                     fontStyle += `font-style: normal !important;`;
                 }
-                else if (key === 'underlined' || key === 'strikethrough') {
+                else if (key === 'underlined') {
                     fontStyle += 'text-decoration: none !important;';
+                }
+                else if (key === 'strikethrough') {
+                    fontStyle += 'text-decoration: line-through;';
                 }
                 else if (key === 'obfuscated') {
                     fontStyle += ``;
@@ -258,7 +280,7 @@ function parseJSONToHTML(sourceJson) {
             //console.log(typeof sourceJson.extra);
             for (let sourceJsonExtra of sourceJson.extra) {
                 //console.log(sourceJson.extra)
-                if (utils_1.isMotdJSONType(sourceJsonExtra)) {
+                if ((0, utils_1.isMotdJSONType)(sourceJsonExtra)) {
                     htmlElement += parseJSONToHTML(sourceJsonExtra);
                 }
             }
@@ -278,6 +300,7 @@ function parseJSONToHTML(sourceJson) {
 }
 // JSON 完整轉換 包含 換行等
 function jsonEnterRender(json) {
+    // console.log('json', json);
     // JSON.stringify(json).split('\\n').join("<br/>")
     const resultMotdHtml = parseJSONToHTML(JSON.parse(JSON.stringify(json)));
     //console.log('motd: ' + resultMotd)
@@ -309,31 +332,27 @@ function autoToHtml(motd) {
         return 'unknown motd data type';
     }
 }
-const motdParserFuncs = {
-    // 刪除所有 tags
-    cleanTags,
-    // 文字轉成 HTML
-    textToHTML,
-    // 文字轉乘 JSON
-    textToJSON: parseTextToJSON,
-    // JSON 轉成 HTML
-    JSONToHtml: parseJSONToHTML,
-    // JSON 完整轉換 包含 換行等
-    jsonEnterRender,
-    // TEXT 完整轉換 包含 換行等
-    textEnterRender,
-    // 自動類型檢查並轉換
-    autoToHtml
-};
-/**
- *
- * ## Minecraft Motd Parser v1.0.5
+/*
+ * #### minecraft motd parser v1.0.9
  * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
  * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
- *
- * (c) 2021 Kevin Zheng
+ * (c) 2022 Kevin Zheng
  *
  * Released under the MIT license
- *
  */
-exports.motdParser = motdParserFuncs;
+exports.motdParser = {
+    // delete all tags
+    cleanTags,
+    // text convert to HTML
+    textToHTML,
+    // text convert to JSON
+    textToJSON: parseTextToJSON,
+    // JSON convert HTML
+    JSONToHtml: parseJSONToHTML,
+    // JSON full convert HTML (include enter)
+    jsonEnterRender,
+    // TEXT full convert HTML (include enter)
+    textEnterRender,
+    // auto check type to convert
+    autoToHtml,
+};
