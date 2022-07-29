@@ -24,7 +24,7 @@ const extras: extraLibraryType = {
 const extraFontStyles: extraLibraryType = {
     'bold': 'font-weight: bold;',
     'italic': 'font-style: italic;',
-    'underlined': 'text-decoration:underline;',
+    'underline': 'text-decoration:underline;',
     'strikethrough': 'text-decoration: line-through;',
     'obfuscated': 'mc_obfuscated;',
     'reset': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
@@ -277,7 +277,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
                 } else if (key === 'italic') {
                     fontStyle += `font-style: normal !important;`;
 
-                } else if (key === 'underlined') {
+                } else if (key === 'underline') {
                     fontStyle += 'text-decoration: none !important;';
 
                 } else if (key === 'strikethrough') {
