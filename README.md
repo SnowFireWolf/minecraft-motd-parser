@@ -28,6 +28,12 @@ The parser does not have the Minecraft font by default.
 ![Image_2022_01_2022d-2022h_01___002](https://user-images.githubusercontent.com/14024836/149811151-d9270d63-aead-46f9-b496-c88eb3b00c72.png)
 
 
+You can try server status view in my created service:
+
+![https://mcsv.top/server/play.mcforests.com](https://sr-api.sfirew.com/server/play.mcforests.com/banner/motd.png?hl=en&v=MI84ydhafV)
+[https://mcsv.top/server/play.mcforests.com](https://mcsv.top/server/play.mcforests.com)
+
+
 
 ## Installation
 ### NPM
