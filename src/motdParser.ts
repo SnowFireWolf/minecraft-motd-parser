@@ -191,9 +191,6 @@ function parseTextToJSON(text: string) {
     }
 
     // console.log('textSplit', textSplit);
-    // const filterBlank = textSplit.filter(item => (item !== ''));
-    // console.log('filterBlank', filterBlank);
-
     textSplit.forEach((item) => {
         let stringToLowerCase = item.toLowerCase();
 
@@ -244,7 +241,11 @@ function parseTextToJSON(text: string) {
                         newExtra.push({
                             ...item as motdJsonType,
                             ...resultObject.extra[index + 1],
-                        })
+                        });
+                    }
+                } else {
+                    if (item.text !== (newExtra[newExtra.length - 1] && newExtra[newExtra.length - 1].text)) {
+                        newExtra.push(item as motdJsonType);
                     }
                 }
             });
@@ -283,25 +284,27 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         if (extraFontStyles.hasOwnProperty(key)) {
             if (sourceJson[key]) {
                 fontStyle += `${extraFontStyles[key]}`
-            } else {
-                if (key === 'bold') {
-                    fontStyle += `font-weight:normal !important;`;
-
-                } else if (key === 'italic') {
-                    fontStyle += `font-style: normal !important;`;
-
-                } else if (key === 'underline') {
-                    fontStyle += 'text-decoration: none !important;';
-
-                } else if (key === 'strikethrough') {
-                    fontStyle += 'text-decoration: line-through !important;';
-
-                } else if (key === 'obfuscated') {
-                    fontStyle += ``
-                } else {
-                    fontStyle = ""
-                }
             }
+
+            // else {
+            //     if (key === 'bold') {
+            //         fontStyle += `font-weight:normal !important;`;
+
+            //     } else if (key === 'italic') {
+            //         fontStyle += `font-style: normal !important;`;
+
+            //     } else if (key === 'underline') {
+            //         fontStyle += 'text-decoration: none !important;';
+
+            //     } else if (key === 'strikethrough') {
+            //         fontStyle += 'text-decoration: line-through !important;';
+
+            //     } else if (key === 'obfuscated') {
+            //         fontStyle += ``
+            //     } else {
+            //         fontStyle = ""
+            //     }
+            // }
             continue;
         }
 
