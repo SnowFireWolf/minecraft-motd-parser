@@ -191,7 +191,6 @@ function parseTextToJSON(text: string) {
     }
 
     // console.log('textSplit', textSplit);
-
     textSplit.forEach((item) => {
         let stringToLowerCase = item.toLowerCase();
 
@@ -245,7 +244,7 @@ function parseTextToJSON(text: string) {
                         });
                     }
                 } else {
-                    if (newExtra[newExtra.length - 1] && item.text !== newExtra[newExtra.length - 1].text) {
+                    if (item.text !== (newExtra[newExtra.length - 1] && newExtra[newExtra.length - 1].text)) {
                         newExtra.push(item as motdJsonType);
                     }
                 }
