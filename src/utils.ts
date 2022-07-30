@@ -14,6 +14,10 @@ export function isMotdJSONType(object: any): object is motdJsonType {
 }
 
 
+/**
+ * 
+ * #### replace all html tags to &...
+ */
 export const htmlStringFormatting = (text: string): string => {
   return text
     // space
@@ -24,7 +28,7 @@ export const htmlStringFormatting = (text: string): string => {
     .replace(/>/g, '&gt;')
     .replace(/\"/g, '&quot;')
     .replace(/\'/g, '&#39;')
-    // return 
+    // return
     .replace(/\n/g, '<br/>');
     // .replace(/\//g, '&#x2F;');
 }
