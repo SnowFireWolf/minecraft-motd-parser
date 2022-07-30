@@ -233,12 +233,12 @@ function parseTextToJSON(text: string) {
     // console.log('resultObject', resultObject);
 
     let newExtra: Array<motdJsonType> = [];
-    console.log('resultObject', resultObject);
+    // console.log('resultObject', resultObject);
     if (resultObject.extra) {
         if (resultObject.extra.length > 1) {
             // if text is '', remove it and merge to next array
             resultObject.extra.forEach((item, index) => {
-                console.log('item', item);
+                // console.log('item', item);
                 if (item.text === '') {
                     if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
                         newExtra.push({
