@@ -233,18 +233,27 @@ function parseTextToJSON(text: string) {
     // console.log('resultObject', resultObject);
 
     let newExtra: Array<motdJsonType> = [];
-    // if text is '', remove it and merge to next array
-    resultObject.extra && resultObject.extra.forEach((item, index) => {
-        // console.log('item', item);
-        if (item.text === '') {
-            if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
-                newExtra.push({
-                    ...item as motdJsonType,
-                    ...resultObject.extra[index + 1],
-                })
-            }
+    console.log('resultObject', resultObject);
+    if (resultObject.extra) {
+        if (resultObject.extra.length > 1) {
+            // if text is '', remove it and merge to next array
+            resultObject.extra.forEach((item, index) => {
+                console.log('item', item);
+                if (item.text === '') {
+                    if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
+                        newExtra.push({
+                            ...item as motdJsonType,
+                            ...resultObject.extra[index + 1],
+                        })
+                    }
+                }
+            });
+        } else {
+            newExtra.push(resultObject.extra[0] as motdJsonType);
         }
-    });
+    }
+
+    // console.log('newExtra', newExtra);
     // remove blank content
     newExtra = newExtra.filter(item => item.text !== '');
     // console.log('newExtra', newExtra);
