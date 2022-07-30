@@ -11,13 +11,16 @@ interface extraLibraryType {
 
 
 interface motdJsonType {
-  text: string;
+  text: string | Number;
   extra?: {
     color?: string;
-    text: string;
+    text?: string | Number;
     bold?: boolean;
     strikethrough?: boolean;
-    extra?: object[]
+    underlined?: boolean;
+    obfuscated?: boolean;
+    italic?: boolean;
+    extra?: object[];
   }[];
   [key: string]: string | boolean | object | Array<object> | undefined;
 };
