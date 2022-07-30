@@ -24,7 +24,7 @@ const extras: extraLibraryType = {
 const extraFontStyles: extraLibraryType = {
     'bold': 'font-weight: bold;',
     'italic': 'font-style: italic;',
-    'underline': 'text-decoration:underline;',
+    'underlined': 'text-decoration:underline;',
     'strikethrough': 'text-decoration: line-through;',
     'obfuscated': 'mc_obfuscated;',
     'reset': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
@@ -34,14 +34,14 @@ const textToJsonExtras: extraLibraryType = {
     '§k': 'obfuscated',
     '§l': 'bold',
     '§m': 'strikethrough',
-    '§n': 'underline',
+    '§n': 'underlined',
     '§o': 'italic',
     '§r': '',
     // 大寫
     '§K': 'obfuscated',
     '§L': 'bold',
     '§M': 'strikethrough',
-    '§N': 'underline',
+    '§N': 'underlined',
     '§O': 'italic',
     '§P': ''
 };
@@ -232,7 +232,7 @@ function parseTextToJSON(text: string) {
     resultObject.extra && resultObject.extra.forEach((item, index) => {
         // console.log('item', item);
         if (item.text === '') {
-            if(resultObject.extra && typeof resultObject.extra[index + 1] === 'object'){
+            if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
                 newExtra.push({
                     ...item as any,
                     ...resultObject.extra[index + 1],
@@ -293,12 +293,14 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         }
 
         // text
-        if (key === "text" && typeof sourceJson.text === 'string') {
-            //console.log(textToHtml(sourceJson.text))
+        if (key === "text") {
+            if (typeof sourceJson.text === 'string' || typeof sourceJson.text === 'number') {
+                //console.log(textToHtml(sourceJson.text))
 
-            // replace space to &nbsp; code
-            htmlElement += textToHTML(sourceJson.text);
-            continue;
+                // replace space to &nbsp; code
+                htmlElement += textToHTML(String(sourceJson.text));
+                continue;
+            }
         }
 
         // color
