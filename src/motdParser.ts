@@ -236,36 +236,28 @@ function parseTextToJSON(text: string) {
         if (resultObject.extra.length > 1) {
             // if text is '', remove it and merge to next array
             resultObject.extra.forEach((item, index) => {
-                let prePushObject: motdJsonType = {
-                    text: "",
-                    extra: [],
-                };
-
                 // console.log('item', item);
                 if (item.text === '') {
                     if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
-                        prePushObject = {
+                        newExtra.push({
                             ...item as motdJsonType,
                             ...resultObject.extra[index + 1],
-                        }
+                        });
                     }
                 } else {
-                    if (item.text !== newExtra[newExtra.length - 1].text) {
-                        prePushObject = {
-                            ...item as motdJsonType,
-                        }
+                    if (newExtra[newExtra.length - 1] && item.text !== newExtra[newExtra.length - 1].text) {
+                        newExtra.push(item as motdJsonType);
                     }
                 }
-
-                newExtra.push(prePushObject);
             });
         } else {
             newExtra.push(resultObject.extra[0] as motdJsonType);
         }
     }
+
     // console.log('newExtra', newExtra);
     // remove blank content
-    // newExtra = newExtra.filter(item => item.text !== '');
+    newExtra = newExtra.filter(item => item.text !== '');
     // console.log('newExtra', newExtra);
 
     return {

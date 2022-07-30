@@ -2,12 +2,20 @@ import { motdParser } from '../src';
 import type { motdJsonType } from '../src/types';
 
 
+// const testString = `&aHypixel Network &c[1.8-1.19]
+// &b&lNEW: DROPPER &7&l| &6&lSUMMER EVENT&7&l+&e&lSALE`;
 
+// const replacedString = testString.replace(/&/g, '§');
+// console.log(motdParser.autoToHtml(replacedString));
 const testFromCodeBug = `&r&f                &r&9&m&l   &r&8&m&l[ &r&f &r&6&lMineplex&r&f &r&f&lGames&r&f &r&8&m&l ]&r&9&m&l   &r&f
                         &r&e&lSTATS REVAMP&r &a&l&n testesest
 `;
 const replacedString = testFromCodeBug.replace(/&/g, '§');
 console.log(motdParser.autoToHtml(replacedString));
+
+
+
+
 
 
 // const testNumberContentFromJson: motdJsonType = {
@@ -20,9 +28,17 @@ console.log(motdParser.autoToHtml(replacedString));
 
 
 
+
+
+
+
 // console.log('--------------------------------------------');
 // const testString = 'Minecraft Server';
 // console.log(motdParser.autoToHtml(testString));
+
+
+
+
 
 
 console.log('----------------------------------------');
@@ -30,6 +46,10 @@ const testFromCode = `§e§l§m-------------§r§7§l[ §f§lMC §c§lPGST §7§
 §7Pixelmon §f8.4.2 §8| §e§l造型寶可夢 §8| §e§l懸賞系統 §8| §e§l自製系統      `;
 console.log(motdParser.autoToHtml(testFromCode));
 console.log('----------------------------------------');
+
+
+
+
 
 // const testFromJSON = {
 //   "extra": [
