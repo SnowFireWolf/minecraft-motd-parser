@@ -11,7 +11,7 @@ import {
 import { isMotdJSONType, htmlStringFormatting } from './utils';
 
 
-
+// color code to font styles
 const extras: extraLibraryType = {
     '§k': 'obfuscated;',
     '§l': 'font-weight: bold;',
@@ -21,6 +21,7 @@ const extras: extraLibraryType = {
     '§r': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
 };
 
+// json extra font styles
 const extraFontStyles: extraLibraryType = {
     'bold': 'font-weight: bold;',
     'italic': 'font-style: italic;',
@@ -30,6 +31,7 @@ const extraFontStyles: extraLibraryType = {
     'reset': 'color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;',
 };
 
+// text to json extra name
 const textToJsonExtras: extraLibraryType = {
     '§k': 'obfuscated',
     '§l': 'bold',
@@ -46,6 +48,7 @@ const textToJsonExtras: extraLibraryType = {
     '§P': ''
 };
 
+// base color hex
 const colorCodeToHex: extraLibraryType = {
     '§0': '#000000',
     '§1': '#0000AA',
@@ -65,6 +68,7 @@ const colorCodeToHex: extraLibraryType = {
     '§f': '#FFFFFF',
 };
 
+// json extra to hex color
 const extraColorsToHex: extraLibraryType = {
     'black': '#000000',
     'dark_blue': '#0000AA',
@@ -86,9 +90,13 @@ const extraColorsToHex: extraLibraryType = {
 
 
 
+
+
+
+
 // clean tags
 /** 
- * ### `cleanTags(string)`
+ * #### `cleanTags(string)`
  * Clean all tags from motd source string.
  */
 function cleanTags(text: string) {
@@ -100,12 +108,9 @@ function cleanTags(text: string) {
     return textResult
 }
 
-
-
-
 // text to html
 /** 
- * ### `textToHTML(string)`
+ * #### `textToHTML(string)`
  * Convert motd text to html.
  */
 function textToHTML(motdString: string) {
@@ -149,6 +154,7 @@ function textToHTML(motdString: string) {
                 //console.log('color: ' + colorHex)
                 //console.log('text: ' + item)
                 //console.log('---------------------------------')
+                // replace html tags
                 textContent = htmlStringFormatting(textContent)
 
                 if (resultColor.length !== 0 || fontStyle.length !== 0) {
@@ -163,11 +169,9 @@ function textToHTML(motdString: string) {
     return resultHTML
 }
 
-
-
 // text to json
 /** 
- * ### `textToJSON(string)`
+ * #### `textToJSON(string)`
  * Convert motd text to JSON.
  */
 function parseTextToJSON(text: string) {
@@ -227,19 +231,21 @@ function parseTextToJSON(text: string) {
     })
 
     // console.log('resultObject', resultObject);
+
     let newExtra: Array<motdJsonType> = [];
-    // if text is '', remote it and merge to next array
+    // if text is '', remove it and merge to next array
     resultObject.extra && resultObject.extra.forEach((item, index) => {
         // console.log('item', item);
         if (item.text === '') {
             if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
                 newExtra.push({
-                    ...item as any,
+                    ...item as motdJsonType,
                     ...resultObject.extra[index + 1],
                 })
             }
         }
-    })
+    });
+    // remove blank content
     newExtra = newExtra.filter(item => item.text !== '');
     // console.log('newExtra', newExtra);
 
@@ -249,11 +255,9 @@ function parseTextToJSON(text: string) {
     };
 }
 
-
-
 // json convert to html
 /** 
- * ### `JSONToString(string)`
+ * #### `JSONToString(string)`
  * Convert JSON to HTML.
  */
 function parseJSONToHTML(sourceJson: motdJsonType) {
@@ -295,9 +299,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         // text
         if (key === "text") {
             if (typeof sourceJson.text === 'string' || typeof sourceJson.text === 'number') {
-                //console.log(textToHtml(sourceJson.text))
-
-                // replace space to &nbsp; code
+                // convert all type to string
                 htmlElement += textToHTML(String(sourceJson.text));
                 continue;
             }
@@ -353,10 +355,9 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
 
 
 
-// JSON 完整轉換 包含 換行等
+// JSON full convert include newline
 function jsonEnterRender(json: motdJsonType | object) {
     // console.log('json', json);
-    // JSON.stringify(json).split('\\n').join("<br/>")
     const resultMotdHtml = parseJSONToHTML(JSON.parse(JSON.stringify(json)));
 
     //console.log('motd: ' + resultMotd)
@@ -365,7 +366,7 @@ function jsonEnterRender(json: motdJsonType | object) {
 
 
 
-// TEXT 完整轉換 包含 換行等
+// TEXT full convert include newline
 function textEnterRender(text: string) {
     const resultMotdHtml = textToHTML(text);
 
