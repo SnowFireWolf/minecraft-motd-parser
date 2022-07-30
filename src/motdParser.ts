@@ -191,8 +191,6 @@ function parseTextToJSON(text: string) {
     }
 
     // console.log('textSplit', textSplit);
-    // const filterBlank = textSplit.filter(item => (item !== ''));
-    // console.log('filterBlank', filterBlank);
 
     textSplit.forEach((item) => {
         let stringToLowerCase = item.toLowerCase();
@@ -238,24 +236,36 @@ function parseTextToJSON(text: string) {
         if (resultObject.extra.length > 1) {
             // if text is '', remove it and merge to next array
             resultObject.extra.forEach((item, index) => {
+                let prePushObject: motdJsonType = {
+                    text: "",
+                    extra: [],
+                };
+
                 // console.log('item', item);
                 if (item.text === '') {
                     if (resultObject.extra && typeof resultObject.extra[index + 1] === 'object') {
-                        newExtra.push({
+                        prePushObject = {
                             ...item as motdJsonType,
                             ...resultObject.extra[index + 1],
-                        })
+                        }
+                    }
+                } else {
+                    if (item.text !== newExtra[newExtra.length - 1].text) {
+                        prePushObject = {
+                            ...item as motdJsonType,
+                        }
                     }
                 }
+
+                newExtra.push(prePushObject);
             });
         } else {
             newExtra.push(resultObject.extra[0] as motdJsonType);
         }
     }
-
     // console.log('newExtra', newExtra);
     // remove blank content
-    newExtra = newExtra.filter(item => item.text !== '');
+    // newExtra = newExtra.filter(item => item.text !== '');
     // console.log('newExtra', newExtra);
 
     return {
@@ -283,25 +293,27 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
         if (extraFontStyles.hasOwnProperty(key)) {
             if (sourceJson[key]) {
                 fontStyle += `${extraFontStyles[key]}`
-            } else {
-                if (key === 'bold') {
-                    fontStyle += `font-weight:normal !important;`;
-
-                } else if (key === 'italic') {
-                    fontStyle += `font-style: normal !important;`;
-
-                } else if (key === 'underline') {
-                    fontStyle += 'text-decoration: none !important;';
-
-                } else if (key === 'strikethrough') {
-                    fontStyle += 'text-decoration: line-through !important;';
-
-                } else if (key === 'obfuscated') {
-                    fontStyle += ``
-                } else {
-                    fontStyle = ""
-                }
             }
+
+            // else {
+            //     if (key === 'bold') {
+            //         fontStyle += `font-weight:normal !important;`;
+
+            //     } else if (key === 'italic') {
+            //         fontStyle += `font-style: normal !important;`;
+
+            //     } else if (key === 'underline') {
+            //         fontStyle += 'text-decoration: none !important;';
+
+            //     } else if (key === 'strikethrough') {
+            //         fontStyle += 'text-decoration: line-through !important;';
+
+            //     } else if (key === 'obfuscated') {
+            //         fontStyle += ``
+            //     } else {
+            //         fontStyle = ""
+            //     }
+            // }
             continue;
         }
 

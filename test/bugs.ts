@@ -3,10 +3,10 @@ import type { motdJsonType } from '../src/types';
 
 
 
-const testFromCode = `&r&f                &r&9&m&l   &r&8&m&l[ &r&f &r&6&lMineplex&r&f &r&f&lGames&r&f &r&8&m&l ]&r&9&m&l   &r&f
+const testFromCodeBug = `&r&f                &r&9&m&l   &r&8&m&l[ &r&f &r&6&lMineplex&r&f &r&f&lGames&r&f &r&8&m&l ]&r&9&m&l   &r&f
                         &r&e&lSTATS REVAMP&r &a&l&n testesest
 `;
-const replacedString = testFromCode.replace(/&/g, '§');
+const replacedString = testFromCodeBug.replace(/&/g, '§');
 console.log(motdParser.autoToHtml(replacedString));
 
 
@@ -20,121 +20,150 @@ console.log(motdParser.autoToHtml(replacedString));
 
 
 
-console.log('--------------------------------------------');
-const testString = 'Minecraft Server';
-console.log(motdParser.autoToHtml(testString));
+// console.log('--------------------------------------------');
+// const testString = 'Minecraft Server';
+// console.log(motdParser.autoToHtml(testString));
 
 
+console.log('----------------------------------------');
+const testFromCode = `§e§l§m-------------§r§7§l[ §f§lMC §c§lPGST §7§l]§e§l§m------------§r
+§7Pixelmon §f8.4.2 §8| §e§l造型寶可夢 §8| §e§l懸賞系統 §8| §e§l自製系統      `;
+console.log(motdParser.autoToHtml(testFromCode));
+console.log('----------------------------------------');
 
-const testObject: motdJsonType = {
-  text: '',
-  extra: [
-    {
-      "extra": [
-        {
-          "bold": true,
-          "color": "green",
-          "text": "╔════════"
-        },
-        {
-          "text": " "
-        },
-        {
-          "color": "#f38ab5",
-          "extra": [
-            {
-              "bold": true,
-              "text": "The Pink Tree"
-            },
-            {
-              "text": " "
-            },
-            {
-              "bold": true,
-              "color": "green",
-              "text": "═══════╗"
-            }
-          ],
-          "text": ""
-        }
-      ],
-      "text": ""
-    },
-    {
-      "text": "\n"
-    },
-    {
-      "extra": [
-        {
-          "bold": true,
-          "color": "green",
-          "text": "╚═══════"
-        },
-        {
-          "text": " "
-        },
-        {
-          "bold": true,
-          "extra": [
-            {
-              "color": "#f3801f",
-              "text": "世"
-            },
-            {
-              "color": "#c4c402",
-              "text": "界"
-            },
-            {
-              "color": "#7ff30c",
-              "text": "的"
-            },
-            {
-              "color": "#3bfd3b",
-              "text": "奥"
-            },
-            {
-              "color": "#0cdf80",
-              "text": "秘"
-            },
-            {
-              "color": "#02a3c4",
-              "text": "将"
-            },
-            {
-              "color": "#205cf3",
-              "text": "由"
-            },
-            {
-              "color": "#5c20fd",
-              "text": "你"
-            },
-            {
-              "color": "#a302df",
-              "text": "来"
-            },
-            {
-              "color": "#e00ca3",
-              "text": "解"
-            },
-            {
-              "color": "#fd3b5c",
-              "text": "开"
-            }
-          ],
-          "text": ""
-        },
-        {
-          "text": " "
-        },
-        {
-          "bold": true,
-          "color": "green",
-          "text": "══════╝"
-        }
-      ],
-      "text": ""
-    }
-  ]
-}
-
-console.log(motdParser.autoToHtml(testObject));
+// const testFromJSON = {
+//   "extra": [
+//     {
+//       "color": "#808080",
+//       "text": "             "
+//     },
+//     {
+//       "bold": true,
+//       "italic": false,
+//       "underlined": false,
+//       "strikethrough": false,
+//       "obfuscated": false,
+//       "extra": [
+//         {
+//           "color": "#1991EA",
+//           "text": "D"
+//         },
+//         {
+//           "color": "#1C93EB",
+//           "text": "r"
+//         },
+//         {
+//           "color": "#2096EC",
+//           "text": "e"
+//         },
+//         {
+//           "color": "#2499ED",
+//           "text": "a"
+//         },
+//         {
+//           "color": "#289CEE",
+//           "text": "m"
+//         },
+//         {
+//           "color": "#2C9EEF",
+//           "text": "C"
+//         },
+//         {
+//           "color": "#30A1F0",
+//           "text": "r"
+//         },
+//         {
+//           "color": "#33A4F1",
+//           "text": "a"
+//         },
+//         {
+//           "color": "#37A7F2",
+//           "text": "f"
+//         },
+//         {
+//           "color": "#3BA9F3",
+//           "text": "t"
+//         },
+//         {
+//           "color": "#3FACF4",
+//           "text": "e"
+//         },
+//         {
+//           "color": "#43AFF5",
+//           "text": "r"
+//         },
+//         {
+//           "color": "#47B2F6",
+//           "text": " "
+//         },
+//         {
+//           "color": "#4BB4F7",
+//           "text": "N"
+//         },
+//         {
+//           "color": "#4EB7F8",
+//           "text": "e"
+//         },
+//         {
+//           "color": "#52BAF9",
+//           "text": "t"
+//         },
+//         {
+//           "color": "#56BDFA",
+//           "text": "w"
+//         },
+//         {
+//           "color": "#5ABFFB",
+//           "text": "o"
+//         },
+//         {
+//           "color": "#5EC2FC",
+//           "text": "r"
+//         },
+//         {
+//           "color": "#62C5FD",
+//           "text": "k"
+//         }
+//       ],
+//       "text": ""
+//     },
+//     {
+//       "text": " "
+//     },
+//     {
+//       "color": "#1f92ed",
+//       "text": "- "
+//     },
+//     {
+//       "bold": true,
+//       "italic": false,
+//       "underlined": false,
+//       "strikethrough": false,
+//       "obfuscated": false,
+//       "extra": [
+//         {
+//           "color": "#66C8FF",
+//           "text": "築"
+//         },
+//         {
+//           "color": "#52BAF9",
+//           "text": "夢"
+//         },
+//         {
+//           "color": "#3FACF4",
+//           "text": "物"
+//         },
+//         {
+//           "color": "#2C9EEF",
+//           "text": "語"
+//         }
+//       ],
+//       "text": ""
+//     },
+//     {
+//       "text": "\n                §f 在這裡 -- 實現你的理想! "
+//     }
+//   ],
+//   "text": ""
+// };
+// console.log(motdParser.autoToHtml(testFromJSON));
