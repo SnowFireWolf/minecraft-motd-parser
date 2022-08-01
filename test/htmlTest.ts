@@ -1,4 +1,4 @@
-import { motdParser } from "../src";
+import motdParser from "../src";
 
 const text =
   "§f§l『§e§lFC夢幻峽谷§f§l』 §7§lFantasyCanyon \n §b§l<<§9§l◎§b§l------------§e§l加入冒險!§b§l------------§9§l◎§b§l>>";

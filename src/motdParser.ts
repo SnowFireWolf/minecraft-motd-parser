@@ -368,7 +368,8 @@ function autoToHtml(motd: motdJsonType | string | object): string {
  *
  * Released under the MIT license
  */
-export const motdParser = {
+
+const _default = {
   // delete all tags
   cleanTags,
   // text convert to HTML
@@ -382,3 +383,5 @@ export const motdParser = {
   // auto check type to convert
   autoToHtml,
 };
+
+export default _default;

@@ -1,4 +1,4 @@
-import { motdParser } from "../src";
+import motdParser from "../src";
 
 const text =
   "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE"; //
@@ -53,6 +53,7 @@ let mcfalloutJson = {
 let start = 0;
 
 // clean tags
+console.log("-------------------------------------------------------");
 console.log("清除 MOTD Tags HTML");
 start = new Date().getTime();
 let cleanedString = motdParser.cleanTags(text);
@@ -61,6 +62,7 @@ console.log(cleanedString);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
 
 // text to html
+console.log("-------------------------------------------------------");
 console.log("文字轉成 HTML");
 start = new Date().getTime();
 let motdHtml = motdParser.textToHTML(text);
@@ -69,6 +71,7 @@ console.log(motdHtml);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
 
 // text to html
+console.log("-------------------------------------------------------");
 console.log("文字轉成 JSON");
 start = new Date().getTime();
 let textToHtml = motdParser.textToJSON(text);
@@ -77,6 +80,7 @@ console.log(textToHtml);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
 
 // json to html
+console.log("-------------------------------------------------------");
 console.log("JSON 轉成 HTML");
 start = new Date().getTime();
 let jsonToHtml = motdParser.JSONToHtml(JSON.parse(json));
@@ -88,6 +92,7 @@ console.log(jsonToHtml2);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
 
 // 自動類型
+console.log("-------------------------------------------------------");
 console.log("自動檢查類型並轉成 HTML");
 start = new Date().getTime();
 let jsonExample = {
@@ -150,8 +155,8 @@ let textExample =
 let autoToHtml = motdParser.autoToHtml(jsonExample);
 let TextAutoToHtml = motdParser.autoToHtml(textExample);
 
-console.log("-------------------------");
+console.log("-------------------------------------------------------");
 console.log(autoToHtml);
-console.log("-------------------------");
+console.log("-------------------------------------------------------");
 console.log(TextAutoToHtml);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);

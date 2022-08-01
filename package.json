@@ -1,7 +1,7 @@
 {
   "name": "@sfirew/mc-motd-parser",
   "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
-  "version": "1.0.9-8-beta.4",
+  "version": "1.0.9-9",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "build": "tsc --project ./ && yarn minify",
     "declaration": "tsc --project ./ --declaration",
     "format": "prettier --write \"**/*.+(ts)\"",
-    "minify": "uglifyjs ./dist/motdParser.js --module"
+    "minify": "uglifyjs ./dist/motdParser.js --module --compress --mangle --output ./dist/motdParser.js"
   },
   "devDependencies": {
     "@types/node": "^16.6.0",
