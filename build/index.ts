@@ -3,8 +3,8 @@ import esbuild from 'esbuild';
 
 
 esbuild.build({
-  entryPoints: ['src/'],
-  outfile: 'dist/',
+  entryPoints: ['src/motdParser.ts'],
+  outfile: 'dist/motdParser.js',
   // plugins: [minifyTemplates(), writeFiles()], // <--
   // bundle: true,
   sourcemap: false,
