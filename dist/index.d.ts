@@ -1,4 +1,4 @@
-import { motdJsonType } from './types';
+import { motdJsonType } from "./types";
 
 declare function cleanTags(text: string): string;
 declare function textToHTML(motdString: string): string;
@@ -9,11 +9,11 @@ declare function textEnterRender(text: string): string;
 declare function autoToHtml(motd: motdJsonType | string | object): string;
 
 export declare const motdParser: {
-    cleanTags: typeof cleanTags;
-    textToHTML: typeof textToHTML;
-    textToJSON: typeof parseTextToJSON;
-    JSONToHtml: typeof parseJSONToHTML;
-    jsonEnterRender: typeof jsonEnterRender;
-    textEnterRender: typeof textEnterRender;
-    autoToHtml: typeof autoToHtml;
+  cleanTags: typeof cleanTags;
+  textToHTML: typeof textToHTML;
+  textToJSON: typeof parseTextToJSON;
+  JSONToHtml: typeof parseJSONToHTML;
+  jsonEnterRender: typeof jsonEnterRender;
+  textEnterRender: typeof textEnterRender;
+  autoToHtml: typeof autoToHtml;
 };

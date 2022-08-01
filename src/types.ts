@@ -6,9 +6,7 @@
 
 interface extraLibraryType {
   [key: string]: string;
-};
-
-
+}
 
 interface motdJsonType {
   text: string | Number;
@@ -23,11 +21,6 @@ interface motdJsonType {
     extra?: object[];
   }[];
   [key: string]: string | boolean | object | Array<object> | undefined;
-};
+}
 
-
-
-export type {
-  extraLibraryType,
-  motdJsonType
-};
+export type { extraLibraryType, motdJsonType };

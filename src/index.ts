@@ -1,1 +1,1 @@
-export { motdParser }from  "./motdParser"
+export { motdParser } from "./motdParser";
