@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.autoToHtml = exports.jsonRender = exports.JSONToHtml = exports.textToJSON = exports.textToHTML = exports.cleanTags = void 0;
+exports.autoToHtml = exports.jsonRender = exports.JSONToHtml = exports.textToJSON = exports.textToHTML = exports.cleanTags = exports.motdParser = void 0;
 const motdParser_1 = __importDefault(require("./motdParser"));
+exports.motdParser = motdParser_1.default;
 exports.cleanTags = motdParser_1.default.cleanTags;
 exports.textToHTML = motdParser_1.default.textToHTML;
 exports.textToJSON = motdParser_1.default.textToJSON;
