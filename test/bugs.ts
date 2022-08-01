@@ -3,7 +3,7 @@ import type { motdJsonType } from '../src/types';
 
 
 const testString = `                §aHypixel Network §c[1.8-1.19]
-§b§lNEW: DROPPER §7§l| §6§lSUMMER EVENT§7§l+§e§lSALE`;
+§B§LNEW: DROPPER §7§l| §6§lSUMMER EVENT§7§l+§e§lSALE`;
 
 const replacedString = testString.replace(/&/g, '§');
 console.log(motdParser.autoToHtml(replacedString));

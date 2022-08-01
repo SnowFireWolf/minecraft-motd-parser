@@ -39,13 +39,6 @@ const textToJsonExtras: extraLibraryType = {
     '§n': 'underlined',
     '§o': 'italic',
     '§r': '',
-    // 大寫
-    '§K': 'obfuscated',
-    '§L': 'bold',
-    '§M': 'strikethrough',
-    '§N': 'underlined',
-    '§O': 'italic',
-    '§P': ''
 };
 
 // base color hex
@@ -367,26 +360,6 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
 
 
 
-// JSON full convert include newline
-function jsonEnterRender(json: motdJsonType | object) {
-    // console.log('json', json);
-    const resultMotdHtml = parseJSONToHTML(JSON.parse(JSON.stringify(json)));
-
-    //console.log('motd: ' + resultMotd)
-    return resultMotdHtml;
-}
-
-
-
-// TEXT full convert include newline
-function textEnterRender(text: string) {
-    const resultMotdHtml = textToHTML(text);
-
-    return resultMotdHtml;
-}
-
-
-
 /** 
  * ### `autoToHtml(object | string)`
  * auto check data type then convert to html.
@@ -425,10 +398,6 @@ export const motdParser = {
     textToJSON: parseTextToJSON,
     // JSON convert HTML
     JSONToHtml: parseJSONToHTML,
-    // JSON full convert HTML (include enter)
-    jsonEnterRender,
-    // TEXT full convert HTML (include enter)
-    textEnterRender,
     // auto check type to convert
     autoToHtml,
 };
