@@ -1,11 +1,11 @@
-import _motdParser from "./motdParser";
+import motdParser from "./motdParser";
 
-export const motdParser = _motdParser;
-export const cleanTags = _motdParser.cleanTags;
-export const textToHTML = _motdParser.textToHTML;
-export const textToJSON = _motdParser.textToJSON;
-export const JSONToHtml = _motdParser.JSONToHtml;
-export const jsonRender = _motdParser.jsonRender;
-export const autoToHtml = _motdParser.autoToHtml;
+export { motdParser };
+export const cleanTags = motdParser.cleanTags;
+export const textToHTML = motdParser.textToHTML;
+export const textToJSON = motdParser.textToJSON;
+export const JSONToHtml = motdParser.JSONToHtml;
+export const jsonRender = motdParser.jsonRender;
+export const autoToHtml = motdParser.autoToHtml;
 
-export default _motdParser;
+export default motdParser;
