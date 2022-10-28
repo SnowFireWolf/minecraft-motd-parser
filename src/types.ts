@@ -1,5 +1,5 @@
 /*
- * minecraft motd parser v1.0.9
+ * minecraft motd parser v1.0.10
  * (c) 2022 Kevin Zheng
  * Released under the MIT license
  */
@@ -9,10 +9,10 @@ interface extraLibraryType {
 }
 
 interface motdJsonType {
-  text: string | Number;
+  text: string | number;
   extra?: {
     color?: string;
-    text?: string | Number;
+    text?: string | number;
     bold?: boolean;
     strikethrough?: boolean;
     underlined?: boolean;
@@ -20,7 +20,7 @@ interface motdJsonType {
     italic?: boolean;
     extra?: object[];
   }[];
-  [key: string]: string | boolean | object | Array<object> | undefined;
+  [key: string]: string | boolean | number | object | Array<object> | undefined;
 }
 
 export type { extraLibraryType, motdJsonType };

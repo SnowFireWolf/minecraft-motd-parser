@@ -17,7 +17,7 @@ Don't have other dependencies.
 ### Some good custom motd hex color servers
 The parser does not have the Minecraft font by default.
 
-#### Minecraft font example:
+#### Minecraft font example
 ![Image_2022_01_2022d-2022h_58___002](https://user-images.githubusercontent.com/14024836/149810729-71909ca5-5705-43cf-ab3c-bdd66db00b78.png)
 
 ![Image_2022_01_2022d-2022h_00___004](https://user-images.githubusercontent.com/14024836/149811040-5ddc35a0-38cf-4434-856a-968c94a4d6b4.png)

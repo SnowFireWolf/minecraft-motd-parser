@@ -1,5 +1,5 @@
 /*
- * minecraft motd parser v1.0.9
+ * minecraft motd parser v1.0.10
  * (c) 2022 Kevin Zheng
  * Released under the MIT license
  */
@@ -7,8 +7,8 @@
 import { motdJsonType } from "./types";
 
 // 類型檢查
-export function isMotdJSONType(object: any): object is motdJsonType {
-  return object;
+export function isMotdJSONType(object: object): object is motdJsonType {
+  return !!object;
 }
 
 /**
@@ -24,8 +24,8 @@ export const htmlStringFormatting = (text: string): string => {
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/\"/g, "&quot;")
-      .replace(/\'/g, "&#39;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;")
       // return
       .replace(/\n/g, "<br/>")
   );

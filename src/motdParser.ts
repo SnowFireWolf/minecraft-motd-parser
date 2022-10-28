@@ -1,11 +1,13 @@
 /*
- * minecraft motd parser v1.0.9
+ * minecraft motd parser v1.0.10
  * (c) 2022 Kevin Zheng
  * Released under the MIT license
  */
 
 import { extraLibraryType, motdJsonType } from "./types";
 import { isMotdJSONType, htmlStringFormatting } from "./utils";
+
+
 
 // color code to font styles
 const extras: extraLibraryType = {
@@ -84,7 +86,7 @@ const extraColorsToHex: extraLibraryType = {
  * Clean all tags from motd source string.
  */
 function cleanTags(text: string) {
-  let REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
+  const REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
   let textResult = "";
 
   textResult = text.replace(REGEX, "");
@@ -98,7 +100,7 @@ function cleanTags(text: string) {
  * Convert motd text to html.
  */
 function textToHTML(motdString: string) {
-  let motdText = motdString;
+  const motdText = motdString;
 
   const colorCodeReg = /([§][0-9a-fA-FklmnorFKLMNOR])/g;
   const codeREGEX = new RegExp(colorCodeReg.source);
@@ -108,16 +110,16 @@ function textToHTML(motdString: string) {
   let colorHex = "";
   let resultHTML = "";
 
-  codeSplit.forEach((item, index) => {
-    let motdStringToLowerCase = item.toLowerCase();
+  codeSplit.forEach((item) => {
+    const motdStringToLowerCase = item.toLowerCase();
 
     // 過濾 hex
-    if (colorCodeToHex.hasOwnProperty(motdStringToLowerCase)) {
+    if (Object.hasOwn(colorCodeToHex, motdStringToLowerCase)) {
       //console.log(`偵測出 ${ colorCodeToHex[item] }`)
       colorHex = colorCodeToHex[motdStringToLowerCase];
 
       // 過濾文字 style
-    } else if (extras.hasOwnProperty(motdStringToLowerCase)) {
+    } else if (Object.hasOwn(extras, motdStringToLowerCase)) {
       // font style code 轉換
       //console.log(`偵測出 style ${ extras[item] }`)
       fontStyle = extras[motdStringToLowerCase];
@@ -159,7 +161,7 @@ function textToHTML(motdString: string) {
  * Convert motd text to JSON.
  */
 function parseTextToJSON(text: string) {
-  let motdText = text;
+  const motdText = text;
 
   // color code regex: /([§][0-9a-fklmnor])/g
   // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
@@ -169,25 +171,25 @@ function parseTextToJSON(text: string) {
   let fontStyle = "";
   let colorHex = "";
 
-  let resultObject: motdJsonType = {
+  const resultObject: motdJsonType = {
     text: "",
     extra: [],
   };
 
   // console.log('textSplit', textSplit);
   textSplit.forEach((item) => {
-    let stringToLowerCase = item.toLowerCase();
+    const stringToLowerCase = item.toLowerCase();
 
     // color code 轉換成 hex
-    if (colorCodeToHex.hasOwnProperty(stringToLowerCase)) {
+    if (Object.hasOwn(colorCodeToHex, stringToLowerCase)) {
       //console.log(`偵測出 ${ colorCodeToHex[item] }`)
       colorHex = colorCodeToHex[stringToLowerCase];
-    } else if (textToJsonExtras.hasOwnProperty(stringToLowerCase)) {
+    } else if (Object.hasOwn(textToJsonExtras, stringToLowerCase)) {
       // font style code 轉換
       //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
       fontStyle = textToJsonExtras[stringToLowerCase];
     } else {
-      let innerObject: motdJsonType = {
+      const innerObject: motdJsonType = {
         text: "",
         extra: [],
       };
@@ -271,7 +273,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
     key = key.toLowerCase();
 
     // text styles
-    if (extraFontStyles.hasOwnProperty(key)) {
+    if (Object.hasOwn(extraFontStyles, key)) {
       if (sourceJson[key]) {
         fontStyle += `${extraFontStyles[key]}`;
       }
@@ -292,15 +294,15 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
 
     // color
     if (key === "color") {
-      let colorKey = sourceJson[key];
+      const colorKey = sourceJson[key];
 
       if (typeof colorKey === "string") {
         // Hex color
-        if (extraColorsToHex.hasOwnProperty(colorKey)) {
+        if (Object.hasOwn(extraColorsToHex, colorKey)) {
           colorHex = `color: ${extraColorsToHex[colorKey]};`;
           continue;
           // color code
-        } else if (colorCodeToHex.hasOwnProperty(colorKey)) {
+        } else if (Object.hasOwn(colorCodeToHex, colorKey)) {
           colorHex = `color: ${colorCodeToHex[colorKey]};`;
           continue;
           // custom color
@@ -315,7 +317,7 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
     // exrta
     if (key === "extra" && typeof sourceJson.extra === "object") {
       //console.log(typeof sourceJson.extra);
-      for (let sourceJsonExtra of sourceJson.extra) {
+      for (const sourceJsonExtra of sourceJson.extra) {
         //console.log(sourceJson.extra)
         if (isMotdJSONType(sourceJsonExtra)) {
           htmlElement += parseJSONToHTML(sourceJsonExtra);

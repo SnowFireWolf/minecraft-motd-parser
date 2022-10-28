@@ -1,7 +1,5 @@
 import _motdParser from "./motdParser";
 
-
-
 export const motdParser = _motdParser;
 export const cleanTags = _motdParser.cleanTags;
 export const textToHTML = _motdParser.textToHTML;
