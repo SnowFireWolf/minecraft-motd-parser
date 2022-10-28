@@ -1,29 +1,47 @@
 {
   "name": "@sfirew/mc-motd-parser",
   "description": "Minecraft Server MOTD Parser, can convert to html, json, text.",
-  "version": "1.0.9-7",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "version": "1.0.10",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "types/index.d.ts",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^16.6.0",
-    "typescript": "^4.7.4"
-  },
   "scripts": {
     "test": "ts-node ./src/test.ts",
-    "build": "tsc --project ./",
-    "declaration": "tsc --project ./ --declaration"
+    "build": "yarn build:dist && yarn build:declarations",
+    "build:dist": "tsup --format cjs,esm",
+    "build:declarations": "tsc --emitDeclarationOnly --declaration --outDir types",
+    "format": "prettier --write \"**/*.+(ts)\""
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "splitting": false,
+    "sourcemap": true,
+    "clean": true,
+    "minify": true
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.0",
+    "prettier": "^2.7.1",
+    "tsup": "^6.3.0",
+    "typescript": "^4.7.4"
   },
   "repository": "https://github.com/SnowFireWolf/minecraft-motd-parser.git",
   "author": "SnowFireWolf",
   "keywords": [
+    "minecraft",
+    "java",
+    "bedrock",
+    "server",
     "motd",
     "color",
     "hex",
     "parser",
-    "minecraft",
     "html",
     "formatting",
+    "javascript",
     "typescript"
   ],
   "publishConfig": {
