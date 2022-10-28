@@ -14,21 +14,21 @@ Support **1.16** custom **hex color** parser, Support auto check motd data type.
 Don't have other dependencies.
 
 
-### Some good custom motd hex color servers:
+### Some good custom motd hex color servers
 The parser does not have the Minecraft font by default.
 
-#### Minecraft font example: 
+#### Minecraft font example:
 ![Image_2022_01_2022d-2022h_58___002](https://user-images.githubusercontent.com/14024836/149810729-71909ca5-5705-43cf-ab3c-bdd66db00b78.png)
 
 ![Image_2022_01_2022d-2022h_00___004](https://user-images.githubusercontent.com/14024836/149811040-5ddc35a0-38cf-4434-856a-968c94a4d6b4.png)
 
-#### No Minecraft font:
+#### No Minecraft font
 ![Image_2022_01_2022d-2022h_04___003](https://user-images.githubusercontent.com/14024836/149811501-d1376d90-d9ad-4092-912a-de1f78fa42eb.png)
 
 ![Image_2022_01_2022d-2022h_01___002](https://user-images.githubusercontent.com/14024836/149811151-d9270d63-aead-46f9-b496-c88eb3b00c72.png)
 
 
-You can try server status view in my created service:
+You can try server status view in my created service
 
 ![https://mcsv.top/server/play.mcforests.com](https://sr-api.sfirew.com/server/play.mcforests.com/banner/motd.png?hl=en&v=MI84ydhafV)
 [https://mcsv.top/server/play.mcforests.com](https://mcsv.top/server/play.mcforests.com)
