@@ -53,12 +53,12 @@ support **deno** and **node.js**
 
 ### CommonJS
 ```typescript
-const { motdParser } = require('@sfirew/mc-motd-parser');
+const motdParser = require('@sfirew/mc-motd-parser');
 ```
 
 ### ES6 Modules
 ```typescript
-import { motdParser } from '@sfirew/mc-motd-parser'
+import motdParser from '@sfirew/mc-motd-parser'
 ```
 
 ### Deno

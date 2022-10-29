@@ -363,14 +363,13 @@ function autoToHtml(motd: motdJsonType | string | object): string {
 }
 
 /*
- * #### minecraft motd parser v1.0.9
+ * #### minecraft motd parser v1.0.11.1
  * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
  * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
  * (c) 2022 Kevin Zheng
  *
  * Released under the MIT license
  */
-
 const _default = {
   // delete all tags
   cleanTags,

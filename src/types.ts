@@ -1,5 +1,5 @@
 /*
- * minecraft motd parser v1.0.10
+ * minecraft motd parser v1.0.11.1
  * (c) 2022 Kevin Zheng
  * Released under the MIT license
  */
