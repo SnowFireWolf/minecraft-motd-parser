@@ -61,11 +61,6 @@ const motdParser = require('@sfirew/mc-motd-parser');
 import motdParser from '@sfirew/mc-motd-parser'
 ```
 
-### Deno
-```typescript
-import { motdParser } from "https://deno.land/x/minecraft_motd_parser@v1.0.4-deno-main/mod.ts";
-```
-
 
 
 ## Example
