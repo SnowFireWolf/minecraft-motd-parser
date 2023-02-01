@@ -30,8 +30,8 @@ The parser does not have the Minecraft font by default.
 
 You can try server status view in my created service
 
-![https://mcsv.top/server/play.mcforests.com](https://sr-api.sfirew.com/server/play.mcforests.com/banner/motd.png?hl=en&v=MI84ydhafV)
-[https://mcsv.top/server/play.mcforests.com](https://mcsv.top/server/play.mcforests.com)
+![https://mcsv.top/server/mc.hypixel.net](https://sr-api.sfirew.com/server/mc.hypixel.net/banner/motd.png?hl=undefined&v=vTFLZYrigI)
+[https://mcsv.top/server/mc.hypixel.net](https://mcsv.top/server/mc.hypixel.net)
 
 
 

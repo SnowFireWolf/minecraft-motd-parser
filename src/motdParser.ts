@@ -1,6 +1,6 @@
 /*
- * minecraft motd parser v1.0.10
- * (c) 2022 Kevin Zheng
+ * minecraft motd parser
+ * (c) 2023 Kevin Zheng
  * Released under the MIT license
  */
 
@@ -277,7 +277,6 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
       if (sourceJson[key]) {
         fontStyle += `${extraFontStyles[key]}`;
       }
-      continue;
     }
 
     // text
@@ -288,7 +287,6 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
       ) {
         // convert all type to string
         htmlElement += textToHTML(String(sourceJson.text));
-        continue;
       }
     }
 
@@ -299,16 +297,16 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
       if (typeof colorKey === "string") {
         // Hex color
         if (Object.hasOwn(extraColorsToHex, colorKey)) {
-          colorHex = `color: ${extraColorsToHex[colorKey]};`;
+          colorHex = `color:${extraColorsToHex[colorKey]};`;
           continue;
           // color code
         } else if (Object.hasOwn(colorCodeToHex, colorKey)) {
-          colorHex = `color: ${colorCodeToHex[colorKey]};`;
+          colorHex = `color:${colorCodeToHex[colorKey]};`;
           continue;
           // custom color
         } else {
           // custom hex color code mode
-          colorHex = `color: ${colorKey};`;
+          colorHex = `color:${colorKey};`;
           continue;
         }
       }
@@ -318,7 +316,6 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
     if (key === "extra" && typeof sourceJson.extra === "object") {
       //console.log(typeof sourceJson.extra);
       for (const sourceJsonExtra of sourceJson.extra) {
-        //console.log(sourceJson.extra)
         if (isMotdJSONType(sourceJsonExtra)) {
           htmlElement += parseJSONToHTML(sourceJsonExtra);
         }
@@ -363,10 +360,10 @@ function autoToHtml(motd: motdJsonType | string | object): string {
 }
 
 /*
- * #### minecraft motd parser v1.0.11.1
+ * #### minecraft motd parser
  * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
  * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
- * (c) 2022 Kevin Zheng
+ * (c) 2023 Kevin Zheng
  *
  * Released under the MIT license
  */
