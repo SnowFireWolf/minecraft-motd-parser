@@ -1,6 +1,6 @@
 /*
- * minecraft motd parser v1.0.11.1
- * (c) 2022 Kevin Zheng
+ * minecraft motd parser
+ * (c) 2023 Kevin Zheng
  * Released under the MIT license
  */
 
@@ -19,7 +19,7 @@ export const htmlStringFormatting = (text: string): string => {
   return (
     text
       // space
-      .replace(/ /g, "\u00a0")
+      // .replace(/ /g, "\u00a0")
       //
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")

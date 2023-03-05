@@ -1,6 +1,7 @@
 src
 test
-esbuild.ts
+test_self
+
 yarn.lock
 
 tsconfig.json

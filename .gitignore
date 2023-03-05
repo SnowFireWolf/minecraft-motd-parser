@@ -3,3 +3,4 @@ types
 dist
 .DS_Store
 *.local
+pnpm-lock.yaml

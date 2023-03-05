@@ -1,6 +1,6 @@
 /*
- * minecraft motd parser v1.0.10
- * (c) 2022 Kevin Zheng
+ * minecraft motd parser
+ * (c) 2023 Kevin Zheng
  * Released under the MIT license
  */
 
@@ -26,8 +26,7 @@ const extraFontStyles: extraLibraryType = {
   underlined: "text-decoration:underline;",
   strikethrough: "text-decoration: line-through;",
   obfuscated: "mc_obfuscated;",
-  reset:
-    "color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;",
+  reset: "color: inherit;text-decoration: none !important;font-weight:normal!important;font-style: normal!important;",
 };
 
 // text to json extra name
@@ -79,6 +78,8 @@ const extraColorsToHex: extraLibraryType = {
   yellow: "#FFFF55",
   white: "#FFFFFF",
 };
+
+
 
 // clean tags
 /**
@@ -223,8 +224,8 @@ function parseTextToJSON(text: string) {
         // console.log('item', item);
         if (item.text === "") {
           if (
-            resultObject.extra &&
-            typeof resultObject.extra[index + 1] === "object"
+            resultObject.extra
+            && typeof resultObject.extra[index + 1] === "object"
           ) {
             newExtra.push({
               ...(item as motdJsonType),
@@ -233,9 +234,8 @@ function parseTextToJSON(text: string) {
           }
         } else {
           if (
-            item.text !==
-            (newExtra[newExtra.length - 1] &&
-              newExtra[newExtra.length - 1].text)
+            item.text !== (newExtra[newExtra.length - 1]
+              && newExtra[newExtra.length - 1].text)
           ) {
             newExtra.push(item as motdJsonType);
           }
@@ -262,12 +262,16 @@ function parseTextToJSON(text: string) {
  * #### `JSONToString(string)`
  * Convert JSON to HTML.
  */
-function parseJSONToHTML(sourceJson: motdJsonType) {
+function parseJSONToHTML(
+  sourceJson: motdJsonType,
+) {
   let htmlElement = "";
   let colorHex = "";
   let fontStyle = "";
 
-  //console.log(sourceJson)
+  // console.log('sourceJson', sourceJson);
+  // console.log('---------');
+
   for (let key of Object.keys(sourceJson)) {
     // console.log('sourceJson key', key);
     key = key.toLowerCase();
@@ -277,20 +281,18 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
       if (sourceJson[key]) {
         fontStyle += `${extraFontStyles[key]}`;
       }
-      continue;
     }
 
-    // text
-    if (key === "text") {
-      if (
-        typeof sourceJson.text === "string" ||
-        typeof sourceJson.text === "number"
-      ) {
-        // convert all type to string
-        htmlElement += textToHTML(String(sourceJson.text));
-        continue;
-      }
-    }
+    // ---------- old text process ----------
+    // if (key === "text") {
+    //   if (
+    //     typeof sourceJson.text === "string" ||
+    //     typeof sourceJson.text === "number"
+    //   ) {
+    //     // convert all type to string
+    //     htmlElement += textToHTML(String(sourceJson.text));
+    //   }
+    // }
 
     // color
     if (key === "color") {
@@ -299,36 +301,54 @@ function parseJSONToHTML(sourceJson: motdJsonType) {
       if (typeof colorKey === "string") {
         // Hex color
         if (Object.hasOwn(extraColorsToHex, colorKey)) {
-          colorHex = `color: ${extraColorsToHex[colorKey]};`;
+          colorHex = `color:${extraColorsToHex[colorKey]};`;
           continue;
           // color code
         } else if (Object.hasOwn(colorCodeToHex, colorKey)) {
-          colorHex = `color: ${colorCodeToHex[colorKey]};`;
+          colorHex = `color:${colorCodeToHex[colorKey]};`;
           continue;
           // custom color
         } else {
           // custom hex color code mode
-          colorHex = `color: ${colorKey};`;
+          colorHex = `color:${colorKey};`;
           continue;
         }
       }
     }
 
-    // exrta
+    // extra
     if (key === "extra" && typeof sourceJson.extra === "object") {
-      //console.log(typeof sourceJson.extra);
+      // ---------- with extra text ----------
+      if (sourceJson.text !== undefined
+        && (typeof sourceJson.text === "string" || typeof sourceJson.text === "number")
+      ) {
+        // content to html
+        htmlElement += textToHTML(String(sourceJson.text));
+      }
+
+      // ---------- foreach extra data and parse ----------
       for (const sourceJsonExtra of sourceJson.extra) {
-        //console.log(sourceJson.extra)
+        // console.log('sourceJsonExtra', sourceJsonExtra);
         if (isMotdJSONType(sourceJsonExtra)) {
           htmlElement += parseJSONToHTML(sourceJsonExtra);
         }
       }
     }
-
-    //console.log('element: ' + htmlElement)
-    //console.log('font: ' + fontStyle)
-    //console.log('color: ' + colorHex)
   }
+
+  // ---------- without extra text content ----------
+  if (sourceJson.extra === undefined && sourceJson.text !== undefined) {
+    const currentText = sourceJson.text;
+    if (
+      typeof sourceJson.text === "string" ||
+      typeof sourceJson.text === "number"
+    ) {
+      // convert all type to string
+      htmlElement += textToHTML(String(currentText));
+    }
+  }
+
+
 
   let returnHTML = "";
   if (fontStyle.length !== 0 || colorHex.length !== 0) {
@@ -352,25 +372,27 @@ function jsonRender(json: motdJsonType | object) {
 function autoToHtml(motd: motdJsonType | string | object): string {
   // type check
   if (typeof motd === "object") {
-    //logger.warn('處理模式： Object mode')
+    // console.log('process mode: Object mode');
     return jsonRender(motd);
   } else if (typeof motd === "string") {
-    //logger.warn('處理模式： String mode')
+    // console.log('process mode: String mode');
     return jsonRender(parseTextToJSON(motd));
   } else {
     return "unknown motd data type";
   }
 }
 
+
+
 /*
- * #### minecraft motd parser v1.0.11.1
+ * #### minecraft motd parser
  * * [github](https://github.com/SnowFireWolf/minecraft-motd-parser/tree/main#minecraft-server-motd-parser)
  * * [npm](https://www.npmjs.com/package/@sfirew/mc-motd-parser)
- * (c) 2022 Kevin Zheng
+ * (c) 2023 Kevin Zheng
  *
  * Released under the MIT license
  */
-const _default = {
+const defaultModules = {
   // delete all tags
   cleanTags,
   // text convert to HTML
@@ -385,4 +407,4 @@ const _default = {
   autoToHtml,
 };
 
-export default _default;
+export default defaultModules;
