@@ -7,9 +7,9 @@
 
 
 ## Introduction
-Can convert minecraft server motd data to text, json, html, and clean tags.
+Can convert minecraft server MOTD data to text, json, html, and clean tags.
 
-Support **1.16** custom **hex color** parser, Support auto check motd data type.
+Support **1.16** custom **hex color**, and auto check motd data type.
 
 Don't have other dependencies.
 
@@ -30,27 +30,28 @@ The parser does not have the Minecraft font by default.
 
 You can try server status view in my created service
 
-![https://mcsv.top/server/mc.hypixel.net](https://sr-api.sfirew.com/server/mc.hypixel.net/banner/motd.png?hl=undefined&v=vTFLZYrigI)
+![https://mcsv.top/server/mc.hypixel.net](https://sr-api.sfirew.com/server/mc.hypixel.net/banner/motd.png?hl=tw&v=cGTdHapzAU)
 [https://mcsv.top/server/mc.hypixel.net](https://mcsv.top/server/mc.hypixel.net)
 
 
 
 ## Installation
-### NPM
+choose your favorite package manager
 ```bash
+# npm
 $ npm install @sfirew/mc-motd-parser
-```
 
-### yarn
-```bash
+# yarn
 $ yarn add @sfirew/mc-motd-parser
+
+# pnpm
+$ pnpm add @sfirew/mc-motd-parser
 ```
 
 
 
 ## Usage
-support **deno** and **node.js**
-
+<!-- support **deno** and **node.js** -->
 ### CommonJS
 ```typescript
 const motdParser = require('@sfirew/mc-motd-parser');
@@ -81,7 +82,7 @@ console.log(result);
 
 
 ### `autoToHtml(string | object)`
-auto check data type then return same html result.
+auto check MOTD data type then return same html result.
 
 ```typescript
 let jsonExample = {
