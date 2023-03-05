@@ -19,7 +19,7 @@ export const htmlStringFormatting = (text: string): string => {
   return (
     text
       // space
-      .replace(/ /g, "\u00a0")
+      // .replace(/ /g, "\u00a0")
       //
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")

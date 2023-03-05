@@ -11,5 +11,5 @@
     "outDir": "./dist",
     "moduleResolution": "node"
   },
-  "exclude": ["node_modules", "test", "dist", "build"]
+  "exclude": ["node_modules", "test", "test_self", "dist", "build", "jest.config.js"]
 }
