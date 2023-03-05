@@ -29,8 +29,6 @@ The parser does not have the Minecraft font by default.
 
 
 You can try server status view in my created service
-
-![https://mcsv.top/server/mc.hypixel.net](https://sr-api.sfirew.com/server/mc.hypixel.net/banner/motd.png?hl=tw&v=cGTdHapzAU)
 [https://mcsv.top/server/mc.hypixel.net](https://mcsv.top/server/mc.hypixel.net)
 
 
