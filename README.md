@@ -41,14 +41,14 @@ const { autoToHtml } = require('@sfirew/minecraft-motd-parser');
 ### ES6 Modules
 ```typescript
 import { autoToHtml } from '@sfirew/minecraft-motd-parser'
-// or 
-import motdParser from '@sfirew/minecraft-motd-parser'
-// motdParser.autoToHtml('motdString');
 ```
 
 ### Simple use example
 ```typescript
 import { autoToHtml as motdParser } from '@sfirew/minecraft-motd-parser'
+// or 
+import motdParser from '@sfirew/minecraft-motd-parser'
+// motdParser.autoToHtml('motdString...');
 
 const hypixelMotdString = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
 
