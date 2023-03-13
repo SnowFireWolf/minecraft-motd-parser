@@ -7,11 +7,57 @@
 
 
 ## Introduction
+This package support **CommonJS**, **ES Module**, and **tree shaking**
+
 Can convert minecraft server MOTD data to text, json, html, and clean tags.
 
 Support **1.16** custom **hex color**, and auto check motd data type.
 
 Don't have other dependencies.
+
+
+
+## Installation
+choose your favorite package manager
+```bash
+# npm
+$ npm install @sfirew/minecraft-motd-parser
+
+# yarn
+$ yarn add @sfirew/minecraft-motd-parser
+
+# pnpm
+$ pnpm add @sfirew/minecraft-motd-parser
+```
+
+
+
+## Usage
+### CommonJS
+```typescript
+const { autoToHtml } = require('@sfirew/minecraft-motd-parser');
+```
+
+### ES6 Modules
+```typescript
+import { autoToHtml } from '@sfirew/minecraft-motd-parser'
+// or 
+import motdParser from '@sfirew/minecraft-motd-parser'
+// motdParser.autoToHtml('motdString');
+```
+
+### Simple use example
+```typescript
+import { autoToHtml as motdParser } from '@sfirew/minecraft-motd-parser'
+
+const hypixelMotdString = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
+
+console.log(motdParser(hypixelMotdString));
+
+/* result
+<span style="color:#55FF55;">Hypixel Network </span><span style="color:#FF5555;">1.8/1.9/1.10/1.11/1.12 </span><span style="color:#FFFF55;font-weight: bold;">NEW PTL GAME:</span><span style="color:#55FFFF;font-weight: bold;"> THE BRIDGE</span>
+*/
+```
 
 
 ### Some good custom motd hex color servers
@@ -33,44 +79,18 @@ You can try server status view in my created service
 
 
 
-## Installation
-choose your favorite package manager
-```bash
-# npm
-$ npm install @sfirew/mc-motd-parser
-
-# yarn
-$ yarn add @sfirew/mc-motd-parser
-
-# pnpm
-$ pnpm add @sfirew/mc-motd-parser
-```
-
-
-
-## Usage
-<!-- support **deno** and **node.js** -->
-### CommonJS
-```typescript
-const motdParser = require('@sfirew/mc-motd-parser');
-```
-
-### ES6 Modules
-```typescript
-import motdParser from '@sfirew/mc-motd-parser'
-```
-
-
-
-## Example
+## More Example
 Some examples here, you can use **TypeScript** or **JavaScript**.
 
 
 ### `cleanTags(string)`
 clean text color tags.
 ```typescript
-let motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-let result = motdParser.cleanTags(motdText);
+import motdParser from '@sfirew/minecraft-motd-parser' 
+import { cleanTags } from '@sfirew/minecraft-motd-parser'
+
+const motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
+const result = cleanTags(motdText);
 console.log(result);
 
 /* result, callback Text:
@@ -83,6 +103,8 @@ console.log(result);
 auto check MOTD data type then return same html result.
 
 ```typescript
+import motdParser from '@sfirew/minecraft-motd-parser'
+
 let jsonExample = {
   "extra": [
     {
