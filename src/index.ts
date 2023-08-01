@@ -12,7 +12,7 @@ import {
   JSONToHTML,
   textToHTML,
   textToJSON,
-  jsonRender,
+  JSONRender,
   autoToHTML,
 } from "./parser";
 
@@ -42,7 +42,7 @@ const motdParser = {
   // JSON convert to HTML
   JSONToHTML,
   // JSON full convert HTML (include enter)
-  jsonRender,
+  JSONRender,
   // auto check type to convert
   autoToHTML,
 

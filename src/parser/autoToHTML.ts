@@ -16,7 +16,7 @@ import {
 
 
 // JSON full convert include newline
-export function jsonRender(json: object | motdJsonType) {
+export function JSONRender(json: object | motdJsonType) {
   return JSONToHTML(JSON.parse(JSON.stringify(json)));
 }
 
@@ -29,7 +29,7 @@ export function autoToHTML(motd: string | object | motdJsonType): string {
   // type check
   if (typeof motd === "object") {
     // console.log('process mode: Object mode');
-    return jsonRender(motd);
+    return JSONRender(motd);
   } else if (typeof motd === "string") {
     // console.log('process mode: String mode');
     // console.log('textToJSON(motd)', textToJSON(motd));

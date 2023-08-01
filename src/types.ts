@@ -20,7 +20,7 @@ interface motdJsonType {
     italic?: boolean;
     extra?: object[] | motdJsonType[];
   }[];
-  translate?: string;
+  translate?: string | number;
   [key: string]: string | boolean | number | object | Array<object> | undefined;
 }
 

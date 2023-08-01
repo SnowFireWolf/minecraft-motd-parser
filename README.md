@@ -35,20 +35,20 @@ $ pnpm add @sfirew/minecraft-motd-parser
 ## Usage
 ### CommonJS
 ```typescript
-const { autoToHtml } = require('@sfirew/minecraft-motd-parser');
+const { autoToHTML } = require('@sfirew/minecraft-motd-parser');
 ```
 
 ### ES6 Modules
 ```typescript
-import { autoToHtml } from '@sfirew/minecraft-motd-parser'
+import { autoToHTML } from '@sfirew/minecraft-motd-parser'
 ```
 
 ### Simple use example
 ```typescript
-import { autoToHtml as motdParser } from '@sfirew/minecraft-motd-parser'
+import { autoToHTML as motdParser } from '@sfirew/minecraft-motd-parser'
 // or 
 import motdParser from '@sfirew/minecraft-motd-parser'
-// motdParser.autoToHtml('motdString...');
+// motdParser.autoToHTML('motdString...');
 
 const hypixelMotdString = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
 
@@ -99,7 +99,7 @@ console.log(result);
 ```
 
 
-### `autoToHtml(string | object)`
+### `autoToHTML(string | object)`
 auto check MOTD data type then return same html result.
 
 ```typescript
@@ -159,7 +159,7 @@ let jsonExample = {
   ],
   "text": ""
 };
-let autoJsonResult = motdParser.autoToHtml(jsonExample);
+let autoJsonResult = motdParser.autoToHTML(jsonExample);
 console.log(autoJsonResult);
 
 /* auto JSON Result, callback HTML:
@@ -167,7 +167,7 @@ console.log(autoJsonResult);
 */
 
 let textExample = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-let autoTextResult = motdParser.autoToHtml(textExample);
+let autoTextResult = motdParser.autoToHTML(textExample);
 console.log(autoTextResult);
 
 /* auto Text Result, callback HTML:
@@ -219,7 +219,7 @@ console.log(result);
 ```
 
 
-### `JSONToHtml(object)`
+### `JSONToHTML(object)`
 convert text to motd json.
 ```typescript
 let mcfalloutJson = {
@@ -267,7 +267,7 @@ let mcfalloutJson = {
   ],
   "text": ""
 }
-let result = motdParser.JSONToHtml(mcfalloutJson);
+let result = motdParser.JSONToHTML(mcfalloutJson);
 console.log(result)
 
 /* result, callback HTML:
