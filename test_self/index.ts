@@ -83,8 +83,8 @@ console.log(`執行時間: ${new Date().getTime() - start} ms`);
 console.log("-------------------------------------------------------");
 console.log("JSON 轉成 HTML");
 start = new Date().getTime();
-let jsonToHtml = motdParser.JSONToHtml(JSON.parse(json));
-let jsonToHtml2 = motdParser.JSONToHtml(mcfalloutJson);
+let jsonToHtml = motdParser.JSONToHTML(JSON.parse(json));
+let jsonToHtml2 = motdParser.JSONToHTML(mcfalloutJson);
 
 console.log(jsonToHtml);
 console.log("-------------------------");
@@ -152,8 +152,8 @@ let jsonExample = {
 
 let textExample =
   "§5§m                  §6>§7§l§6§l>§6§l[§5§l§oPurple §8§l§oPrison§6§l]§6§l<§6<§5§m                     §R §7   §5§k§l;;;§r  §d§lNEW BLACK-MARKET §5§l» §6§L/BLACKMARKET  §5§k§l;;;";
-let autoToHtml = motdParser.autoToHtml(jsonExample);
-let TextAutoToHtml = motdParser.autoToHtml(textExample);
+let autoToHtml = motdParser.autoToHTML(jsonExample);
+let TextAutoToHtml = motdParser.autoToHTML(textExample);
 
 console.log("-------------------------------------------------------");
 console.log(autoToHtml);
