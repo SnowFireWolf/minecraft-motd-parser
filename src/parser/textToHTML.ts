@@ -37,10 +37,16 @@ export default function textToHTML(motdString: string) {
 
       // 過濾文字 style
     } else if (Object.hasOwn(extras, motdStringToLowerCase)) {
-      // font style code 轉換
-      //console.log(`偵測出 style ${ extras[item] }`)
-      fontStyle = extras[motdStringToLowerCase];
-      //console.log('textFont: ' + fontStyle)
+      if(motdStringToLowerCase === '§r') {
+        colorHex = '';
+        fontStyle = '';
+      } else {
+        // font style code 轉換
+        //console.log(`偵測出 style ${ extras[item] }`)
+        fontStyle = extras[motdStringToLowerCase];
+      }
+      // console.log('motdStringToLowerCase', motdStringToLowerCase);
+      // console.log('textFont: ' + fontStyle);
       // 正常文字
     } else {
       let resultColor = "";
