@@ -1,15 +1,15 @@
 # Minecraft Server MOTD Parser
 ![Version](https://img.shields.io/github/languages/top/SnowFireWolf/minecraft-motd-parser?style=for-the-badge)
-[![npm version](https://img.shields.io/npm/v/@sfirew/mc-motd-parser?label=version&style=for-the-badge)](https://www.npmjs.com/package/@sfirew/mc-motd-parser?style=for-the-badge)
+[![npm version](https://img.shields.io/npm/v/@sfirew/minecraft-motd-parser?label=version&style=for-the-badge)](https://www.npmjs.com/package/@sfirew/minecraft-motd-parser?style=for-the-badge)
 [![License](https://img.shields.io/npm/l/minecraft-server-util?style=for-the-badge)](https://github.com/SnowFireWolf/minecraft-motd-parser/blob/master/LICENSE)
-![npm weekly downloads](https://img.shields.io/npm/dw/@sfirew/mc-motd-parser?style=for-the-badge)
+![npm weekly downloads](https://img.shields.io/npm/dw/@sfirew/minecraft-motd-parser?style=for-the-badge)
 
 
 
 ## Introduction
 This package support **CommonJS**, **ES Module**, and **tree shaking**
 
-Can convert minecraft server MOTD data to text, json, html, and clean tags.
+Can convert minecraft server MOTD data to text, json, html, and clean codes.
 
 Support **1.16** custom **hex color**, and auto check motd data type.
 
@@ -83,14 +83,14 @@ You can try server status view in my created service
 Some examples here, you can use **TypeScript** or **JavaScript**.
 
 
-### `cleanTags(string)`
-clean text color tags.
+### `cleanCodes(string)`
+clean motd text color codes.
 ```typescript
 import motdParser from '@sfirew/minecraft-motd-parser' 
-import { cleanTags } from '@sfirew/minecraft-motd-parser'
+import { cleanCodes } from '@sfirew/minecraft-motd-parser'
 
 const motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-const result = cleanTags(motdText);
+const result = cleanCodes(motdText);
 console.log(result);
 
 /* result, callback Text:

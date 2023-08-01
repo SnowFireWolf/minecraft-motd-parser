@@ -8,7 +8,7 @@ let start = 0;
 // clean tags
 console.log("清除 MOTD Tags HTML");
 start = new Date().getTime();
-let cleanedString = motdParser.cleanTags(text);
+let cleanedString = motdParser.cleanCodes(text);
 
 console.log(cleanedString);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
@@ -17,7 +17,7 @@ console.log(`執行時間: ${new Date().getTime() - start} ms`);
 console.log("自動轉成 HTML");
 start = new Date().getTime();
 
-const motdHtml = motdParser.autoToHtml(text);
+const motdHtml = motdParser.autoToHTML(text);
 console.log("-------------------------");
 console.log(motdHtml);
 console.log("-------------------------");
@@ -59,7 +59,7 @@ const mcfalloutSourceMotd = {
   text: "",
 };
 
-const mcfalloutMotdHtml = motdParser.autoToHtml(mcfalloutSourceMotd);
+const mcfalloutMotdHtml = motdParser.autoToHTML(mcfalloutSourceMotd);
 console.log("-------------------------");
 console.log(mcfalloutMotdHtml);
 console.log("-------------------------");

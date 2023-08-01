@@ -147,8 +147,9 @@ describe("Minecraft MOTD Parser", () => {
   describe("autoToHTML", () => {
     describe("- string to HTML", () => {
       it("should convert MOTD string to HTML", () => {
-        const expectedOutput = `<span style="color:#FFFFFF;font-weight: bold;">『</span><span style="color:#FFFF55;font-weight: bold;">FC夢幻峽谷</span><span style="color:#FFFFFF;font-weight: bold;">』 </span><span style="color:#AAAAAA;font-weight: bold;">FantasyCanyon <br/> </span><span style="color:#55FFFF;font-weight: bold;">&lt;&lt;</span><span style="color:#5555FF;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;">------------</span><span style="color:#FFFF55;font-weight: bold;">加入冒險!</span><span style="color:#55FFFF;font-weight: bold;">------------</span><span style="color:#5555FF;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;">&gt;&gt;</span>`;
-        const result = motdParser.autoToHtml(testMOTDString);
+        const expectedOutput = `<span style="color:#FFFFFF;font-weight: bold;">『</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;">FC夢幻峽谷</span><span style="color:#FFFFFF;font-weight: bold;">』 </span><span style="color:#AAAAAA;font-weight: bold;font-weight: bold;">FantasyCanyon <br/> </span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;">&lt;&lt;</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">加入冒險!</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">&gt;&gt;</span>`;
+        const result = motdParser.autoToHTML(testMOTDString);
+        console.log('result', result)
         expect(result).toEqual(expectedOutput);
       });
     });
@@ -156,16 +157,16 @@ describe("Minecraft MOTD Parser", () => {
     describe("- object (JSON) to HTML", () => {
       it("should convert MOTD json to HTML", () => {
         const expectedOutput = `<span style=\"color:#808080;\">             </span><span style=\"font-weight: bold;\"><span style=\"color:#1991EA;\">D</span><span style=\"color:#1C93EB;\">r</span><span style=\"color:#2096EC;\">e</span><span style=\"color:#2499ED;\">a</span><span style=\"color:#289CEE;\">m</span><span style=\"color:#2C9EEF;\">C</span><span style=\"color:#30A1F0;\">r</span><span style=\"color:#33A4F1;\">a</span><span style=\"color:#37A7F2;\">f</span><span style=\"color:#3BA9F3;\">t</span><span style=\"color:#3FACF4;\">e</span><span style=\"color:#43AFF5;\">r</span><span style=\"color:#47B2F6;\"> </span><span style=\"color:#4BB4F7;\">N</span><span style=\"color:#4EB7F8;\">e</span><span style=\"color:#52BAF9;\">t</span><span style=\"color:#56BDFA;\">w</span><span style=\"color:#5ABFFB;\">o</span><span style=\"color:#5EC2FC;\">r</span><span style=\"color:#62C5FD;\">k</span></span> <span style=\"color:#1f92ed;\">- </span><span style=\"font-weight: bold;\"><span style=\"color:#66C8FF;\">築</span><span style=\"color:#52BAF9;\">夢</span><span style=\"color:#3FACF4;\">物</span><span style=\"color:#2C9EEF;\">語</span></span><br/>                <span style=\"color:#FFFFFF;\"> 在這裡 -- 實現你的理想! </span>`;
-        const result = motdParser.autoToHtml(testMotdJSON);
+        const result = motdParser.autoToHTML(testMotdJSON);
         expect(result).toEqual(expectedOutput);
       });
     });
   });
 
-  describe("cleanTags", () => {
+  describe("cleanCodes", () => {
     it("should clean MOTD color tags", () => {
       const expectedOutput = "『FC夢幻峽谷』 FantasyCanyon \n <<◎------------加入冒險!------------◎>>";
-      expect(motdParser.cleanTags(testMOTDString)).toEqual(expectedOutput);
+      expect(motdParser.cleanCodes(testMOTDString)).toEqual(expectedOutput);
     });
   });
 

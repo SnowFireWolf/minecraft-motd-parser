@@ -54,13 +54,13 @@ export function cleanHtmlTags(text: string): string {
 
 
 /**
- * clean motd tags
+ * clean motd codes
  * 
- * Clean all tags from motd source string.
+ * Clean all codes from motd source string.
  * 
  * @param {string} text - motd string include tag § will remove
  */
-export function cleanTags(text: string) {
+export function cleanCodes(text: string) {
   const REGEX = /(?:§)([0-9a-fA-FklmnorFKLMNOR])/g;
   let textResult = "";
 

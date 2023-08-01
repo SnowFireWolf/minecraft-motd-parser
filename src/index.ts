@@ -5,7 +5,7 @@
  */
 import {
   htmlStringFormatting,
-  cleanTags,
+  cleanCodes,
   cleanHtmlTags,
 } from "./utils";
 import {
@@ -48,8 +48,8 @@ const motdParser = {
 
   // utils
   htmlStringFormatting,
-  // clean all motd tags
-  cleanTags,
+  // clean all motd codes
+  cleanCodes,
   // clean all html tags
   cleanHtmlTags,
 };
