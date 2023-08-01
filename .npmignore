@@ -5,3 +5,5 @@ test_self
 yarn.lock
 
 tsconfig.json
+
+.idea

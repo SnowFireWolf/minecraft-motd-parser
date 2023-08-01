@@ -1,15 +1,27 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": false,
     "module": "commonjs",
     "esModuleInterop": true,
     "sourceMap": false,
     "allowJs": true,
     "target": "ES6",
+    "baseUrl": "./",
     "lib": ["es6", "ESNext"],
     "rootDir": "./src",
     "outDir": "./dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "~/*": [
+        "./src/*"
+      ]
+    }
   },
-  "exclude": ["node_modules", "test", "test_self", "dist", "build", "jest.config.js"]
+  "exclude": ["node_modules", "test", "test_self", "dist", "build", "jest.config.js"],
+  "include": [
+    "src/**/*"
+  ]
 }
