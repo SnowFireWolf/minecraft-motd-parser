@@ -18,8 +18,9 @@ interface motdJsonType {
     underlined?: boolean;
     obfuscated?: boolean;
     italic?: boolean;
-    extra?: object[];
+    extra?: object[] | motdJsonType[];
   }[];
+  translate?: string;
   [key: string]: string | boolean | number | object | Array<object> | undefined;
 }
 
