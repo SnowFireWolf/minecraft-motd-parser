@@ -32,7 +32,9 @@ export function autoToHTML(motd: string | object | motdJsonType): string {
     return jsonRender(motd);
   } else if (typeof motd === "string") {
     // console.log('process mode: String mode');
+    // console.log('textToJSON(motd)', textToJSON(motd));
     return textToHTML(motd);
+    // return jsonRender(textToJSON(motd));
   } else {
     return "unknown motd data type";
   }

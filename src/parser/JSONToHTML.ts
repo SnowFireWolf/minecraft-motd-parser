@@ -24,7 +24,8 @@ export default function parseJSONToHTML(
   sourceJson: motdJsonType,
 ) {
   let htmlElement = "";
-  let colorHex = "";
+  // let colorHex = "";
+  let colorStyle = "";
   let fontStyle = "";
 
   // console.log('sourceJson', sourceJson);
@@ -55,22 +56,24 @@ export default function parseJSONToHTML(
     // color
     if (key === "color") {
       const colorKey = sourceJson[key];
+      let colorHex = "";
 
       if (typeof colorKey === "string") {
         // Hex color
         if (Object.hasOwn(extraColorsToHex, colorKey)) {
-          colorHex = `color:${extraColorsToHex[colorKey]};`;
-          continue;
+          colorHex = extraColorsToHex[colorKey];
           // color code
         } else if (Object.hasOwn(colorCodeToHex, colorKey)) {
-          colorHex = `color:${colorCodeToHex[colorKey]};`;
-          continue;
+          colorHex = colorCodeToHex[colorKey];
           // custom color
         } else {
           // custom hex color code mode
-          colorHex = `color:${colorKey};`;
-          continue;
+          colorHex = colorKey;
         }
+      }
+
+      if(colorHex !== "") {
+        colorStyle = `color:${colorHex};`;
       }
     }
 
@@ -109,8 +112,8 @@ export default function parseJSONToHTML(
 
 
   let returnHTML = "";
-  if (fontStyle.length !== 0 || colorHex.length !== 0) {
-    returnHTML = `<span style="${fontStyle + colorHex}">${htmlElement}</span>`;
+  if (fontStyle.length !== 0 || colorStyle.length !== 0) {
+    returnHTML = `<span style="${colorStyle + fontStyle}">${htmlElement}</span>`;
   } else {
     returnHTML = htmlElement;
   }

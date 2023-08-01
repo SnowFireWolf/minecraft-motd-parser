@@ -39,10 +39,19 @@ export default function parseTextToJSON(text: string) {
     if (Object.hasOwn(colorCodeToHex, stringToLowerCase)) {
       //console.log(`偵測出 ${ colorCodeToHex[item] }`)
       colorHex = colorCodeToHex[stringToLowerCase];
+      // §f reset
+      if(stringToLowerCase === "§f") {
+        fontStyle = "";
+      }
     } else if (Object.hasOwn(textToJsonExtras, stringToLowerCase)) {
-      // font style code 轉換
-      //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
-      fontStyle = textToJsonExtras[stringToLowerCase];
+      if(stringToLowerCase === "§r") {
+        fontStyle = "";
+        colorHex = "";
+      } else {
+        // font style code 轉換
+        //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
+        fontStyle = textToJsonExtras[stringToLowerCase];
+      }
     } else {
       const innerObject: motdJsonType = {
         text: "",
