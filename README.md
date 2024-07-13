@@ -79,24 +79,9 @@ You can try server status view in my created service
 
 
 
-## More Example
+## Example and main formatter
 Some examples here, you can use **TypeScript** or **JavaScript**.
 
-
-### `cleanCodes(string)`
-clean motd text color codes.
-```typescript
-import motdParser from '@sfirew/minecraft-motd-parser' 
-import { cleanCodes } from '@sfirew/minecraft-motd-parser'
-
-const motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
-const result = cleanCodes(motdText);
-console.log(result);
-
-/* result, callback Text:
- * Hypixel Network 1.8/1.9/1.10/1.11/1.12 NEW PTL GAME: THE BRIDGE
- */
-```
 
 
 ### `autoToHTML(string | object)`
@@ -177,6 +162,48 @@ console.log(autoTextResult);
 
 
 
+
+
+
+## clean codes formatter
+### `cleanCodes(string)`
+clean motd text color codes.
+```typescript
+import motdParser from '@sfirew/minecraft-motd-parser' 
+import { cleanCodes } from '@sfirew/minecraft-motd-parser'
+
+const motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
+const result = cleanCodes(motdText);
+console.log(result);
+
+/* result, callback Text:
+ * Hypixel Network 1.8/1.9/1.10/1.11/1.12 NEW PTL GAME: THE BRIDGE
+ */
+```
+
+
+
+### `autoCleanToText(string | object)`
+auto check MOTD data type then return same cleaned text.
+```typescript
+import motdParser from '@sfirew/minecraft-motd-parser' 
+import { autoCleanToText } from '@sfirew/minecraft-motd-parser'
+
+const motdText = "§aHypixel Network §7§c1.8/1.9/1.10/1.11/1.12 §e§lNEW PTL GAME:§b§l THE BRIDGE";
+const result = autoCleanToText(motdText);
+console.log(result);
+
+/* result, callback Text:
+ * Hypixel Network 1.8/1.9/1.10/1.11/1.12 NEW PTL GAME: THE BRIDGE
+ */
+```
+
+
+
+
+
+
+## origin formatter
 ### `textToHTML(string)`
 convert motd text to html.
 ```typescript

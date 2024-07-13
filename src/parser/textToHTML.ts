@@ -8,10 +8,6 @@ import {
 
 
 
-
-
-
-// text to html
 /**
  * Convert motd text to html.
  * @param motdString

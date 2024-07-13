@@ -1,6 +1,6 @@
 /*
  * minecraft motd parser
- * (c) 2023 Kevin Zheng
+ * (c) 2021 Kevin Zheng
  * Released under the MIT license
  */
 

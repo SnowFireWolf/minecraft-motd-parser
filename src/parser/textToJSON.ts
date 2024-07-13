@@ -6,10 +6,6 @@ import {
 
 
 
-
-
-
-// text to json
 /**
  * Convert motd text to JSON.
  * 

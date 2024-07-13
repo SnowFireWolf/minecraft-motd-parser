@@ -149,7 +149,6 @@ describe("Minecraft MOTD Parser", () => {
       it("should convert MOTD string to HTML", () => {
         const expectedOutput = `<span style="color:#FFFFFF;font-weight: bold;">『</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;">FC夢幻峽谷</span><span style="color:#FFFFFF;font-weight: bold;">』 </span><span style="color:#AAAAAA;font-weight: bold;font-weight: bold;">FantasyCanyon <br/> </span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;">&lt;&lt;</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">加入冒險!</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">&gt;&gt;</span>`;
         const result = motdParser.autoToHTML(testMOTDString);
-        console.log('result', result)
         expect(result).toEqual(expectedOutput);
       });
     });
@@ -163,12 +162,32 @@ describe("Minecraft MOTD Parser", () => {
     });
   });
 
+
+
   describe("cleanCodes", () => {
     it("should clean MOTD color tags", () => {
       const expectedOutput = "『FC夢幻峽谷』 FantasyCanyon \n <<◎------------加入冒險!------------◎>>";
       expect(motdParser.cleanCodes(testMOTDString)).toEqual(expectedOutput);
     });
   });
+
+  describe("autoCleanToText", () => {
+    describe("- string to cleaned text", () => {
+      it("string type should clean MOTD color tags and converted to text", () => {
+        const expectedOutput = "『FC夢幻峽谷』 FantasyCanyon \n <<◎------------加入冒險!------------◎>>";
+        expect(motdParser.autoCleanToText(testMOTDString)).toEqual(expectedOutput);
+      });
+    });
+
+    describe("- JSON to cleaned text", () => {
+      it("object type should clean MOTD color tags and converted to text", () => {
+        const expectedOutput = "             DreamCrafter Network - 築夢物語\n                 在這裡 -- 實現你的理想! ";
+        expect(motdParser.autoCleanToText(testMotdJSON)).toEqual(expectedOutput);
+      });
+    });
+  });
+
+
 
   describe("textToHTML", () => {
     it("should convert simple text to HTML", () => {
