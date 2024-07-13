@@ -6,19 +6,14 @@ import { cleanCodes } from "../utils";
 
 
 
-// make sure JSON data is JSON object and then convert.
-export function JSONRender(json: object | motdJsonType) {
-  return JSONToCleanedText(JSON.parse(JSON.stringify(json)));
-}
-
 /**
  * auto check data type then convert to html.
  */
-export function autoCleanToText(motd: string | object | motdJsonType): string {
+export function autoCleanToText(motd: string | object): string {
   // type check
   if (typeof motd === "object") {
     // console.log('process mode: Object mode');
-    return JSONRender(motd);
+    return JSONToCleanedText(motd as motdJsonType);
   } else if (typeof motd === "string") {
     // console.log('process mode: String mode');
     return cleanCodes(motd);

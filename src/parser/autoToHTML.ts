@@ -7,14 +7,14 @@ import {
 
 
 // make sure JSON data is JSON object and then convert.
-export function JSONRender(json: object | motdJsonType) {
-  return JSONToHTML(JSON.parse(JSON.stringify(json)));
+export function JSONRender(json: object) {
+  return JSONToHTML(json as motdJsonType);
 }
 
 /**
  * auto check data type then convert to html.
  */
-export function autoToHTML(motd: string | object | motdJsonType): string {
+export function autoToHTML(motd: string | object): string {
   // type check
   if (typeof motd === "object") {
     // console.log('process mode: Object mode');

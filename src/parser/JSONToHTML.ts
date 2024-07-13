@@ -11,17 +11,15 @@ import textToHTML from "./textToHTML";
 
 
 
-// json convert to html
 /**
  * Convert JSON to HTML.
  * 
- * @param sourceJson 
+ * @param sourceJson
  */
 export default function parseJSONToHTML(
   sourceJson: motdJsonType,
 ) {
   let htmlElement = "";
-  // let colorHex = "";
   let colorStyle = "";
   let fontStyle = "";
 
