@@ -86,11 +86,11 @@ export default function parseJSONToHTML(
       for (const sourceJsonExtra of sourceJson.extra) {
         // console.log('sourceJsonExtra', sourceJsonExtra);
         if (typeof sourceJsonExtra === 'string') {
-            // Process string elements directly with textToHTML
-            htmlElement += textToHTML(sourceJsonExtra);
-          } else if (isMotdJSONType(sourceJsonExtra)) {
-            htmlElement += parseJSONToHTML(sourceJsonExtra);
-          }
+          // Process string elements directly with textToHTML
+          htmlElement += textToHTML(sourceJsonExtra);
+        } else if (isMotdJSONType(sourceJsonExtra)) {
+          htmlElement += parseJSONToHTML(sourceJsonExtra);
+        }
       }
     }
   }
