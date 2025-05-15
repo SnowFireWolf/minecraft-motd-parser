@@ -61,9 +61,9 @@ export default function parseJSONToHTML(
         } else if (Object.hasOwn(colorCodeToHex, colorKey)) {
           colorHex = colorCodeToHex[colorKey];
           // custom color
-        } else {
-          // custom hex color code mode
-          colorHex = colorKey;
+        } else if (colorKey.match(/^#?[0-9A-Fa-f]{6}$/)) {
+          // custom hex color code mode. Prepend a # if not present
+          colorHex = colorKey.replace(/^([^#])/, "#$1");
         }
       }
 
