@@ -408,4 +408,203 @@ describe("Minecraft MOTD Parser", () => {
       });
     });
   });
+
+  describe("JSONRender", () => {
+    it("should render JSON object directly to HTML", () => {
+      const input = {
+        text: "Test",
+        color: "red",
+        bold: true
+      };
+      const expectedOutput = '<span style="color:#FF5555;font-weight: bold;">Test</span>';
+      const result = motdParser.JSONRender(input);
+      expect(result).toEqual(expectedOutput);
+    });
+
+    it("should handle empty JSON object", () => {
+      const input = {};
+      const result = motdParser.JSONRender(input);
+      expect(typeof result).toBe("string");
+    });
+  });
+
+  describe("cleanHtmlTags", () => {
+    it("should remove HTML tags", () => {
+      const input = "<span>Hello</span> <b>World</b>";
+      const expectedOutput = "Hello World";
+      const result = motdParser.cleanHtmlTags(input);
+      expect(result).toEqual(expectedOutput);
+    });
+
+    it("should remove dangerous script tags", () => {
+      const input = "Safe <script>alert('xss')</script> text";
+      const expectedOutput = "Safe  text";
+      const result = motdParser.cleanHtmlTags(input);
+      expect(result).toEqual(expectedOutput);
+    });
+
+    it("should handle HTML comments", () => {
+      const input = "Text <!-- comment --> more";
+      const expectedOutput = "Text  more";
+      const result = motdParser.cleanHtmlTags(input);
+      expect(result).toEqual(expectedOutput);
+    });
+  });
+
+  // Merged tests from coverage.test.ts
+  describe("isMotdJSONType utility", () => {
+    it("should return true for valid MOTD JSON with text", () => {
+      const validJson = { text: "Hello" };
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType(validJson)).toBe(true);
+    });
+
+    it("should return true for valid MOTD JSON with extra", () => {
+      const validJson = { extra: [{ text: "Hello" }] };
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType(validJson)).toBe(true);
+    });
+
+    it("should return true for valid MOTD JSON with translate", () => {
+      const validJson = { translate: "item.apple" };
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType(validJson)).toBe(true);
+    });
+
+    it("should return false for invalid types", () => {
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType(null)).toBe(false);
+      expect(isMotdJSONType(undefined)).toBe(false);
+      expect(isMotdJSONType("string")).toBe(false);
+      expect(isMotdJSONType(123)).toBe(false);
+      expect(isMotdJSONType([])).toBe(false);
+    });
+
+    it("should return false for empty object", () => {
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType({})).toBe(false);
+    });
+
+    it("should return false for object with only unrelated properties", () => {
+      const invalidJson = { color: "red", bold: true };
+      const { isMotdJSONType } = require("../src/utils");
+      expect(isMotdJSONType(invalidJson)).toBe(false);
+    });
+  });
+
+  describe("JSONToCleanedText function", () => {
+    it("should convert simple JSON to clean text", () => {
+      const json = { text: "§cHello §lWorld" };
+      const result = motdParser.JSONToCleanedText(json);
+      expect(result).toBe("Hello World");
+    });
+
+    it("should handle JSON with extra array", () => {
+      const json = {
+        text: "Start",
+        extra: [
+          { text: "§a Green" },
+          { text: "§l Bold" }
+        ]
+      };
+      const result = motdParser.JSONToCleanedText(json);
+      expect(result).toBe("Start Green Bold");
+    });
+
+    it("should handle mixed elements in extra array", () => {
+      const json = {
+        text: "",
+        extra: [
+          { text: "Object element" }
+        ]
+      };
+      const result = motdParser.JSONToCleanedText(json);
+      expect(result).toBe("Object element");
+    });
+
+    it("should handle numeric text values", () => {
+      const json = { text: 12345 };
+      const result = motdParser.JSONToCleanedText(json);
+      expect(result).toBe("12345");
+    });
+  });
+
+  describe("Error handling and edge cases", () => {
+    describe("autoToHTML error handling", () => {
+      it("should handle unknown data types", () => {
+        const result = motdParser.autoToHTML(123 as any);
+        expect(result).toBe("unknown motd data type");
+      });
+
+      it("should handle null input", () => {
+        expect(() => motdParser.autoToHTML(null as any)).toThrow();
+      });
+
+      it("should handle undefined input", () => {
+        const result = motdParser.autoToHTML(undefined as any);
+        expect(result).toBe("unknown motd data type");
+      });
+
+      it("should handle empty string input", () => {
+        expect(motdParser.autoToHTML("")).toEqual("");
+      });
+
+      it("should handle empty object input", () => {
+        const result = motdParser.autoToHTML({});
+        expect(typeof result).toBe("string");
+      });
+
+      it("should handle array input", () => {
+        try {
+          const result = motdParser.autoToHTML([]);
+          expect(typeof result).toBe("string");
+        } catch (error) {
+          expect(error).toBeDefined();
+        }
+      });
+    });
+
+    describe("autoCleanToText error handling", () => {
+      it("should handle unknown data types", () => {
+        const result = motdParser.autoCleanToText(123 as any);
+        expect(result).toBe("unknown motd data type");
+      });
+
+      it("should handle null input", () => {
+        expect(() => motdParser.autoCleanToText(null as any)).toThrow();
+      });
+
+      it("should handle undefined input", () => {
+        const result = motdParser.autoCleanToText(undefined as any);
+        expect(result).toBe("unknown motd data type");
+      });
+
+      it("should handle empty string input", () => {
+        expect(motdParser.autoCleanToText("")).toEqual("");
+      });
+    });
+
+    describe("Edge case testing", () => {
+      it("should handle empty string input for all functions", () => {
+        expect(motdParser.textToHTML("")).toBe("");
+        expect(motdParser.textToJSON("")).toEqual({ text: "", extra: [] });
+        expect(motdParser.cleanCodes("")).toBe("");
+      });
+
+      it("should handle very long strings", () => {
+        const longString = "§c" + "A".repeat(10000);
+        const htmlResult = motdParser.textToHTML(longString);
+        const cleanResult = motdParser.cleanCodes(longString);
+        
+        expect(htmlResult).toContain("A".repeat(10000));
+        expect(cleanResult).toBe("A".repeat(10000));
+      });
+
+      it("should handle strings with only color codes", () => {
+        const colorOnlyString = "§a§l§r§c";
+        const result = motdParser.textToHTML(colorOnlyString);
+        expect(result).toBe("");
+      });
+    });
+  });
 });
