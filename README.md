@@ -7,6 +7,8 @@
 
 A powerful and lightweight library to parse Minecraft server MOTD (Message of the Day) data into various formats.
 
+
+
 ## Table of Contents
 
 - [Features](#features)
@@ -21,6 +23,8 @@ A powerful and lightweight library to parse Minecraft server MOTD (Message of th
 - [Visual Examples](#visual-examples)
 - [Contributing](#contributing)
 
+
+
 ## Features
 
 ✨ **Zero Dependencies** - Lightweight and fast  
@@ -29,6 +33,8 @@ A powerful and lightweight library to parse Minecraft server MOTD (Message of th
 🌈 **Full Color Support** - Including Minecraft 1.16+ hex colors  
 📦 **Module Support** - CommonJS, ES Modules, and tree shaking  
 🎯 **TypeScript Ready** - Full TypeScript support
+
+
 
 ## Installation
 
@@ -44,6 +50,8 @@ yarn add @sfirew/minecraft-motd-parser
 # pnpm
 pnpm add @sfirew/minecraft-motd-parser
 ```
+
+
 
 ## Quick Start
 
@@ -66,6 +74,8 @@ const { autoToHTML } = require('@sfirew/minecraft-motd-parser');
 import motdParser from '@sfirew/minecraft-motd-parser'
 motdParser.autoToHTML('motdString...');
 ```
+
+
 
 ## API Reference
 
@@ -151,6 +161,8 @@ const clean = cleanCodes(motd);
 console.log(clean); // "Hypixel Network 1.8-1.19"
 ```
 
+
+
 ## Examples
 
 ### Complex MOTD with Multiple Formats
@@ -174,14 +186,6 @@ const jsonExample = {
   ]
 };
 console.log(motdParser.autoToHTML(jsonExample));
-```
-
-### Hex Color Support (Minecraft 1.16+)
-
-```typescript
-// The parser automatically handles hex colors
-const hexMotd = "§x§§f§f§0§0§0§0Hello §x§§0§0§f§f§0§0World";
-console.log(autoToHTML(hexMotd));
 ```
 
 ## Visual Examples
