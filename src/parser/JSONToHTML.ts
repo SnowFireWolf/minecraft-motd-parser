@@ -33,7 +33,7 @@ export default function parseJSONToHTML(
     // text styles
     if (Object.hasOwn(extraFontStyles, key)) {
       if (sourceJson[key]) {
-        fontStyle += `${extraFontStyles[key]}`;
+        fontStyle += String(extraFontStyles[key]);
       }
     }
 
@@ -83,9 +83,7 @@ export default function parseJSONToHTML(
     // extra
     if (key === "extra" && typeof sourceJson.extra === "object") {
       // ---------- with extra text ----------
-      if (sourceJson.text !== undefined
-        && (typeof sourceJson.text === "string" || typeof sourceJson.text === "number")
-      ) {
+      if (typeof sourceJson.text === "string" || typeof sourceJson.text === "number") {
         // content to html
         htmlElement += textToHTML(String(sourceJson.text));
       }

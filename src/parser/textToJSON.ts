@@ -71,7 +71,7 @@ export default function parseTextToJSON(text: string) {
   });
 
   // code styles merge
-  let newExtra: Array<motdJsonType> = [];
+  let newExtra: motdJsonType[] = [];
   // console.log('resultObject', resultObject);
   if (resultObject.extra) {
     if (resultObject.extra.length > 1) {
@@ -90,8 +90,7 @@ export default function parseTextToJSON(text: string) {
           }
         } else {
           if (
-            item.text !== (newExtra[newExtra.length - 1]
-              && newExtra[newExtra.length - 1].text)
+            item.text !== newExtra[newExtra.length - 1]?.text
           ) {
             newExtra.push(item as motdJsonType);
           }

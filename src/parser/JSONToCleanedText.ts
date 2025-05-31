@@ -22,9 +22,7 @@ export default function JSONToCleanedText(
     // extra
     if (key === "extra" && typeof sourceJson.extra === "object") {
       // ---------- with extra text ----------
-      if (sourceJson.text !== undefined
-        && (typeof sourceJson.text === "string" || typeof sourceJson.text === "number")
-      ) {
+      if (typeof sourceJson.text === "string" || typeof sourceJson.text === "number") {
         // content to html
         textString += cleanCodes(String(sourceJson.text));
       }
