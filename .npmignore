@@ -7,3 +7,4 @@ yarn.lock
 tsconfig.json
 
 .idea
+coverage
