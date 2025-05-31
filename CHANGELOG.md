@@ -11,26 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Comprehensive test coverage for hex color parsing, performance, security, and HTML cleaning
-- test(hex color parsing): add comprehensive tests for various hex color formats in JSON to HTML conversion
-- test(performance): implement performance and stress tests for large data handling capabilities
-- test(security): add security-focused test cases for robust input validation
-- test(coverage): add additional tests for JSON rendering and HTML cleaning functionality
+- Modern ESLint configuration with enhanced type safety and optional chaining
+- New test scripts for coverage, watch, performance, security, and comprehensive testing
 
 ### Changed
-- Major refactor of HTML string generation and formatting logic
-- Enhanced type checking throughout the codebase
-- Implemented secure HTML tag cleaning and sanitization
-- refactor(utils): enhance type checking, improve HTML string formatting, and implement secure HTML tag cleaning
-- update(jest.config): enhance test configuration with coverage options and performance settings
-- update(package.json): add new test scripts for coverage, watch, performance, security, and comprehensive testing
-- update(README): add spacing for better readability and remove hex color support example
-- update(README): restructure content for clarity, enhance features section, and add installation and usage examples
+- Major refactor of HTML string generation and formatting logic with secure tag cleaning
+- Enhanced type checking and consistency across JSON parsing functions
+- Streamlined text handling in textToHTML and parser functions
+- Standardized code style: enforced double quotes, updated ESLint rules, improved Jest configuration
+- Updated package.json: replaced `format` script with `lint` script, added ESLint dependencies
+- Improved variable management using `const` instead of `let` where appropriate
+- Enhanced README structure and clarity, removed hex color support example
 - Merge pull request #21 from AlexTMjugador/alex/upstream-hex-color-parser-fix
 
 ### Fixed
 - Parser behavior now precisely matches Minecraft game behavior
-- tweak(parser/JSONtoHTML): tailor behavior to precisely match the game
-- fix(parser): validate text component hex color values
+- Hex color value validation in text components
+- Code consistency issues with standardized formatting
 
 
 
