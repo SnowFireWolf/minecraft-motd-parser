@@ -153,10 +153,10 @@ const jsonExample = {
 const textExample =
   "§5§m                  §6>§7§l§6§l>§6§l[§5§l§oPurple §8§l§oPrison§6§l]§6§l<§6<§5§m                     §R §7   §5§k§l;;;§r  §d§lNEW BLACK-MARKET §5§l» §6§L/BLACKMARKET  §5§k§l;;;";
 const autoToHtml = motdParser.autoToHTML(jsonExample);
-const TextAutoToHtml = motdParser.autoToHTML(textExample);
+const textAutoToHtml = motdParser.autoToHTML(textExample);
 
 console.log("-------------------------------------------------------");
 console.log(autoToHtml);
 console.log("-------------------------------------------------------");
-console.log(TextAutoToHtml);
+console.log(textAutoToHtml);
 console.log(`執行時間: ${new Date().getTime() - start} ms`);
