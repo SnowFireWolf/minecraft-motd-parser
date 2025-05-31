@@ -3,6 +3,7 @@ import {
   textToJsonExtras,
   colorCodeToHex,
 } from '../styleLibrary';
+import { baseColorCodeRegex } from '../utils';
 
 
 
@@ -14,9 +15,7 @@ import {
 export default function parseTextToJSON(text: string) {
   const motdText = text;
 
-  // color code regex: /([§][0-9a-fklmnor])/g
-  // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
-  const colorCodeReg = /([§][0-9a-f0-9a-fA-FklmnorFKLMNOR])/g;
+  const colorCodeReg = baseColorCodeRegex;
   const codeREGEX = new RegExp(colorCodeReg.source);
   const textSplit = motdText.split(codeREGEX);
   let fontStyle = "";
