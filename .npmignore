@@ -1,9 +1,12 @@
 src
 test
 test_self
+jest.config.ts
 
 yarn.lock
 
 tsconfig.json
+eslint.config.mjs
 
 .idea
+coverage
