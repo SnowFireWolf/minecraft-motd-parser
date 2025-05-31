@@ -216,4 +216,196 @@ describe("Minecraft MOTD Parser", () => {
       expect(motdParser.textToJSON(input)).toEqual(expectedOutput);
     });
   });
+
+  describe("hex color parsing", () => {
+    describe("JSONToHTML hex color validation", () => {
+      it("should handle standard 6-digit hex colors with #", () => {
+        const testJson = {
+          "color": "#FF0000",
+          "text": "Red text"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#FF0000;">Red text</span>');
+      });
+
+      it("should handle lowercase hex colors", () => {
+        const testJson = {
+          "color": "#00ff00",
+          "text": "Green text"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#00ff00;">Green text</span>');
+      });
+
+      it("should handle mixed case hex colors", () => {
+        const testJson = {
+          "color": "#0000Ff",
+          "text": "Blue text"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#0000Ff;">Blue text</span>');
+      });
+
+      it("should handle short hex format with leading zeros", () => {
+        const testJson = {
+          "color": "#123",
+          "text": "Short hex"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#000123;">Short hex</span>');
+      });
+
+      it("should handle hex colors with leading + sign", () => {
+        const testJson = {
+          "color": "#+FF0000",
+          "text": "Plus sign test"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#FF0000;">Plus sign test</span>');
+      });
+
+      it("should ignore hex colors with leading - sign", () => {
+        const testJson = {
+          "color": "#-FF0000",
+          "text": "Minus sign test"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Minus sign test');
+      });
+
+      it("should handle hex colors with multiple leading zeros", () => {
+        const testJson = {
+          "color": "#000FF",
+          "text": "Leading zeros"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#0000FF;">Leading zeros</span>');
+      });
+
+      it("should handle hex colors with +0 prefix", () => {
+        const testJson = {
+          "color": "#+0FF0000",
+          "text": "Plus zero prefix"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#FF0000;">Plus zero prefix</span>');
+      });
+
+      it("should ignore hex colors with -0 prefix", () => {
+        const testJson = {
+          "color": "#-0FF0000",
+          "text": "Minus zero prefix"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Minus zero prefix');
+      });
+
+      it("should handle single non-zero digit", () => {
+        const testJson = {
+          "color": "#A",
+          "text": "Single digit"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#00000A;">Single digit</span>');
+      });
+
+      it("should handle valid 5-digit hex", () => {
+        const testJson = {
+          "color": "#1ABCD",
+          "text": "Five digits"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#01ABCD;">Five digits</span>');
+      });
+
+      it("should ignore invalid hex colors (no # prefix)", () => {
+        const testJson = {
+          "color": "FF0000",
+          "text": "Invalid no hash"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Invalid no hash');
+      });
+
+      it("should ignore invalid hex colors (invalid characters)", () => {
+        const testJson = {
+          "color": "#GG0000",
+          "text": "Invalid characters"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Invalid characters');
+      });
+
+      it("should ignore invalid hex colors (too long)", () => {
+        const testJson = {
+          "color": "#1234567",
+          "text": "Too long"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Too long');
+      });
+
+      it("should ignore empty color value", () => {
+        const testJson = {
+          "color": "",
+          "text": "Empty color"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Empty color');
+      });
+
+      it("should ignore only # symbol", () => {
+        const testJson = {
+          "color": "#",
+          "text": "Only hash"
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('Only hash');
+      });
+
+      it("should handle complex JSON with valid hex colors", () => {
+        const testJson = {
+          "extra": [
+            {
+              "color": "#FF0000",
+              "text": "Red "
+            },
+            {
+              "color": "#00FF00",
+              "text": "Green "
+            },
+            {
+              "color": "#123",
+              "text": "Short"
+            }
+          ],
+          "text": ""
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#FF0000;">Red </span><span style="color:#00FF00;">Green </span><span style="color:#000123;">Short</span>');
+      });
+
+      it("should handle mixed valid and invalid hex colors", () => {
+        const testJson = {
+          "extra": [
+            {
+              "color": "#FF0000",
+              "text": "Valid "
+            },
+            {
+              "color": "invalid",
+              "text": "Invalid "
+            },
+            {
+              "color": "#00FF00",
+              "text": "Valid again"
+            }
+          ],
+          "text": ""
+        };
+        const result = motdParser.autoToHTML(testJson);
+        expect(result).toEqual('<span style="color:#FF0000;">Valid </span>Invalid <span style="color:#00FF00;">Valid again</span>');
+      });
+    });
+  });
 });
