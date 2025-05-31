@@ -154,16 +154,17 @@ export function cleanHtmlTags(text: string): string {
 
     /* --------------- SKIP_BLOCK Logic --------------- */
     if (state === State.SKIP_BLOCK) {
-      // Simple case-insensitive matching for skipUntil string
+      // Transition: SKIP_BLOCK -> TEXT
+      // Check if the current segment matches the end tag (e.g., </script>)
       if (
         ch === "<" &&
         text.slice(i, i + skipUntil.length).toLowerCase() === skipUntil
       ) {
-        // Skip entire "</tag>" segment
+        // Skip the entire end tag (case-insensitive match)
         i += skipUntil.length - 1;
-        state = State.TEXT;
+        state = State.TEXT; // Return to TEXT state
       }
-      continue; // Consume any content until leaving SKIP_BLOCK
+      continue; // Consume all content until the end tag is found
     }
 
     /* --------------- TEXT State: Normal output --------------- */
