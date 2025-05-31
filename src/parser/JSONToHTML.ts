@@ -62,7 +62,7 @@ export default function parseJSONToHTML(
           colorHex = colorCodeToHex[colorKey];
           // custom color
         } else {
-          let customHexColorMatches = colorKey.match(
+          const customHexColorMatches = colorKey.match(
             /^#([-+]?0+|\+?0*[1-9A-Fa-f][0-9A-Fa-f]{0,5})$/,
           );
 

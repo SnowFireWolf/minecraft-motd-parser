@@ -17,7 +17,7 @@ export const baseColorCodeRegex = /([§][0-9a-fA-FklmnorKLMNOR])/g;
 
 
 // Type checking function
-export function isMotdJSONType(object: any): object is motdJsonType {
+export function isMotdJSONType(object: unknown): object is motdJsonType {
   // basic type check
   if (!object || typeof object !== 'object' || Array.isArray(object)) {
     return false;
@@ -120,7 +120,7 @@ export function cleanHtmlTags(text: string): string {
       while (j < len && /\s/.test(text[j])) j++;
 
       // Extract tagName (a~z or A~Z or 0-9 or -)
-      let start = j;
+      const start = j;
       while (j < len && /[A-Za-z0-9-]/.test(text[j])) j++;
 
       tagName = text.slice(start, j).toLowerCase();
