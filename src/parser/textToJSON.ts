@@ -2,7 +2,8 @@ import { motdJsonType } from "../types";
 import {
   textToJsonExtras,
   colorCodeToHex,
-} from '../styleLibrary';
+} from "../styleLibrary";
+import { baseColorCodeRegex } from "../utils";
 
 
 
@@ -14,9 +15,7 @@ import {
 export default function parseTextToJSON(text: string) {
   const motdText = text;
 
-  // color code regex: /([§][0-9a-fklmnor])/g
-  // color hex regex: /^#(?:[0-9a-f]{3}){1,2}$/g
-  const colorCodeReg = /([§][0-9a-f0-9a-fA-FklmnorFKLMNOR])/g;
+  const colorCodeReg = baseColorCodeRegex;
   const codeREGEX = new RegExp(colorCodeReg.source);
   const textSplit = motdText.split(codeREGEX);
   let fontStyle = "";
@@ -72,7 +71,7 @@ export default function parseTextToJSON(text: string) {
   });
 
   // code styles merge
-  let newExtra: Array<motdJsonType> = [];
+  let newExtra: motdJsonType[] = [];
   // console.log('resultObject', resultObject);
   if (resultObject.extra) {
     if (resultObject.extra.length > 1) {
@@ -91,8 +90,7 @@ export default function parseTextToJSON(text: string) {
           }
         } else {
           if (
-            item.text !== (newExtra[newExtra.length - 1]
-              && newExtra[newExtra.length - 1].text)
+            item.text !== newExtra[newExtra.length - 1]?.text
           ) {
             newExtra.push(item as motdJsonType);
           }

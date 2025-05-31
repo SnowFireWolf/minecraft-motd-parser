@@ -1,9 +1,10 @@
 import {
   extras,
   colorCodeToHex,
-} from '../styleLibrary';
+} from "../styleLibrary";
 import {
   htmlStringFormatting,
+  baseColorCodeRegex,
 } from "../utils";
 
 
@@ -13,11 +14,9 @@ import {
  * @param motdString
  */
 export default function textToHTML(motdString: string) {
-  const motdText = motdString;
-
-  const colorCodeReg = /([§][0-9a-f0-9a-fA-FklmnorFKLMNOR])/g;
+  const colorCodeReg = baseColorCodeRegex;
   const codeREGEX = new RegExp(colorCodeReg.source);
-  const codeSplit = motdText.split(codeREGEX).filter(item => item !== '');
+  const codeSplit = motdString.split(codeREGEX).filter(item => item !== "");
 
   let fontStyle = "";
   let colorHex = "";

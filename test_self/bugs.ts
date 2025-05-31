@@ -4,16 +4,16 @@ import { autoToHTML, textToHTML } from "../src";
 
 
 const testMOTDString = "§c§l            DDShen 大神伺服器§7§l|§r §b1.8-1.20 §a     ▁▂▃▄▅▆ 請勿破懷遊戲平衡 違規者嚴逞 ▆▅▄▃▂▁";
-console.log('--------------------------');
+console.log("--------------------------");
 console.log(textToHTML(testMOTDString));
-console.log('--------------------------');
+console.log("--------------------------");
 console.log(autoToHTML(testMOTDString));
 
 
 const test2MOTDString = "§r             §d§l秘境之城 §eSecretsCity  §91.18 - 1.19 §r       多元伺服 §f§l｜ §b領地保護 §f§l｜ §e探索星球§f§l ｜ §6無限故事";
-console.log('--------------------------');
+console.log("--------------------------");
 console.log(textToHTML(test2MOTDString));
-console.log('--------------------------');
+console.log("--------------------------");
 console.log(autoToHTML(test2MOTDString));
 
 

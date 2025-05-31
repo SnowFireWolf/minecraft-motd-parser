@@ -11,7 +11,7 @@ let start = 0;
 // clean tags
 console.log("清除 MOTD Tags HTML");
 start = performance.now();
-let cleanedString = motdParser.cleanCodes(text);
+const cleanedString = motdParser.cleanCodes(text);
 
 console.log(cleanedString);
 console.log(`執行時間: ${performance.now() - start} ms`);

@@ -3,7 +3,7 @@ import {
   extraFontStyles,
   colorCodeToHex,
   extraColorsToHex,
-} from '../styleLibrary';
+} from "../styleLibrary";
 import {
   isMotdJSONType,
 } from "../utils";
@@ -33,7 +33,7 @@ export default function parseJSONToHTML(
     // text styles
     if (Object.hasOwn(extraFontStyles, key)) {
       if (sourceJson[key]) {
-        fontStyle += `${extraFontStyles[key]}`;
+        fontStyle += String(extraFontStyles[key]);
       }
     }
 
@@ -62,7 +62,7 @@ export default function parseJSONToHTML(
           colorHex = colorCodeToHex[colorKey];
           // custom color
         } else {
-          let customHexColorMatches = colorKey.match(
+          const customHexColorMatches = colorKey.match(
             /^#([-+]?0+|\+?0*[1-9A-Fa-f][0-9A-Fa-f]{0,5})$/,
           );
 
@@ -83,9 +83,7 @@ export default function parseJSONToHTML(
     // extra
     if (key === "extra" && typeof sourceJson.extra === "object") {
       // ---------- with extra text ----------
-      if (sourceJson.text !== undefined
-        && (typeof sourceJson.text === "string" || typeof sourceJson.text === "number")
-      ) {
+      if (typeof sourceJson.text === "string" || typeof sourceJson.text === "number") {
         // content to html
         htmlElement += textToHTML(String(sourceJson.text));
       }
@@ -93,7 +91,7 @@ export default function parseJSONToHTML(
       // ---------- foreach extra data and parse ----------
       for (const sourceJsonExtra of sourceJson.extra) {
         // console.log('sourceJsonExtra', sourceJsonExtra);
-        if (typeof sourceJsonExtra === 'string') {
+        if (typeof sourceJsonExtra === "string") {
           // Process string elements directly with textToHTML
           htmlElement += textToHTML(sourceJsonExtra);
         } else if (isMotdJSONType(sourceJsonExtra)) {

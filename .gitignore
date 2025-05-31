@@ -4,4 +4,6 @@ dist
 .DS_Store
 *.local
 pnpm-lock.yaml
+yarn.lock
 .idea
+coverage
