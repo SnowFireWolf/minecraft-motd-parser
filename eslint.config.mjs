@@ -43,6 +43,11 @@ export default [
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     rules: {
+      quotes: [
+        "error",
+        "double",
+        { avoidEscape: true },
+      ],
       // Relax some strict rules for better development experience
       "no-useless-escape": "warn",
       
@@ -50,6 +55,7 @@ export default [
       "no-redeclare": "error",
       "no-undef": "error",
       "no-constant-binary-expression": "error",
+      
     },
   },
   

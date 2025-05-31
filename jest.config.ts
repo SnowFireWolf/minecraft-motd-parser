@@ -1,19 +1,19 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/test.ts', // 排除自測試文件
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/test.ts", // 排除自測試文件
   ],
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
   coverageReporters: [
-    'text',
-    'lcov',
-    'html',
-    'json-summary'
+    "text",
+    "lcov",
+    "html",
+    "json-summary"
   ],
   coverageThreshold: {
     global: {
@@ -24,9 +24,9 @@ export default {
     }
   },
   testMatch: [
-    '**/test/**/*.test.ts'
+    "**/test/**/*.test.ts"
   ],
   // 效能測試配置
   testTimeout: 30000, // 30 秒超時
-  maxWorkers: '50%', // 使用 50% 的 CPU 核心
+  maxWorkers: "50%", // 使用 50% 的 CPU 核心
 };

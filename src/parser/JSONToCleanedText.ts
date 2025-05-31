@@ -32,7 +32,7 @@ export default function JSONToCleanedText(
       // ---------- foreach extra data and parse ----------
       for (const sourceJsonExtra of sourceJson.extra) {
         // console.log('sourceJsonExtra', sourceJsonExtra);
-        if (typeof sourceJsonExtra === 'string') {
+        if (typeof sourceJsonExtra === "string") {
           // Add string elements directly to the output
           textString += cleanCodes(sourceJsonExtra);
         } else if (isMotdJSONType(sourceJsonExtra)) {

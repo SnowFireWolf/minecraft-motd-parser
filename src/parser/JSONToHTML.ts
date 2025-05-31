@@ -3,7 +3,7 @@ import {
   extraFontStyles,
   colorCodeToHex,
   extraColorsToHex,
-} from '../styleLibrary';
+} from "../styleLibrary";
 import {
   isMotdJSONType,
 } from "../utils";
@@ -93,7 +93,7 @@ export default function parseJSONToHTML(
       // ---------- foreach extra data and parse ----------
       for (const sourceJsonExtra of sourceJson.extra) {
         // console.log('sourceJsonExtra', sourceJsonExtra);
-        if (typeof sourceJsonExtra === 'string') {
+        if (typeof sourceJsonExtra === "string") {
           // Process string elements directly with textToHTML
           htmlElement += textToHTML(sourceJsonExtra);
         } else if (isMotdJSONType(sourceJsonExtra)) {

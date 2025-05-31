@@ -147,7 +147,7 @@ describe("Minecraft MOTD Parser", () => {
   describe("autoToHTML", () => {
     describe("- string to HTML", () => {
       it("should convert MOTD string to HTML", () => {
-        const expectedOutput = `<span style="color:#FFFFFF;font-weight: bold;">『</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;">FC夢幻峽谷</span><span style="color:#FFFFFF;font-weight: bold;">』 </span><span style="color:#AAAAAA;font-weight: bold;font-weight: bold;">FantasyCanyon <br/> </span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;">&lt;&lt;</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#FFFF55;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">加入冒險!</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">------------</span><span style="color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">◎</span><span style="color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;">&gt;&gt;</span>`;
+        const expectedOutput = "<span style=\"color:#FFFFFF;font-weight: bold;\">『</span><span style=\"color:#FFFF55;font-weight: bold;font-weight: bold;\">FC夢幻峽谷</span><span style=\"color:#FFFFFF;font-weight: bold;\">』 </span><span style=\"color:#AAAAAA;font-weight: bold;font-weight: bold;\">FantasyCanyon <br/> </span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;\">&lt;&lt;</span><span style=\"color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">------------</span><span style=\"color:#FFFF55;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">加入冒險!</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">------------</span><span style=\"color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">&gt;&gt;</span>";
         const result = motdParser.autoToHTML(testMOTDString);
         expect(result).toEqual(expectedOutput);
       });
@@ -155,7 +155,7 @@ describe("Minecraft MOTD Parser", () => {
 
     describe("- object (JSON) to HTML", () => {
       it("should convert MOTD json to HTML", () => {
-        const expectedOutput = `<span style=\"color:#808080;\">             </span><span style=\"font-weight: bold;\"><span style=\"color:#1991EA;\">D</span><span style=\"color:#1C93EB;\">r</span><span style=\"color:#2096EC;\">e</span><span style=\"color:#2499ED;\">a</span><span style=\"color:#289CEE;\">m</span><span style=\"color:#2C9EEF;\">C</span><span style=\"color:#30A1F0;\">r</span><span style=\"color:#33A4F1;\">a</span><span style=\"color:#37A7F2;\">f</span><span style=\"color:#3BA9F3;\">t</span><span style=\"color:#3FACF4;\">e</span><span style=\"color:#43AFF5;\">r</span><span style=\"color:#47B2F6;\"> </span><span style=\"color:#4BB4F7;\">N</span><span style=\"color:#4EB7F8;\">e</span><span style=\"color:#52BAF9;\">t</span><span style=\"color:#56BDFA;\">w</span><span style=\"color:#5ABFFB;\">o</span><span style=\"color:#5EC2FC;\">r</span><span style=\"color:#62C5FD;\">k</span></span> <span style=\"color:#1f92ed;\">- </span><span style=\"font-weight: bold;\"><span style=\"color:#66C8FF;\">築</span><span style=\"color:#52BAF9;\">夢</span><span style=\"color:#3FACF4;\">物</span><span style=\"color:#2C9EEF;\">語</span></span><br/>                <span style=\"color:#FFFFFF;\"> 在這裡 -- 實現你的理想! </span>`;
+        const expectedOutput = "<span style=\"color:#808080;\">             </span><span style=\"font-weight: bold;\"><span style=\"color:#1991EA;\">D</span><span style=\"color:#1C93EB;\">r</span><span style=\"color:#2096EC;\">e</span><span style=\"color:#2499ED;\">a</span><span style=\"color:#289CEE;\">m</span><span style=\"color:#2C9EEF;\">C</span><span style=\"color:#30A1F0;\">r</span><span style=\"color:#33A4F1;\">a</span><span style=\"color:#37A7F2;\">f</span><span style=\"color:#3BA9F3;\">t</span><span style=\"color:#3FACF4;\">e</span><span style=\"color:#43AFF5;\">r</span><span style=\"color:#47B2F6;\"> </span><span style=\"color:#4BB4F7;\">N</span><span style=\"color:#4EB7F8;\">e</span><span style=\"color:#52BAF9;\">t</span><span style=\"color:#56BDFA;\">w</span><span style=\"color:#5ABFFB;\">o</span><span style=\"color:#5EC2FC;\">r</span><span style=\"color:#62C5FD;\">k</span></span> <span style=\"color:#1f92ed;\">- </span><span style=\"font-weight: bold;\"><span style=\"color:#66C8FF;\">築</span><span style=\"color:#52BAF9;\">夢</span><span style=\"color:#3FACF4;\">物</span><span style=\"color:#2C9EEF;\">語</span></span><br/>                <span style=\"color:#FFFFFF;\"> 在這裡 -- 實現你的理想! </span>";
         const result = motdParser.autoToHTML(testMotdJSON);
         expect(result).toEqual(expectedOutput);
       });
@@ -270,7 +270,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Minus sign test"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Minus sign test');
+        expect(result).toEqual("Minus sign test");
       });
 
       it("should handle hex colors with multiple leading zeros", () => {
@@ -297,7 +297,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Minus zero prefix"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Minus zero prefix');
+        expect(result).toEqual("Minus zero prefix");
       });
 
       it("should handle single non-zero digit", () => {
@@ -324,7 +324,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Invalid no hash"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Invalid no hash');
+        expect(result).toEqual("Invalid no hash");
       });
 
       it("should ignore invalid hex colors (invalid characters)", () => {
@@ -333,7 +333,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Invalid characters"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Invalid characters');
+        expect(result).toEqual("Invalid characters");
       });
 
       it("should ignore invalid hex colors (too long)", () => {
@@ -342,7 +342,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Too long"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Too long');
+        expect(result).toEqual("Too long");
       });
 
       it("should ignore empty color value", () => {
@@ -351,7 +351,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Empty color"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Empty color');
+        expect(result).toEqual("Empty color");
       });
 
       it("should ignore only # symbol", () => {
@@ -360,7 +360,7 @@ describe("Minecraft MOTD Parser", () => {
           "text": "Only hash"
         };
         const result = motdParser.autoToHTML(testJson);
-        expect(result).toEqual('Only hash');
+        expect(result).toEqual("Only hash");
       });
 
       it("should handle complex JSON with valid hex colors", () => {

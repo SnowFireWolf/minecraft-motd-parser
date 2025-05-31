@@ -1,7 +1,7 @@
 import {
   extras,
   colorCodeToHex,
-} from '../styleLibrary';
+} from "../styleLibrary";
 import {
   htmlStringFormatting,
   baseColorCodeRegex,
@@ -18,7 +18,7 @@ export default function textToHTML(motdString: string) {
 
   const colorCodeReg = baseColorCodeRegex;
   const codeREGEX = new RegExp(colorCodeReg.source);
-  const codeSplit = motdText.split(codeREGEX).filter(item => item !== '');
+  const codeSplit = motdText.split(codeREGEX).filter(item => item !== "");
 
   let fontStyle = "";
   let colorHex = "";

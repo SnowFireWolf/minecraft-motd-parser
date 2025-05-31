@@ -2,8 +2,8 @@ import { motdJsonType } from "../types";
 import {
   textToJsonExtras,
   colorCodeToHex,
-} from '../styleLibrary';
-import { baseColorCodeRegex } from '../utils';
+} from "../styleLibrary";
+import { baseColorCodeRegex } from "../utils";
 
 
 
