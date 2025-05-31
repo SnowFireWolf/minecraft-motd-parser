@@ -62,8 +62,16 @@ export default function parseJSONToHTML(
           colorHex = colorCodeToHex[colorKey];
           // custom color
         } else {
-          // custom hex color code mode
-          colorHex = colorKey;
+          let customHexColorMatches = colorKey.match(
+            /^#([-+]?0+|\+?0*[1-9A-Fa-f][0-9A-Fa-f]{0,5})$/,
+          );
+
+          if (customHexColorMatches !== null) {
+            // custom hex color code mode
+            colorHex =
+              "#" +
+              customHexColorMatches[1].replace(/^[-+]?0*/, "").padStart(6, "0");
+          }
         }
       }
 
