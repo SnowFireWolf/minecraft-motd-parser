@@ -12,6 +12,7 @@ import {
 /**
  * Convert motd text to html.
  * @param motdString
+ * @returns
  */
 export default function textToHTML(motdString: string) {
   const colorCodeReg = baseColorCodeRegex;
@@ -26,34 +27,35 @@ export default function textToHTML(motdString: string) {
     const motdStringToLowerCase = item.toLowerCase();
     // console.log('motdStringToLowerCase', motdStringToLowerCase);
 
-    // 過濾 hex
+    // detect hex
     if (Object.hasOwn(colorCodeToHex, motdStringToLowerCase)) {
-      //console.log(`偵測出 ${ colorCodeToHex[item] }`)
       colorHex = colorCodeToHex[motdStringToLowerCase];
 
       // §f reset
       if(motdStringToLowerCase === "§f") {
         fontStyle = "";
       }
-      // 過濾文字 style
+
+    // detect style
     } else if (Object.hasOwn(extras, motdStringToLowerCase)) {
       if(motdStringToLowerCase === "§r") {
         colorHex = "";
         fontStyle = "";
       } else {
-        // font style code 轉換
-        // console.log(`偵測出 style ${ extras[motdStringToLowerCase] }`);
+        // font style code convert
+        // console.log(`detect style ${ extras[motdStringToLowerCase] }`);
         fontStyle += extras[motdStringToLowerCase];
       }
       // console.log('motdStringToLowerCase', motdStringToLowerCase);
       // console.log('textFont: ' + fontStyle);
-      // 正常文字
+
+    // detect normal text
     } else {
       let resultColor = "";
       let textContent = item;
       //console.log(fontStyle)
 
-      // 檢查 Hex color
+      // check Hex color
       if (colorHex !== "") {
         resultColor = `color:${colorHex};`;
       }

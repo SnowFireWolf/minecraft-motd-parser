@@ -15,6 +15,7 @@ import textToHTML from "./textToHTML";
  * Convert JSON to HTML.
  * 
  * @param sourceJson
+ * @returns
  */
 export default function parseJSONToHTML(
   sourceJson: motdJsonType,
@@ -33,20 +34,9 @@ export default function parseJSONToHTML(
     // text styles
     if (Object.hasOwn(extraFontStyles, key)) {
       if (sourceJson[key]) {
-        fontStyle += String(extraFontStyles[key]);
+        fontStyle += extraFontStyles[key];
       }
     }
-
-    // ---------- old text process ----------
-    // if (key === "text") {
-    //   if (
-    //     typeof sourceJson.text === "string" ||
-    //     typeof sourceJson.text === "number"
-    //   ) {
-    //     // convert all type to string
-    //     htmlElement += textToHTML(String(sourceJson.text));
-    //   }
-    // }
 
     // color
     if (key === "color") {
@@ -83,7 +73,10 @@ export default function parseJSONToHTML(
     // extra
     if (key === "extra" && typeof sourceJson.extra === "object") {
       // ---------- with extra text ----------
-      if (typeof sourceJson.text === "string" || typeof sourceJson.text === "number") {
+      if (
+        typeof sourceJson.text === "string" ||
+        typeof sourceJson.text === "number"
+      ) {
         // content to html
         htmlElement += textToHTML(String(sourceJson.text));
       }

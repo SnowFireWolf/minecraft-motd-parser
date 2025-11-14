@@ -11,6 +11,7 @@ import { baseColorCodeRegex } from "../utils";
  * Convert motd text to JSON.
  * 
  * @param text
+ * @returns
  */
 export default function parseTextToJSON(text: string) {
   const motdText = text;
@@ -30,9 +31,9 @@ export default function parseTextToJSON(text: string) {
   textSplit.forEach((item) => {
     const stringToLowerCase = item.toLowerCase();
 
-    // color code 轉換成 hex
+    // color code convert to hex
     if (Object.hasOwn(colorCodeToHex, stringToLowerCase)) {
-      //console.log(`偵測出 ${ colorCodeToHex[item] }`)
+      //console.log(`detect ${ colorCodeToHex[item] }`)
       colorHex = colorCodeToHex[stringToLowerCase];
       // §f reset
       if(stringToLowerCase === "§f") {
@@ -43,8 +44,8 @@ export default function parseTextToJSON(text: string) {
         fontStyle = "";
         colorHex = "";
       } else {
-        // font style code 轉換
-        //console.log(`偵測出 style ${ textToJsonExtras[item] }`)
+        // font style code convert
+        //console.log(`detect style ${ textToJsonExtras[item] }`)
         fontStyle = textToJsonExtras[stringToLowerCase];
       }
     } else {
