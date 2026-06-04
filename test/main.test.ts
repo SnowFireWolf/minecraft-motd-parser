@@ -147,7 +147,7 @@ describe("Minecraft MOTD Parser", () => {
   describe("autoToHTML", () => {
     describe("- string to HTML", () => {
       it("should convert MOTD string to HTML", () => {
-        const expectedOutput = "<span style=\"color:#FFFFFF;font-weight: bold;\">『</span><span style=\"color:#FFFF55;font-weight: bold;font-weight: bold;\">FC夢幻峽谷</span><span style=\"color:#FFFFFF;font-weight: bold;\">』 </span><span style=\"color:#AAAAAA;font-weight: bold;font-weight: bold;\">FantasyCanyon <br/> </span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;\">&lt;&lt;</span><span style=\"color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">------------</span><span style=\"color:#FFFF55;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">加入冒險!</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">------------</span><span style=\"color:#5555FF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;font-weight: bold;\">&gt;&gt;</span>";
+        const expectedOutput = "<span style=\"color:#FFFFFF;font-weight: bold;\">『</span><span style=\"color:#FFFF55;font-weight: bold;\">FC夢幻峽谷</span><span style=\"color:#FFFFFF;font-weight: bold;\">』 </span><span style=\"color:#AAAAAA;font-weight: bold;\">FantasyCanyon <br/> </span><span style=\"color:#55FFFF;font-weight: bold;\">&lt;&lt;</span><span style=\"color:#5555FF;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;\">------------</span><span style=\"color:#FFFF55;font-weight: bold;\">加入冒險!</span><span style=\"color:#55FFFF;font-weight: bold;\">------------</span><span style=\"color:#5555FF;font-weight: bold;\">◎</span><span style=\"color:#55FFFF;font-weight: bold;\">&gt;&gt;</span>";
         const result = motdParser.autoToHTML(testMOTDString);
         expect(result).toEqual(expectedOutput);
       });
@@ -201,6 +201,35 @@ describe("Minecraft MOTD Parser", () => {
       const expectedOutput = '<span style="color:#FF5555;">Red text</span>';
       expect(motdParser.textToHTML(input)).toEqual(expectedOutput);
     });
+
+    it("should not duplicate font styles when same code appears multiple times", () => {
+      const input = "§l text §l text";
+      const result = motdParser.textToHTML(input);
+      expect(result).toContain("font-weight: bold;");
+      expect(result).not.toContain("font-weight: bold;font-weight: bold;");
+    });
+
+    it("should apply multiple font styles together without duplication", () => {
+      const input = "§l§o mixed";
+      const result = motdParser.textToHTML(input);
+      expect(result).toContain("font-weight: bold;");
+      expect(result).toContain("font-style: italic;");
+      const styleCount = (result.match(/font-weight: bold;/g) || []).length;
+      expect(styleCount).toBe(1);
+    });
+
+    it("should clear all styles and color after §r code", () => {
+      const input = "§c§l§obold§rplain";
+      const result = motdParser.textToHTML(input);
+      expect(result).toBe(
+        '<span style="color:#FF5555;font-weight: bold;font-style: italic;">bold</span>plain'
+      );
+    });
+
+    it("§f should keep styles applied after it (style after color)", () => {
+      const result = motdParser.textToHTML("§f§lwhite");
+      expect(result).toBe('<span style="color:#FFFFFF;font-weight: bold;">white</span>');
+    });
   });
 
   describe("textToJSON", () => {
@@ -214,6 +243,20 @@ describe("Minecraft MOTD Parser", () => {
       const input = "§cRed text";
       const expectedOutput = { "extra": [{ "color": "#FF5555", "extra": [], "text": "Red text" }], "text": "" };
       expect(motdParser.textToJSON(input)).toEqual(expectedOutput);
+    });
+
+    it("should apply multiple font styles simultaneously", () => {
+      const input = "§l§o text";
+      const result = motdParser.textToJSON(input);
+      expect(result.extra[0]).toHaveProperty("bold", true);
+      expect(result.extra[0]).toHaveProperty("italic", true);
+    });
+
+    it("should apply bold and strikethrough together", () => {
+      const input = "§l§m text";
+      const result = motdParser.textToJSON(input);
+      expect(result.extra[0]).toHaveProperty("bold", true);
+      expect(result.extra[0]).toHaveProperty("strikethrough", true);
     });
   });
 

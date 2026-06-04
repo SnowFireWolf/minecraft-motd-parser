@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.1.9-dev.001] - 2026-06-04
+
+### Fixed
+- `textToHTML`: repeated formatting codes (e.g. `§l§l`) no longer produce duplicate CSS properties such as `font-weight: bold;font-weight: bold;`
+- `textToJSON`: multiple simultaneous formatting codes (e.g. `§l§o`) now correctly produce all corresponding properties (`bold: true, italic: true`) instead of only the last one
+
+### Changed
+- `textToHTML`: replaced string concatenation with a `Set`-based approach (`fontStyleSet`) to track active font styles, ensuring each CSS rule appears at most once per span
+- `textToJSON`: replaced single-style overwrite logic with `fontStyleSet` accumulation; each text segment is now assigned all currently active styles directly
+- `textToJSON`: removed the post-processing merge block; empty-text segments from adjacent style/color codes are now handled by a simple filter, simplifying the parser logic
+
+### Documentation
+- README: added Quick Decision Table and restructured API Reference into Use Cases for easier navigation
+
+### Tests
+- Added `textToHTML` tests: duplicate style prevention, multiple simultaneous styles, `§r` full reset, `§f` + style ordering
+- Added `textToJSON` tests: multiple simultaneous styles (`§l§o`, `§l§m`), correct bold + strikethrough coexistence
+- Updated `autoToHTML` snapshot to reflect deduplicated style output
+
+
+
 ## [1.1.5] - 2025-05-31
 
 ### Added

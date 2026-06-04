@@ -19,7 +19,8 @@ export default function parseTextToJSON(text: string) {
   const colorCodeReg = baseColorCodeRegex;
   const codeREGEX = new RegExp(colorCodeReg.source);
   const textSplit = motdText.split(codeREGEX);
-  let fontStyle = "";
+  // track active font styles in a Set so multiple styles coexist and don't duplicate
+  const fontStyleSet = new Set<string>();
   let colorHex = "";
 
   const resultObject: motdJsonType = {
@@ -37,16 +38,16 @@ export default function parseTextToJSON(text: string) {
       colorHex = colorCodeToHex[stringToLowerCase];
       // §f reset
       if(stringToLowerCase === "§f") {
-        fontStyle = "";
+        fontStyleSet.clear();
       }
     } else if (Object.hasOwn(textToJsonExtras, stringToLowerCase)) {
       if(stringToLowerCase === "§r") {
-        fontStyle = "";
+        fontStyleSet.clear();
         colorHex = "";
       } else {
-        // font style code convert
+        // font style code convert (Set dedupes & keeps multiple styles)
         //console.log(`detect style ${ textToJsonExtras[item] }`)
-        fontStyle = textToJsonExtras[stringToLowerCase];
+        fontStyleSet.add(textToJsonExtras[stringToLowerCase]);
       }
     } else {
       const innerObject: motdJsonType = {
@@ -54,9 +55,9 @@ export default function parseTextToJSON(text: string) {
         extra: [],
       };
 
-      // 其餘字串
-      if (fontStyle !== "") {
-        innerObject[fontStyle] = true;
+      // 其餘字串 - apply all currently active styles
+      for (const style of fontStyleSet) {
+        innerObject[style] = true;
       }
 
       innerObject.text = item;
@@ -71,41 +72,12 @@ export default function parseTextToJSON(text: string) {
     }
   });
 
-  // code styles merge
-  let newExtra: motdJsonType[] = [];
-  // console.log('resultObject', resultObject);
-  if (resultObject.extra) {
-    if (resultObject.extra.length > 1) {
-      // if text is '', remove it and merge to next array
-      resultObject.extra.forEach((item, index) => {
-        // console.log('item', item);
-        if (item.text === "") {
-          if (
-            resultObject.extra
-            && typeof resultObject.extra[index + 1] === "object"
-          ) {
-            newExtra.push({
-              ...(item as motdJsonType),
-              ...resultObject.extra[index + 1],
-            });
-          }
-        } else {
-          if (
-            item.text !== newExtra[newExtra.length - 1]?.text
-          ) {
-            newExtra.push(item as motdJsonType);
-          }
-        }
-      });
-    } else {
-      newExtra.push(resultObject.extra[0] as motdJsonType);
-    }
-  }
-
-  // console.log('newExtra', newExtra);
-  // remove blank content
-  newExtra = newExtra.filter((item) => item.text !== "");
-  // console.log('newExtra', newExtra);
+  // each text segment already carries its full active style, so simply drop
+  // the empty-text segments produced by adjacent style/color codes
+  const newExtra = (resultObject.extra ?? []).filter(
+    (item): item is motdJsonType =>
+      typeof item === "object" && item.text !== "",
+  );
 
   return {
     text: resultObject.text,

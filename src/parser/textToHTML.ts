@@ -19,7 +19,8 @@ export default function textToHTML(motdString: string) {
   const codeREGEX = new RegExp(colorCodeReg.source);
   const codeSplit = motdString.split(codeREGEX).filter(item => item !== "");
 
-  let fontStyle = "";
+  // track active font styles in a Set to avoid duplicates (e.g. repeated §l)
+  const fontStyleSet = new Set<string>();
   let colorHex = "";
   let resultHTML = "";
 
@@ -33,26 +34,27 @@ export default function textToHTML(motdString: string) {
 
       // §f reset
       if(motdStringToLowerCase === "§f") {
-        fontStyle = "";
+        fontStyleSet.clear();
       }
 
     // detect style
     } else if (Object.hasOwn(extras, motdStringToLowerCase)) {
       if(motdStringToLowerCase === "§r") {
         colorHex = "";
-        fontStyle = "";
+        fontStyleSet.clear();
       } else {
-        // font style code convert
+        // font style code convert (Set dedupes repeated codes)
         // console.log(`detect style ${ extras[motdStringToLowerCase] }`);
-        fontStyle += extras[motdStringToLowerCase];
+        fontStyleSet.add(extras[motdStringToLowerCase]);
       }
       // console.log('motdStringToLowerCase', motdStringToLowerCase);
-      // console.log('textFont: ' + fontStyle);
+      // console.log('fontStyleSet: ', fontStyleSet);
 
     // detect normal text
     } else {
       let resultColor = "";
       let textContent = item;
+      const fontStyle = [...fontStyleSet].join("");
       //console.log(fontStyle)
 
       // check Hex color
